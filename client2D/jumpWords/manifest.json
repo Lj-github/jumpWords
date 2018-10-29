@@ -14,17 +14,18 @@
 	],
 	"game": [
 		"bin-debug/component/PbComponent.js",
-		"bin-debug/zidongxunlu/Node.js",
+		"bin-debug/component/BaseLayer.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/com/Gt.js",
 		"bin-debug/com/Logger.js",
-		"bin-debug/component/BaseLayer.js",
+		"bin-debug/AssetAdapter.js",
 		"bin-debug/component/ImgButton.js",
 		"bin-debug/component/LocalContex.js",
-		"bin-debug/AssetAdapter.js",
+		"bin-debug/LoadingUI.js",
 		"bin-debug/component/PbVScrollBar.js",
+		"bin-debug/layer/LayerJumpWords.js",
 		"bin-debug/protobuf/GameProtocol.js",
 		"bin-debug/protobuf/SocketClient.js",
 		"bin-debug/utils/EffectUtils.js",
@@ -32,6 +33,6 @@
 		"bin-debug/zidongxunlu/AStar.js",
 		"bin-debug/zidongxunlu/Game.js",
 		"bin-debug/zidongxunlu/Grid.js",
-		"bin-debug/LoadingUI.js"
+		"bin-debug/zidongxunlu/Node.js"
 	]
 }

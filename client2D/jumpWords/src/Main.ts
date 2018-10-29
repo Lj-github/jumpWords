@@ -37,7 +37,7 @@ class Main extends egret.DisplayObjectContainer {
         await this.loadResource()
         this.createGameScene();
         const result = await RES.getResAsync("description_json")
-        this.startAnimation(result);
+        //this.startAnimation(result);
         await platform.login();
         const userInfo = await platform.getUserInfo();
         console.log(userInfo);
@@ -57,7 +57,6 @@ class Main extends egret.DisplayObjectContainer {
         }
     }
 
-    private textfield: egret.TextField;
 
     /**
      * 创建游戏场景
@@ -68,6 +67,20 @@ class Main extends egret.DisplayObjectContainer {
             width: egret.MainContext.instance.stage.stageWidth,
             height: egret.MainContext.instance.stage.stageHeight
         };
+
+
+        let colorLabel = new egret.TextField();
+        colorLabel.textColor = 0xffffff;
+        colorLabel.width =  gt.size.width - 172;
+        colorLabel.textAlign = "center";
+        colorLabel.text = "开始";
+        colorLabel.size = 24;
+        colorLabel.x = 172;
+        colorLabel.y = 80;
+        //colorLabel.scaleY = colorLabel.scaleX = 5
+        colorLabel.fontFamily ="hanti";
+        this.addChild(colorLabel);
+        colorLabel.filters =  [gt.getCustomFilter(0, 255, 0)]
 
 
 
@@ -98,44 +111,6 @@ class Main extends egret.DisplayObjectContainer {
 
     }
 
-    /**
-     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
-     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
-     */
-    static createBitmapByName(name: string) {
-        let result = new egret.Bitmap();
-        let texture: egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
-    }
 
-    /**
-     * 描述文件加载成功，开始播放动画
-     * Description file loading is successful, start to play the animation
-     */
-    private startAnimation(result: string[]) {
-        let parser = new egret.HtmlTextParser();
 
-        let textflowArr = result.map(text => parser.parse(text));
-        let textfield = this.textfield;
-        let count = -1;
-        let change = () => {
-            count++;
-            if (count >= textflowArr.length) {
-                count = 0;
-            }
-            let textFlow = textflowArr[count];
-
-            // 切换描述内容
-            // Switch to described content
-            textfield.textFlow = textFlow;
-            let tw = egret.Tween.get(textfield);
-            tw.to({"alpha": 1}, 200);
-            tw.wait(2000);
-            tw.to({"alpha": 0}, 200);
-            tw.call(change, this);
-        };
-
-        change();
-    }
 }

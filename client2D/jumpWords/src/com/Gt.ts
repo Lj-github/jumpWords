@@ -1,3 +1,8 @@
+
+interface Window{
+    XMLHttpRequest:any;
+    ActiveXObject:any;
+}
 module gt {
     export const lan_cn = "ch"// 当前先写为中文
     export const lan_en = "en"// 当前先写为中文
@@ -6,6 +11,8 @@ module gt {
 
     export let SocketClient: SocketClient
     export let size = {
+        width: 0,
+        height: 0
         // Number(document.getElementsByClassName("egret-player")[0].getAttribute("data-content-width")) ,
         // Number(document.getElementsByClassName("egret-player")[0].getAttribute("data-content-height"))
     }
@@ -106,6 +113,97 @@ module gt {
         }
         return "anonymous"
     };
+
+    export function getCustomFilter(r: number, g: number, b: number) {
+        var colorMatrix = [
+            r / 255, 0, 0, 0, 0,
+            0, g / 255, 0, 0, 0,
+            0, 0, b / 255, 0, 0,
+            0, 0, 0, 1, 0
+        ];
+        var colorFlilter = new egret.ColorMatrixFilter(colorMatrix);
+        return colorFlilter
+    }
+
+    export function setLblUnderLine(lbl: eui.Label, text?: string) {
+        var str = text == void 0 ? lbl.text : text
+        var httpTxt = new egret.HtmlTextParser().parser("<u>" + str + "</u>");
+        lbl.textFlow = httpTxt
+    }
+      export function getXMLHttpRequest() {
+        return window.XMLHttpRequest ? new window.XMLHttpRequest() : new window.ActiveXObject("MSXML2.XMLHTTP");
+    }
+
+
+export function clone<T>(obj: T): T {
+        var newObj = (obj.constructor) ? (new (<any>obj).constructor) : {};
+        for (var key in obj) {
+            var copy = obj[key];
+            // Beware that typeof null == "object" !
+            if (((typeof copy) === "object") && copy &&
+                !(copy instanceof egret.DisplayObject) && !(copy instanceof HTMLElement)) {
+                newObj[key] = clone(copy);
+            } else {
+                newObj[key] = copy;
+            }
+        }
+        return newObj;
+    }
+
+
+
+      /*
+    *检测是否有中文字符
+    */
+    export function isContainChinese(str) {
+        let reg = /[\u4e00-\u9fa5]/g
+        return reg.test(str)
+    }
+
+       export function getGrayFilters(v: number) {
+        var colorMatrix = [
+            v, 0, 0, 0, 0,
+            0, v, 0, 0, 0,
+            0, 0, v, 0, 0,
+            0, 0, 0, 1, 0
+        ];
+        var colorFlilter = new egret.ColorMatrixFilter(colorMatrix);
+        return colorFlilter
+    }
+
+      /**
+     * 二分法查找 返回目标索引
+     */
+    export function dichotomyFind(array: Array<any>, value: any, key: any): number {
+        var arr: Array<any> = gt.clone(array);
+        var low: number = 0;
+        var high: number = arr.length - 1;
+        var middle: number;
+        while (low <= high) {
+            middle = low + high >> 1;
+            if (value == arr[middle][key]) {
+                return middle;
+            }
+            if (value > arr[middle][key]) {
+                low = middle + 1;
+            }
+            if (value < arr[middle][key]) {
+                high = middle - 1;
+            }
+        }
+        return -1;
+    }
+
+     /**
+     * 俩数之间随机数 min--max
+     * @param min 开始值
+     * @param max 结束值
+     */
+    export function randomValue(min: number, max: number): number {
+        var value: number = min + Math.random() * (max - min + 1) >> 0;
+        return value;
+    }
+
 
 
 }
