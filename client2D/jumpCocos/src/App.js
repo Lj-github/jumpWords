@@ -31,7 +31,7 @@ var GameLayer = cc.Layer.extend({
         //获取 canvas base64 data
         var canvas =  document.getElementById("gameCanvas");
         if(canvas){
-            console.log( canvas.toDataURL()[0])
+            console.log( canvas.toDataURL())
         }
 
 
