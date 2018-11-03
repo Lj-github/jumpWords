@@ -9,7 +9,7 @@ mp4File = "/Users/admin/Desktop/vedio/0012bqfTlx07nCLkfpTa01040200hbIU0k010.mp4"
 imgOutFile = "/Users/admin/Desktop/vedio/"
 
 vc = cv2.VideoCapture(mp4File)
-
+#默认 好像是30 fps
 c = 1
 if vc.isOpened():
     rval, frame = vc.read()
