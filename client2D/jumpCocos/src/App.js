@@ -2,6 +2,7 @@ var GameLayer = cc.Layer.extend({
     sprite: null,
     ctor: function () {
         this._super();
+        this.len = 1
         var size = cc.winSize;
         this.helloLabel = new cc.LabelTTF("中文中文aa", "Marker", 80)
         this.helloLabel1 = new cc.LabelTTF("中文中文aa2", "font1", 80)
@@ -24,17 +25,29 @@ var GameLayer = cc.Layer.extend({
         this.sprite.setPosition(size.width / 2, size.height / 2)
         this.sprite.setScale(size.height / this.sprite.getContentSize().height)
         //this.addChild(this.sprite, 0)
-
         //this.getScreenShotInCanvasModele()
         //init()
+        window.ddd = this
         return true;
     },
     run: function (time) {
+        this.len++
         this.time += time
         let posY = cc.winSize.height * Math.sin(this.time)
         this.helloLabel.y = Math.abs(posY * .6)
-        sendMsg(this.getScreenShotInCanvasModele())
+        this.helloLabel1.y = Math.abs(posY * .5)
+        this.helloLabel2.y = Math.abs(posY * .8)
 
+
+        let base64Data = {}
+        if (this.len < 200) {
+            base64Data.id = 0//base64 msg
+            base64Data.base64 = this.getScreenShotInCanvasModele()
+        } else {
+            base64Data.id = 1
+            this.unschedule(this.run)
+        }
+        sendMsg(JSON.stringify(base64Data))
     },
 
     //在project json  "renderMode":1, canvas  0 webgl

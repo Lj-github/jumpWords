@@ -29,33 +29,41 @@ def getImgSizeAndPX(imgFile):
     imgInfo1.size = os.path.getsize(imgFile)
     return imgInfo1
 
-
+def del_file(path):
+    for i in os.listdir(path):
+        path_file = os.path.join(path, i)
+        if os.path.isfile(path_file) :
+            if path_file.find("html") <= -1:
+                os.remove(path_file)
+        else:
+            del_file(path_file)
 
 # 需要 获取 图片size  和图片文件的大小
-fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-
-path = "img/"
-index = 0
-img_root = path
-im_names = os.listdir(path)
-
-imgInfoB = getImgSizeAndPX(img_root + "" + str(1) + ".jpg")
-size = (imgInfoB.PX.w, imgInfoB.PX.h)
-resuze = [size[0], size[1]]
-
-vw = cv2.VideoWriter('file.avi', fourcc=fourcc, fps=30.0, frameSize=size)
-
-for im_name in range(len(im_names)):
-    jpgFile = img_root + "" + str(im_name + 1) + ".jpg"
-    if os.path.isfile(jpgFile):
-        fp, fn = os.path.split(jpgFile)
-        if fn.split(".").pop() == "jpg":
-            f = jpgFile
-            print(f)
-            f_read = cv2.imread(f)
-            f_img = Image.fromarray(f_read)
-            f_rs = f_img.resize(resuze, resample=Image.NONE)
-            f_out = np.array(f_rs)
-            vw.write(f_out)
-
-vw.release()
+# fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
+#
+# path = "img/"
+# index = 0
+# img_root = path
+# im_names = os.listdir(path)
+#
+# imgInfoB = getImgSizeAndPX(img_root + "" + str(1) + ".jpg")
+# size = (imgInfoB.PX.w, imgInfoB.PX.h)
+# resuze = [size[0], size[1]]
+#
+# vw = cv2.VideoWriter('file.avi', fourcc=fourcc, fps=30.0, frameSize=size)
+#
+# for im_name in range(len(im_names)):
+#     jpgFile = img_root + "" + str(im_name + 1) + ".jpg"
+#     if os.path.isfile(jpgFile):
+#         fp, fn = os.path.split(jpgFile)
+#         if fn.split(".").pop() == "jpg":
+#             f = jpgFile
+#             print(f)
+#             f_read = cv2.imread(f)
+#             f_img = Image.fromarray(f_read)
+#             f_rs = f_img.resize(resuze, resample=Image.NONE)
+#             f_out = np.array(f_rs)
+#             vw.write(f_out)
+#
+# vw.release()
+del_file("img/")
