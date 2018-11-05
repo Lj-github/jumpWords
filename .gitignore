@@ -3,5 +3,6 @@ client2D/jumpWords/.wing/
 client2D/jumpWords/bin-debug/
 *.pyc
 *.mp4
+*.mp3
 *.avi
 pySocket/img/*
