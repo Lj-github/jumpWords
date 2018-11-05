@@ -38,32 +38,33 @@ def del_file(path):
         else:
             del_file(path_file)
 
-# 需要 获取 图片size  和图片文件的大小
-# fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-#
-# path = "img/"
-# index = 0
-# img_root = path
-# im_names = os.listdir(path)
-#
-# imgInfoB = getImgSizeAndPX(img_root + "" + str(1) + ".jpg")
-# size = (imgInfoB.PX.w, imgInfoB.PX.h)
-# resuze = [size[0], size[1]]
-#
-# vw = cv2.VideoWriter('file.avi', fourcc=fourcc, fps=30.0, frameSize=size)
-#
-# for im_name in range(len(im_names)):
-#     jpgFile = img_root + "" + str(im_name + 1) + ".jpg"
-#     if os.path.isfile(jpgFile):
-#         fp, fn = os.path.split(jpgFile)
-#         if fn.split(".").pop() == "jpg":
-#             f = jpgFile
-#             print(f)
-#             f_read = cv2.imread(f)
-#             f_img = Image.fromarray(f_read)
-#             f_rs = f_img.resize(resuze, resample=Image.NONE)
-#             f_out = np.array(f_rs)
-#             vw.write(f_out)
-#
-# vw.release()
+#需要 获取 图片size  和图片文件的大小
+fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
+
+path = "img/"
+index = 0
+img_root = path
+im_names = os.listdir(path)
+
+imgInfoB = getImgSizeAndPX(img_root + "" + str(1) + ".jpg")
+size = (imgInfoB.PX.w, imgInfoB.PX.h)
+resuze = [size[0], size[1]]
+
+vw = cv2.VideoWriter('file.avi', fourcc=fourcc, fps=30.0, frameSize=size)
+
+for im_name in range(len(im_names)):
+    jpgFile = img_root + "" + str(im_name + 1) + ".jpg"
+    if os.path.isfile(jpgFile):
+        fp, fn = os.path.split(jpgFile)
+        if fn.split(".").pop() == "jpg":
+            f = jpgFile
+            print(f)
+            f_read = cv2.imread(f)
+            f_img = Image.fromarray(f_read)
+            f_rs = f_img.resize(resuze, resample=Image.NONE)
+            f_out = np.array(f_rs)
+            vw.write(f_out)
+
+vw.release()
+# 清空 缓存区
 del_file("img/")
