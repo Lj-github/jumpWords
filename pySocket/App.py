@@ -2,7 +2,7 @@
 # @Time    : 2018/11/5 下午4:28
 
 import asyncio
-import websockets
+import websockets  #https://websockets.readthedocs.io/en/stable/
 import base64
 le = 0
 allCode = []
