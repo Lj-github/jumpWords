@@ -4,3 +4,4 @@ client2D/jumpWords/bin-debug/
 *.pyc
 *.mp4
 *.avi
+pySocket/img/*

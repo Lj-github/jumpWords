@@ -1,21 +1,11 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2018/11/3 下午7:19
-
-strs = ''
-# strs = "1.jpg"
 import os
 import cv2
 from PIL import Image
 import numpy as np
-import base64  # https://stackoverflow.com/questions/33754935/read-a-base-64-encoded-image-from-memory-using-opencv-python-library
+import base64
 from io import BytesIO
-'''
-    问题记录 
-    TypeError: string argument expected, got 'bytes'：
-    https://stackoverflow.com/questions/32075135/python-3-in-memory-zipfile-error-string-argument-expected-got-bytes
-    python3 使用 BytesIO 代替 StringIO
+# 完美解决
 
-'''
 class PX():
     w = 0
     h = 0
@@ -40,24 +30,29 @@ def getImgSizeAndPX(imgFile):
     return imgInfo1
 
 
-# 需要 获取 图片size  和图片文件的大小  只需要获取 一张即可
+
+# 需要 获取 图片size  和图片文件的大小
 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-path = "/Users/admin/Desktop/vedio/"
+
+path = "img/"
 index = 0
 img_root = path
 im_names = os.listdir(path)
-imgInfoB = getImgSizeAndPX(img_root + "The_Path_to_Save_Your_Pics" + str(1) + ".jpg")
+
+imgInfoB = getImgSizeAndPX(img_root + "" + str(1) + ".jpg")
 size = (imgInfoB.PX.w, imgInfoB.PX.h)
 resuze = [size[0], size[1]]
-vw = cv2.VideoWriter('base64Test.avi', fourcc=fourcc, fps=30.0, frameSize=size)
+
+vw = cv2.VideoWriter('file.avi', fourcc=fourcc, fps=30.0, frameSize=size)
+
 for im_name in range(len(im_names)):
-    jpgFile = img_root + "The_Path_to_Save_Your_Pics" + str(im_name + 1) + ".jpg"
+    jpgFile = img_root + "" + str(im_name + 1) + ".jpg"
     if os.path.isfile(jpgFile):
         fp, fn = os.path.split(jpgFile)
         if fn.split(".").pop() == "jpg":
             f = jpgFile
-            f_read = readb64(strs)
-            # cv2.imshow(cvimg)
+            print(f)
+            f_read = cv2.imread(f)
             f_img = Image.fromarray(f_read)
             f_rs = f_img.resize(resuze, resample=Image.NONE)
             f_out = np.array(f_rs)

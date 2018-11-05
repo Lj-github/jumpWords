@@ -17,22 +17,23 @@ var GameLayer = cc.Layer.extend({
         this.helloLabel2.setColor(cc.color(0, 178, 111))
         this.helloLabel.setColor(cc.color(0, 233, 12))
         this.time = 0
-        this.schedule(this.run, 1 / 5)
+        this.schedule(this.run, 1 / 30)
 
         this.sprite = new cc.Sprite(res.HelloWorld_png)
         this.sprite.setAnchorPoint(0.5, 0.5)
         this.sprite.setPosition(size.width / 2, size.height / 2)
         this.sprite.setScale(size.height / this.sprite.getContentSize().height)
-        this.addChild(this.sprite, 0)
+        //this.addChild(this.sprite, 0)
 
-        this.getScreenShotInCanvasModele()
+        //this.getScreenShotInCanvasModele()
+        //init()
         return true;
     },
     run: function (time) {
         this.time += time
         let posY = cc.winSize.height * Math.sin(this.time)
         this.helloLabel.y = Math.abs(posY * .6)
-
+        sendMsg(this.getScreenShotInCanvasModele())
 
     },
 
@@ -41,7 +42,7 @@ var GameLayer = cc.Layer.extend({
     getScreenShotInCanvasModele: function () {
         return document.getElementById("gameCanvas").toDataURL()
     },
-    getScreenShotInCanvasModele: function () {
+    getScreenShotInWebglModele: function () {
         var listener = cc.eventManager.addListener({
             event: cc.EventListener.CUSTOM,
             eventName: cc.Director.EVENT_AFTER_DRAW,

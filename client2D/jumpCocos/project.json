@@ -6,6 +6,7 @@
     "jsList":[
         "src/App.js",
         "src/resource.js",
+        "src/SocketClient.js",
         "lib/Test.js"
     ],
     "modules":[
@@ -16,6 +17,6 @@
     ],
     "noCache":false,
     "project_type":"javascript",
-    "renderMode":0,
+    "renderMode":1,
     "showFPS":true
 }
