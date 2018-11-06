@@ -5,4 +5,6 @@ client2D/jumpWords/bin-debug/
 *.mp4
 *.mp3
 *.avi
+*.wav
+*.aac
 pySocket/img/*
