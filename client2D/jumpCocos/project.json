@@ -13,7 +13,8 @@
         "cocos2d",
         "cocostudio",
         "ccbreader",
-        "editbox"
+        "editbox",
+        "chipmunk"
     ],
     "noCache":false,
     "project_type":"javascript",

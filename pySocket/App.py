@@ -10,8 +10,6 @@ le = 0
 allCode = []
 
 
-
-
 async def echo(websocket, path):
     async for message in websocket:
         # 接受到的消息

@@ -1,5 +1,6 @@
-var socket = new WebSocket("ws://192.168.1.214:9999");
+
 var isConnected = false
+window.socket = {}
 socket.onopen = function () {
     /* 与服务器端连接成功后，自动执行 */
     console.log("链接成功")
@@ -26,4 +27,7 @@ function sendMsg(txt) {
 function closeConn() {
     socket.close();
     console.log("关闭连接")
+}
+function initSocket() {
+    window.socket = new WebSocket("ws://192.168.1.214:9999");
 }
