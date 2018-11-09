@@ -1,5 +1,4 @@
 var GameLayer = cc.Layer.extend({
-    sprite: null,
     ctor: function () {
         this._super();
         //初始化物理世界
@@ -11,25 +10,7 @@ var GameLayer = cc.Layer.extend({
 
         this.len = 1
         var size = cc.winSize;
-        this.helloLabel = new cc.LabelTTF("中文中文aa", "Marker", 80)
-        this.helloLabel1 = new cc.LabelTTF("中文中文aa2", "font1", 80)
-        this.helloLabel2 = new cc.LabelTTF("中文中文aa2", "font2", 80)
-        this.addChild(this.helloLabel1);
-        this.addChild(this.helloLabel2);
-        this.helloLabel.x = this.helloLabel2.x = this.helloLabel1.x = size.width / 2;
-        this.helloLabel.y = size.height / 2 + 200;
-        this.helloLabel1.y = size.height / 2;
-        this.helloLabel2.y = size.height / 2 - 200;
-        //this.addChild(this.helloLabel, 5);
-        this.helloLabel1.setColor(cc.color(0, 178, 255))
-        this.helloLabel2.setColor(cc.color(0, 178, 111))
-        this.helloLabel.setColor(cc.color(0, 233, 12))
         this.time = 0
-        this.sprite = new cc.Sprite(res.HelloWorld_png)
-        this.sprite.setAnchorPoint(0.5, 0.5)
-        this.sprite.setPosition(size.width / 2, size.height / 2)
-        this.sprite.setScale(size.height / this.sprite.getContentSize().height)
-        //this.addChild(this.sprite, 0)
         //this.getScreenShotInCanvasModele()
         window.ddd = this
         var button1 = new cc.MenuItemImage(res.HelloWorld_png, res.HelloWorld_png, this.beginLoop, this)
@@ -44,8 +25,16 @@ var GameLayer = cc.Layer.extend({
 
         this.addChild(this.menu)
 
+        Union.getLyrics(res.lyrics,this,function (data) {
+            console.log("data",data)
+
+        })
+
+        console.log(res.lyrics)
+
         return true;
     },
+
     onEnter: function () {
         this._super();
         cc.eventManager.addListener({
@@ -61,25 +50,51 @@ var GameLayer = cc.Layer.extend({
     TouchBegan: function (touch, event) {
         cc.log("TouchBegan");
         var p = touch.getLocation();
-        var body = new cp.Body(1, cp.momentForBox(1, 50, 50));    //其中参数 1 是质量(mass) |  50是框体的 宽和高
+        this.createPhysicLabel('中文中文aaaaa', p)
+        return true;
+    },
+    /*
+      文字  位置
+     */
+    createPhysicLabel: function (txt, pos) {
+        let scale = .2
+
+        var pos = pos
+        if (!pos) {
+            pos = cc.p(0, 0)
+        }
+        var p = pos
+        let lbl = new cc.LabelTTF(txt, "font2", 80)
+        lbl.color = Union.getRandomColor()
+        let w = lbl.width
+        let h = lbl.height * .9
+        //设置最终大小
+        var body = new cp.Body(1, cp.momentForBox(1, w, h));    //其中参数 1 是质量(mass) |  50是框体的 宽和高
         body.setPos(p);
         this.space.addBody(body);
 
-        var shape = new cp.BoxShape(body, 50, 50);
+        var shape = new cp.BoxShape(body, w * scale, h * scale);
         shape.setElasticity(0.5);             //设置弹性系数
         shape.setFriction(0.5);               //设置摩擦力
         this.space.addShape(shape);
         //创建物理精灵
-
         var sprite = new cc.PhysicsSprite(res.HelloWorld_png);
+        sprite.opacity = 0
 
         sprite.setBody(body);
         sprite.setPosition(cc.p(p.x, p.y));
         this.addChild(sprite);
+        lbl.setAnchorPoint(0.5, 0.5)
+        lbl.setPosition(w / 2, h / 2)
+        sprite.width = lbl.width
+        sprite.height = lbl.height
 
-        //sprite.addChild()
-//shape.addCallback(new cc.LabelTTF("中文中文aa2", "font2", 80))
-        return true;
+        sprite.addChild(lbl)
+
+        var action = cc.scaleTo(2, scale, scale);
+        sprite.runAction(action);
+
+
     },
 
 
@@ -93,9 +108,11 @@ var GameLayer = cc.Layer.extend({
         this.len++
         this.time += time
         let posY = cc.winSize.height * Math.sin(this.time)
-        this.helloLabel.y = Math.abs(posY * .6)
-        this.helloLabel1.y = Math.abs(posY * .5)
-        this.helloLabel2.y = Math.abs(posY * .8)
+        let d = new cc.p()
+        d.x = 300
+        d.y = posY
+
+        this.createPhysicLabel('music111', d)
 
 
         // 数据上传位置
@@ -112,12 +129,9 @@ var GameLayer = cc.Layer.extend({
     initPhysics: function () {
         var width = cc.winSize.width;
         var height = cc.winSize.height;
-
         this.space = new cp.Space();
         this.space.gravity = cp.v(0, -200);     //设置重力  重力向下为 200
-
         var staticBody = this.space.staticBody;
-
 
         var walls = [
             new cp.SegmentShape(staticBody, cp.v(0, 0), cp.v(width, 0), 0),    //最后一个参数是墙的厚度 , 很重要 , 没有厚度的墙体容易被穿透.
@@ -139,7 +153,7 @@ var GameLayer = cc.Layer.extend({
     },
     showDebug: function () {
         this._debugNode = new cc.PhysicsDebugNode(this.space);
-        this._debugNode.visible = true;     // 为true 时, 显示物理框体
+        this._debugNode.visible = false;     // 为true 时, 显示物理框体
         this.addChild(this._debugNode);
     },
 

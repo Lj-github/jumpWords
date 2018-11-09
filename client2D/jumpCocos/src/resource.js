@@ -1,5 +1,7 @@
 var res = {
     HelloWorld_png: "res/HelloWorld.png",
+    lyrics: "res/lyrics/我的唇吻不到我爱的人王奕心.txt",
+
 };
 
 var g_resources = [
