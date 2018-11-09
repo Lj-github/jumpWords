@@ -12,7 +12,6 @@ var GameLayer = cc.Layer.extend({
         var size = cc.winSize;
         this.time = 0
         //this.getScreenShotInCanvasModele()
-        window.ddd = this
         var button1 = new cc.MenuItemImage(res.HelloWorld_png, res.HelloWorld_png, this.beginLoop, this)
         button1.setPosition(cc.p(551, 112))
         var button2 = new cc.MenuItemImage(res.HelloWorld_png,
@@ -27,6 +26,7 @@ var GameLayer = cc.Layer.extend({
 
         Union.getLyrics(res.lyrics,this,function (data) {
             console.log("data",data)
+            console.log( Union.splitLyricsToJson(data))
 
         })
 
