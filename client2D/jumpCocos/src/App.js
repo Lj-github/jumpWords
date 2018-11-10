@@ -24,9 +24,11 @@ var GameLayer = cc.Layer.extend({
 
         this.addChild(this.menu)
 
-        Union.getLyrics(res.lyrics,this,function (data) {
-            console.log("data",data)
-            console.log( Union.splitLyricsToJson(data))
+        Union.getLyrics(res.lyrics, this, function (data) {
+            console.log("data", data)
+            console.log(Union.splitLyricsToJson(data))
+            this.beginLoop()
+            this.lyrics = data
 
         })
 
