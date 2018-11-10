@@ -1,4 +1,7 @@
 var GameLayer = cc.Layer.extend({
+
+    lyricsIndex: 0,
+
     ctor: function () {
         this._super();
         //初始化物理世界
@@ -7,33 +10,23 @@ var GameLayer = cc.Layer.extend({
         this.scheduleUpdate();
         //显示碰撞框体
         this.showDebug();
-
         this.len = 1
-        var size = cc.winSize;
+        var size = cc.winSize
         this.time = 0
         //this.getScreenShotInCanvasModele()
         var button1 = new cc.MenuItemImage(res.HelloWorld_png, res.HelloWorld_png, this.beginLoop, this)
         button1.setPosition(cc.p(551, 112))
         var button2 = new cc.MenuItemImage(res.HelloWorld_png,
             res.HelloWorld_png, this.beginLoop, this)
-
         button2.setPosition(cc.p(551, 112))
-
         this.menu = new cc.Menu(button1, button2)
         this.menu.setPosition(cc.p(-100, 300))
-
         this.addChild(this.menu)
-
         Union.getLyrics(res.lyrics, this, function (data) {
             console.log("data", data)
-            console.log(Union.splitLyricsToJson(data))
+            this.lyrics = Union.splitLyricsToJson(data)
             this.beginLoop()
-            this.lyrics = data
-
         })
-
-        console.log(res.lyrics)
-
         return true;
     },
 
@@ -95,14 +88,12 @@ var GameLayer = cc.Layer.extend({
 
         var action = cc.scaleTo(2, scale, scale);
         sprite.runAction(action);
-
-
     },
 
-
     beginLoop: function (btn) {
-        initSocket()
-        this.schedule(this.run, 1 / 30)
+        //initSocket()
+        this.lyricsIndex = 0
+        this.schedule(this.run, 1/60)
         this.menu.setVisible(false)
         console.log("开始录制！！")
     },
@@ -113,13 +104,18 @@ var GameLayer = cc.Layer.extend({
         let d = new cc.p()
         d.x = 300
         d.y = posY
-
-        this.createPhysicLabel('music111', d)
-
+        let data = this.lyrics[this.lyricsIndex]
+        let timeD = data.time.toFixed(2)
+        let txt = data.txt
+        let timeNow = this.time.toFixed(2)
+        if ((timeD - timeNow) <= 0.01) {
+            this.createPhysicLabel(txt, d)
+            this.lyricsIndex++
+        }
 
         // 数据上传位置
         let base64Data = {}
-        if (this.len < 200) {
+        if (this.len < 200000) {
             base64Data.id = 0//base64 msg
             base64Data.base64 = this.getScreenShotInCanvasModele()
         } else {
