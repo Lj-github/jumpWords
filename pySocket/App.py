@@ -35,3 +35,4 @@ async def echo(websocket, path):
 
 asyncio.get_event_loop().run_until_complete(websockets.serve(echo, '192.168.1.214', 9999))
 asyncio.get_event_loop().run_forever()
+print("begin")

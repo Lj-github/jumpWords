@@ -1,6 +1,7 @@
 var GameLayer = cc.Layer.extend({
 
     lyricsIndex: 0,
+    fontSizeScale: .2,
 
     ctor: function () {
         this._super();
@@ -52,15 +53,26 @@ var GameLayer = cc.Layer.extend({
       文字  位置
      */
     createPhysicLabel: function (txt, pos) {
-        let scale = .2
-
         var pos = pos
         if (!pos) {
             pos = cc.p(0, 0)
         }
         var p = pos
-        let lbl = new cc.LabelTTF(txt, "font2", 80)
+        let lbl = new cc.LabelTTF(txt, "font2", 50)
         lbl.color = Union.getRandomColor()
+        lbl.setPosition(p)
+        this.addChild(lbl)
+        return lbl
+    },
+
+    drupBody: function () {
+        if (!this.oldlbl) {
+            return
+        }
+        this.oldlbl.removeFromParent()
+        let scale = this.fontSizeScale
+        var p = this.oldlbl.getPosition()
+        let lbl = this.oldlbl
         let w = lbl.width
         let h = lbl.height * .9
         //设置最终大小
@@ -83,17 +95,15 @@ var GameLayer = cc.Layer.extend({
         lbl.setPosition(w / 2, h / 2)
         sprite.width = lbl.width
         sprite.height = lbl.height
-
         sprite.addChild(lbl)
-
         var action = cc.scaleTo(2, scale, scale);
         sprite.runAction(action);
     },
 
     beginLoop: function (btn) {
-        //initSocket()
+        initSocket()
         this.lyricsIndex = 0
-        this.schedule(this.run, 1/60)
+        this.schedule(this.run, 1 / 60)
         this.menu.setVisible(false)
         console.log("开始录制！！")
     },
@@ -102,20 +112,21 @@ var GameLayer = cc.Layer.extend({
         this.time += time
         let posY = cc.winSize.height * Math.sin(this.time)
         let d = new cc.p()
-        d.x = 300
-        d.y = posY
+        d.x = gt.size.width / 2
+        d.y = gt.size.height * .8
         let data = this.lyrics[this.lyricsIndex]
         let timeD = data.time.toFixed(2)
         let txt = data.txt
         let timeNow = this.time.toFixed(2)
-        if ((timeD - timeNow) <= 0.01) {
-            this.createPhysicLabel(txt, d)
+        //console.log('timeNow', timeNow, 'timeD', timeD)
+        if ((timeD - timeNow) <= 0.02) {
+            this.drupBody()
+            this.oldlbl = this.createPhysicLabel(txt, d)
             this.lyricsIndex++
         }
-
         // 数据上传位置
         let base64Data = {}
-        if (this.len < 200000) {
+        if (this.lyricsIndex <= 20) {
             base64Data.id = 0//base64 msg
             base64Data.base64 = this.getScreenShotInCanvasModele()
         } else {
@@ -189,11 +200,8 @@ var GameLayer = cc.Layer.extend({
 });
 
 var GameScene = cc.Scene.extend({
-
     onEnter: function () {
         this._super();
-
-
         var layer = new GameLayer();
         this.addChild(layer);
     }

@@ -80,7 +80,7 @@ class Main extends egret.DisplayObjectContainer {
         //colorLabel.scaleY = colorLabel.scaleX = 5
         colorLabel.fontFamily ="hanti";
         this.addChild(colorLabel);
-        colorLabel.filters =  [gt.getCustomFilter(0, 255, 0)]
+        //colorLabel.filters =  [gt.getCustomFilter(0, 255, 0)]
 
 
 

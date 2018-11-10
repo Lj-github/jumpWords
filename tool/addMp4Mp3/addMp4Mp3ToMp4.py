@@ -61,3 +61,7 @@ os.system('ffmpeg -i file.avi -i test.mp3 -vcodec copy -acodec copy output2.avi'
 # ffmpeg -i file.avi -i test.aac -vcodec mpeg4 -acodec copy add.mp4  !可以
 
 
+#ffmpeg -i file.avi -i test.aac -vcodec mpeg4 -acodec copy wodecunwenbudaowoaideren.mp4  成功
+
+
+

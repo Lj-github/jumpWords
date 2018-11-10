@@ -5,6 +5,7 @@
     "id":"gameCanvas",
     "jsList":[
         "src/App.js",
+        "src/gt.js",
         "src/resource.js",
         "src/SocketClient.js",
         "src/Union.js",
