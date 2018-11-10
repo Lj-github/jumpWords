@@ -33,9 +33,9 @@ Union.splitLyricsToJson = function (lyricsStr) {
 Union.timeToSecond = function (timeStr) {
     let fTxt = timeStr.split(":")
     let se = 0
-    for (var i  in fTxt) {
+    for (var i in fTxt.reverse()) {
         let item = fTxt[i]
-        se = se + (item-1) * Math.pow(60, i)
+        se = se + item * Math.pow(60, i)
     }
     return se
 }
