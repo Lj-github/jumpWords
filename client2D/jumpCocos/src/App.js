@@ -46,7 +46,10 @@ var GameLayer = cc.Layer.extend({
     TouchBegan: function (touch, event) {
         cc.log("TouchBegan");
         var p = touch.getLocation();
-        this.createPhysicLabel('中文中文aaaaa', p)
+        this.oldlbl = this.createPhysicLabel('中文中文aaaaa', p)
+        this.drupBody()
+
+
         return true;
     },
     /*
