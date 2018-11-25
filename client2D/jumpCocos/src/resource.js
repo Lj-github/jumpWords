@@ -1,6 +1,7 @@
 var res = {
     HelloWorld_png: "res/HelloWorld.png",
     lyrics: "res/lyrics/我的唇吻不到我爱的人王奕心.txt",
+     mp3: "res/lyrics/我的唇吻不到我爱的人王奕心.txt",
 
 };
 

@@ -23,12 +23,30 @@ var GameLayer = cc.Layer.extend({
         this.menu = new cc.Menu(button1, button2)
         this.menu.setPosition(cc.p(-100, 300))
         this.addChild(this.menu)
-        Union.getLyrics(res.lyrics, this, function (data) {
+        // Union.getLyrics(res.lyrics, this, function (data) {
+        //     let lyricsTxt = data
+        //
+        //     console.log("data", data)
+        //     this.lyrics = Union.splitLyricsToJson(data)
+        //     this.beginLoop()
+        // })
+
+         Union.getMp3(res.lyrics, this, function (data) {
+            let lyricsTxt = data
+
             console.log("data", data)
             this.lyrics = Union.splitLyricsToJson(data)
             this.beginLoop()
         })
+
         return true;
+    },
+
+     initMusicRander:function(path){
+        this.musicRander = new  Music.ReadBuff(path)
+
+
+
     },
 
     onEnter: function () {
@@ -102,6 +120,11 @@ var GameLayer = cc.Layer.extend({
         var action = cc.scaleTo(2, scale, scale);
         sprite.runAction(action);
     },
+
+    /**
+     *
+     * @param btn
+     */
 
     beginLoop: function (btn) {
         initSocket()

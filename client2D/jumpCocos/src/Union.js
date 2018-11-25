@@ -9,6 +9,13 @@ Union.getLyrics = function (url, tar, cb) {
     });
 }
 
+Union.getMp3 = function (url, tar, cb) {
+    cc.loader.load(url, function (error, data) {
+        cb.call(tar, data)
+    });
+}
+
+
 /**
  * 返回数组形式  [  {time: 2 /秒数/,txt :‘’ /文字/}  ]
  */

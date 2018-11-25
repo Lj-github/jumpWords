@@ -1,3 +1,12 @@
+
+// 是否横屏    横竖屏 视频
+var gt = window.gt || {}
+gt.IS_HORIZONTAL_SCREEN = true
+
+
+
+
+
 cc.game.onStart = function(){
     var sys = cc.sys;
     if(!sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
@@ -10,7 +19,8 @@ cc.game.onStart = function(){
     }
     cc.view.enableRetina(true);
     cc.view.adjustViewPort(true);
-    cc.view.setDesignResolutionSize(720, 1280, cc.ResolutionPolicy.SHOW_ALL);
+    gt.IS_HORIZONTAL_SCREEN ? cc.view.setDesignResolutionSize(1280, 720, cc.ResolutionPolicy.SHOW_ALL)
+    :cc.view.setDesignResolutionSize(720, 1280, cc.ResolutionPolicy.SHOW_ALL);
     cc.view.resizeWithBrowserSize(true);
     cc.LoaderScene.preload(g_resources, function () {
         cc.director.runScene(new GameScene());
