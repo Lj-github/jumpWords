@@ -1,9 +1,20 @@
 var res = {
     HelloWorld_png: "res/HelloWorld.png",
-    lyrics: "res/lyrics/我的唇吻不到我爱的人王奕心.txt",
-     mp3: "res/lyrics/我的唇吻不到我爱的人王奕心.txt",
+     timg_jpg: "res/img/timg.jpg",
+    //lyrics: "res/lyrics/我的唇吻不到我爱的人王奕心.txt",
+
 
 };
+
+
+
+var music = {
+     mp31: "res/music/shiqucaidong.mp3",
+}
+var shader = {
+   vsh:  "res/shader/gray.vsh",
+  fsh:  "res/shader/gray.fsh"
+}
 
 var g_resources = [
     {
@@ -25,4 +36,7 @@ var g_resources = [
 ];
 for (var i in res) {
     g_resources.push(res[i]);
+}
+for (var i in shader) {
+    g_resources.push(shader[i]);
 }

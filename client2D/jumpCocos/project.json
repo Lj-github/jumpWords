@@ -4,12 +4,14 @@
     "frameRate":60,
     "id":"gameCanvas",
     "jsList":[
-        "src/App.js",
-        "src/gt.js",
-        "src/resource.js",
-        "src/SocketClient.js",
-        "src/Union.js",
-        "lib/Test.js"
+        "src\\App.js",
+        "src\\gt.js",
+        "src\\pannel\\ImgRander.js",
+        "src\\ReadMp3.js",
+        "src\\resource.js",
+        "src\\SocketClient.js",
+        "src\\Union.js",
+        "lib\\Test.js"
     ],
     "modules":[
         "cocos2d",
@@ -20,6 +22,6 @@
     ],
     "noCache":false,
     "project_type":"javascript",
-    "renderMode":1,
+    "renderMode":0,
     "showFPS":true
 }

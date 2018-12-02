@@ -14,12 +14,13 @@ var Music;
                 console.error("no musicUrl init !!!");
                 return;
             }
-            cc.loader.load(this.musicFilePath, this.getAllMusic, this);
+            //cc.loader.load(this.musicFilePath, this.getAllMusic, this);
             document.body.appendChild(this.createAudioElement());
             //<audio id="audio" style=" " src="shapeofyou.mp3"></audio>
             var audio = document.getElementById('audio');
             var actx = this.getAudioContext();
             audio.src = musicUrl; //";
+            audio.play()
             this.analyser = actx.createAnalyser();
             var audioSrc = actx.createMediaElementSource(audio);
             audioSrc.connect(this.analyser);
