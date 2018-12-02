@@ -264,6 +264,7 @@ var GameLayer = cc.Layer.extend({
     },
     //在project json  "renderMode":1, canvas  0 webgl
     //获取 canvas base64 data   //canvas 使用 toDataURL 可以完美截图
+    //{preserveDrawingBuffer: true} 可以完美截图
     getScreenShotInCanvasModele: function () {
         return document.getElementById("gameCanvas").toDataURL()
     },
