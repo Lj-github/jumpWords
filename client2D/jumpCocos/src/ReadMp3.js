@@ -3,7 +3,7 @@ var Music;
 (function (Music) {
     class ReadBuff {
         constructor(musicUrl) {
-            this.LINENUM = 80;
+            this.LINENUM = gt.musicRanderLanEnum;
             this.SHAP = 2; //1:圆   2 ：柱 3 ：线
             this.musicFilePath = "resource/music.json";
             this.bf = {};

@@ -9,7 +9,8 @@ var ImgRander =cc.Layer.extend({
         img.setAnchorPoint(.5,.5)
         this.addChild(img)
         this.img = img
-
+this.img.scale = 2
+        this.createAllImg()
 
 
 
@@ -17,6 +18,20 @@ var ImgRander =cc.Layer.extend({
     },
 
      initMusicRander:function(path){
+
+
+    },
+    createAllImg :function(){
+        for (var i = 0 ;i <gt.musicRanderLanEnum;i++){
+            var img =  new cc.Sprite( res.timg_jpg)
+            this['img' +i] = img
+            img.x = i * 20
+            img.y = 0
+            //img.width = 10
+            img.setScaleX(.05)
+            img.setAnchorPoint(.5,.5)
+            this.addChild(img)
+        }
 
 
     },

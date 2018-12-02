@@ -43,6 +43,7 @@ var GameLayer = cc.Layer.extend({
              musciRander.init(music.mp31)
             this.beginLoop()
         })
+        gt.dddd = 1
 
 
         let imgLayer = new ImgRander()
@@ -51,8 +52,6 @@ var GameLayer = cc.Layer.extend({
 
         this.initShader()
         gt.createCanvasForWEBGLRander()
-
-
         return true;
     },
 
@@ -62,16 +61,14 @@ var GameLayer = cc.Layer.extend({
 
     initShader : function () {
         this.graySprite(this.imgLayer.img ,gt.shader.Wave.vsh,gt.shader.Wave.fsh)
-
-
     } ,
     graySprite: function (sprite,vertexSrc,grayShaderFragment){
         if(sprite){
             //!! 只能在webgl 模式下 运行...
-          var  shader = new cc.GLProgram()//cc.GLProgram.create("gray.vsh", "gray.fsh")
-         // var shader =cc.GLProgram.create("res/shader/gray.vsh", "res/shader/gray.fsh")
-          shader.retain()
-          shader.initWithVertexShaderByteArray(vertexSrc, grayShaderFragment)
+            var  shader = new cc.GLProgram()//cc.GLProgram.create("gray.vsh", "gray.fsh")
+            // var shader =cc.GLProgram.create("res/shader/gray.vsh", "res/shader/gray.fsh")
+            shader.retain()
+            shader.initWithVertexShaderByteArray(vertexSrc, grayShaderFragment)
             shader.addAttribute(cc.ATTRIBUTE_NAME_POSITION, cc.VERTEX_ATTRIB_POSITION)
             shader.addAttribute(cc.ATTRIBUTE_NAME_COLOR, cc.VERTEX_ATTRIB_COLOR)
             shader.addAttribute(cc.ATTRIBUTE_NAME_TEX_COORD, cc.VERTEX_ATTRIB_TEX_COORDS)
@@ -81,15 +78,18 @@ var GameLayer = cc.Layer.extend({
             this.shader = shader
         }
     },
-    runShader:function(delta){
+    runShader:function(delta,musicVal){
         this.dt += delta
         this.time += delta
         this.shader.use()
         this.shader.setUniformLocationWith1f(this.shader.getUniformLocationForName('u_radius'), 0.003 * this.dt )
+       // this.shader.setUniformLocationWith1f(this.shader.getUniformLocationForName('u_vector'), musicVal / 20 )
+        if(musicVal  === 0  ){musicVal = 0.01}
+
+        this.imgLayer.img.scaleX =  (musicVal /200) * 2  + 2
+
         this.shader.updateUniforms()
     },
-
-
 
     onEnter: function () {
         this._super();
@@ -108,8 +108,6 @@ var GameLayer = cc.Layer.extend({
         var p = touch.getLocation();
         this.oldlbl = this.createPhysicLabel('中文中文aaaaa', p)
         this.drupBody()
-
-
         return true;
     },
     /*
@@ -150,7 +148,6 @@ var GameLayer = cc.Layer.extend({
         //创建物理精灵
         var sprite = new cc.PhysicsSprite(res.HelloWorld_png);
         sprite.opacity = 0
-
         sprite.setBody(body);
         sprite.setPosition(cc.p(p.x, p.y));
         this.addChild(sprite);
@@ -162,12 +159,6 @@ var GameLayer = cc.Layer.extend({
         var action = cc.scaleTo(2, scale, scale);
         sprite.runAction(action);
     },
-
-    /**
-     *
-     * @param btn
-     */
-
     beginLoop: function (btn) {
         initSocket()
         this.lyricsIndex = 0
@@ -178,25 +169,35 @@ var GameLayer = cc.Layer.extend({
     },
 
     runWithMusci:function(time){
-
         let muscicBuff = this.musciRander.getBuff()
-       // console.log("musicBuf",muscicBuff)
-        this.runShader(time)
+       //console.log("musicBuf",muscicBuff)
+        let voicehigh = muscicBuff.voicehigh
+        let step = muscicBuff.step
+        //let value=voicehigh[step*gt.musicRanderLanEnum/2];
+        let value=voicehigh[step*gt.musicRanderLanEnum/5];
+        let all  = 0
 
-
+        for (var i = 0 ;i <gt.musicRanderLanEnum;i++){
+            let value=voicehigh[step*i]; // 0 -200
+            if(value){
+                all = all + value
+                var img =  this.imgLayer['img' +i]
+                img.setScaleY( value/40 || 0.01)
+            }
+        }
+       this.runShader(time,all/gt.musicRanderLanEnum)
         // 数据上传位置
         let base64Data = {}
         //if (this.lyricsIndex <= 20) {
-        if (this.lyricsIndex <= 20) {
+        if (this.len <= 6000) {
             base64Data.id = 0//base64 msg
            // base64Data.base64 = this.getScreenShotInCanvasModele()
-
              base64Data.base64 = this.getScreenShotInWebglModele()
         } else {
             base64Data.id = 1
             this.unschedule(this.run)
         }
-        console.log(base64Data)
+        //console.log(base64Data)
         sendMsg(JSON.stringify(base64Data))
     },
 
@@ -223,9 +224,6 @@ var GameLayer = cc.Layer.extend({
             base64Data.id = 0//base64 msg
            base64Data.base64 = this.getScreenShotInCanvasModele()
 
-
-
-
         } else {
             base64Data.id = 1
             this.unschedule(this.run)
@@ -238,14 +236,12 @@ var GameLayer = cc.Layer.extend({
         this.space = new cp.Space();
         this.space.gravity = cp.v(0, -200);     //设置重力  重力向下为 200
         var staticBody = this.space.staticBody;
-
         var walls = [
             new cp.SegmentShape(staticBody, cp.v(0, 0), cp.v(width, 0), 0),    //最后一个参数是墙的厚度 , 很重要 , 没有厚度的墙体容易被穿透.
             new cp.SegmentShape(staticBody, cp.v(0, height), cp.v(width, height), 0),
             new cp.SegmentShape(staticBody, cp.v(0, 0), cp.v(0, height), 0),
             new cp.SegmentShape(staticBody, cp.v(width, 0), cp.v(width, height), 0)
         ];
-
         for (var i = 0; i < walls.length; i++) {
             var shape = walls[i];
             shape.setElasticity(1);     //设置弹性系数
@@ -271,7 +267,6 @@ var GameLayer = cc.Layer.extend({
     getScreenShotInWebglModele: function () {
         return document.getElementById("gameCanvas").toDataURL()
     }
-
 });
 
 var GameScene = cc.Scene.extend({

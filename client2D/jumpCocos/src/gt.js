@@ -20,17 +20,17 @@ gt.shader = {
           "}",
 
       fsh : "\n" +
-          "varying vec2 v_texCoord;\n" +
-           "uniform float u_radius;\n"+
-
-          "void main()\n" +
-          "\n{\n" +
-          "   float radius = u_radius;\n"+
-          "   vec2 coord = v_texCoord;\n" +
-          "   coord.x += (sin(coord.y * 8.0 * 3.1415926 + radius*3.1415926 *1000.0) / 30.0  )   ;\n" +
-          "   vec2 uvs = coord.xy;\n" +
-          "   gl_FragColor = texture2D(CC_Texture0, coord);\n" +
-          "}"
+        "varying vec2 v_texCoord;\n" +
+        "uniform float u_radius;\n"+
+        "uniform float u_vector;\n"+
+        "void main()\n" +
+        "\n{\n" +
+        "   float radius = u_radius;\n"+
+        "   vec2 coord = v_texCoord;\n" +
+        "   coord.x += (sin(coord.y * 8.0 * 3.1415926 + radius*3.1415926 *1000.0) / 30.0  )   ;\n" +
+        "   vec2 uvs = coord.xy;\n" +
+        "   gl_FragColor = texture2D(CC_Texture0, coord);\n" +
+        "}"
 
     }
 
@@ -51,3 +51,5 @@ gt.createCanvasForWEBGLRander = function () {
     // console.log(tempCanvas.toDataURL());
     //
 }
+
+gt.musicRanderLanEnum = 80
