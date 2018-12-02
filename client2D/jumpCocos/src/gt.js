@@ -37,3 +37,17 @@ gt.shader = {
 
 
 }
+
+ gt.webglRanderCanvas = null
+gt.createCanvasForWEBGLRander = function () {
+     var oDiv=document.createElement('div');
+     document.body.append(oDiv);
+
+    var tempCanvas = document.createElement('canvas');
+    oDiv.appendChild(tempCanvas);
+    tempCanvas.id = 'webglRander'
+    gt.webglRanderCanvas = tempCanvas
+    // tempCanvas.getContext('2d').putImageData(imageData, 0, 0, 0, 0, cc.game._renderContext.drawingBufferWidth, cc.game._renderContext.drawingBufferHeight);
+    // console.log(tempCanvas.toDataURL());
+    //
+}

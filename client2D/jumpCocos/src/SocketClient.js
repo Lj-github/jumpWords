@@ -27,8 +27,10 @@ function closeConn() {
     console.log("关闭连接")
 }
 
+let host = 'localhost'
+
 function initSocket() {
-    window.socket = new WebSocket("ws://192.168.1.214:9999");
+    window.socket = new WebSocket("ws://" + host+":9999");
     socket.onopen = onopen
     socket.onclose = onclose
     socket.onmessage = onmessage

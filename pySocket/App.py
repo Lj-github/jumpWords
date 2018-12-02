@@ -32,7 +32,8 @@ async def echo(websocket, path):
         elif msgID == 1 :
             os.system("python3 img2Video2.py")
             await websocket.send("publish success!!!")
-
-asyncio.get_event_loop().run_until_complete(websockets.serve(echo, '192.168.1.214', 9999))
+host = '192.168.1.214'
+host = 'localhost'
+asyncio.get_event_loop().run_until_complete(websockets.serve(echo,host, 9999))
 asyncio.get_event_loop().run_forever()
 print("begin")

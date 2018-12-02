@@ -2768,12 +2768,13 @@ cc.game = /** @lends cc.game# */{
         localCanvas.setAttribute("width", width || 480);
         localCanvas.setAttribute("height", height || 320);
         localCanvas.setAttribute("tabindex", 99);
-
+        // add by liujiang
         if (cc._renderType === cc.game.RENDER_TYPE_WEBGL) {
             this._renderContext = cc._renderContext = cc.webglContext
              = cc.create3DContext(localCanvas, {
                 'stencil': true,
-                'alpha': false
+                'alpha': false,
+                preserveDrawingBuffer: true
             });
         }
         // WebGL context created successfully

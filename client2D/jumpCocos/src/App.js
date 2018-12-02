@@ -50,29 +50,24 @@ var GameLayer = cc.Layer.extend({
         this.imgLayer = imgLayer
 
         this.initShader()
+        gt.createCanvasForWEBGLRander()
 
 
         return true;
     },
 
-     initMusicRander:function(path){
+    initMusicRander:function(path){
         this.musicRander = new  Music.ReadBuff(path)
     },
 
     initShader : function () {
-      //   var _that = this;
-      //    cc.loader.loadTxt(res.fragmentWather, function(x, fragmentWather) {
-      //   return cc.loader.loadTxt(res.vertex, function(x, vertex) {
-      //     return _that.initShader(vertex, fragmentWather);
-      //   });
-      // });
-
         this.graySprite(this.imgLayer.img ,gt.shader.Wave.vsh,gt.shader.Wave.fsh)
 
 
     } ,
     graySprite: function (sprite,vertexSrc,grayShaderFragment){
         if(sprite){
+            //!! 只能在webgl 模式下 运行...
           var  shader = new cc.GLProgram()//cc.GLProgram.create("gray.vsh", "gray.fsh")
          // var shader =cc.GLProgram.create("res/shader/gray.vsh", "res/shader/gray.fsh")
           shader.retain()
@@ -185,22 +180,23 @@ var GameLayer = cc.Layer.extend({
     runWithMusci:function(time){
 
         let muscicBuff = this.musciRander.getBuff()
-        console.log("musicBuf",muscicBuff)
+       // console.log("musicBuf",muscicBuff)
         this.runShader(time)
-
-
-
 
 
         // 数据上传位置
         let base64Data = {}
+        //if (this.lyricsIndex <= 20) {
         if (this.lyricsIndex <= 20) {
             base64Data.id = 0//base64 msg
-            base64Data.base64 = this.getScreenShotInCanvasModele()
+           // base64Data.base64 = this.getScreenShotInCanvasModele()
+
+             base64Data.base64 = this.getScreenShotInWebglModele()
         } else {
             base64Data.id = 1
             this.unschedule(this.run)
         }
+        console.log(base64Data)
         sendMsg(JSON.stringify(base64Data))
     },
 
@@ -225,12 +221,16 @@ var GameLayer = cc.Layer.extend({
         let base64Data = {}
         if (this.lyricsIndex <= 20) {
             base64Data.id = 0//base64 msg
-            base64Data.base64 = this.getScreenShotInCanvasModele()
+           base64Data.base64 = this.getScreenShotInCanvasModele()
+
+
+
+
         } else {
             base64Data.id = 1
             this.unschedule(this.run)
         }
-        sendMsg(JSON.stringify(base64Data))
+        //sendMsg(JSON.stringify(base64Data))
     },
     initPhysics: function () {
         var width = cc.winSize.width;
@@ -262,36 +262,13 @@ var GameLayer = cc.Layer.extend({
         this._debugNode.visible = false;     // 为true 时, 显示物理框体
         this.addChild(this._debugNode);
     },
-
-
     //在project json  "renderMode":1, canvas  0 webgl
     //获取 canvas base64 data   //canvas 使用 toDataURL 可以完美截图
     getScreenShotInCanvasModele: function () {
         return document.getElementById("gameCanvas").toDataURL()
     },
     getScreenShotInWebglModele: function () {
-        var listener = cc.eventManager.addListener({
-            event: cc.EventListener.CUSTOM,
-            eventName: cc.Director.EVENT_AFTER_DRAW,
-            callback: function (event) {
-                function grab(x, y, width, height) {
-                    var arrayBuffer = new Uint8Array(width * height * 4);
-                    cc.game._renderContext.readPixels(x, y, width, height, cc.game._renderContext.RGBA, cc.game._renderContext.UNSIGNED_BYTE, arrayBuffer);
-                    var clampArray = new Uint8ClampedArray(arrayBuffer, 0, arrayBuffer.length);
-                    var imageData = new ImageData(clampArray, width, height);
-                    var tempCanvas = document.createElement('canvas');
-                    document.appendChild(tempCanvas)
-                    tempCanvas.getContext('2d').putImageData(imageData, 0, 0, 0, 0, cc.game._renderContext.drawingBufferWidth, cc.game._renderContext.drawingBufferHeight);
-                    console.log(tempCanvas.toDataURL());
-                }
-
-                grab(0, 0, cc.game._renderContext.drawingBufferWidth, cc.game._renderContext.drawingBufferHeight);
-                //grab(0, 0, cc.winSize.width, cc.winSize.height);
-
-                cc.eventManager.removeListener(listener);
-                listener = undefined;
-            }
-        }, cc.Director._getInstance().getRunningScene());// 这是 webgl 渲染下 的可以 捕捉 内容
+        return document.getElementById("gameCanvas").toDataURL()
     }
 
 });
