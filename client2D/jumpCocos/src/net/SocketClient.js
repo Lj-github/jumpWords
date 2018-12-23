@@ -1,10 +1,11 @@
 var isConnected = false
 var allMsg = []
-let sendSocketTimer = setInterval(function () {
+let sendSocketTimer = function(){
+    setInterval(function () {
     sendMsg(allMsg[0])
     allMsg = allMsg.splice(1,allMsg.length)
 },33)
-
+}
 var onopen = function () {
     /* 与服务器端连接成功后，自动执行 */
     console.log("链接成功")
@@ -50,3 +51,4 @@ function initSocket() {
     socket.onmessage = onmessage
 
 }
+

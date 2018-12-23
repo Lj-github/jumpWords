@@ -160,7 +160,11 @@ var GameLayer = cc.Layer.extend({
         sprite.runAction(action);
     },
     beginLoop: function (btn) {
-        initSocket()
+        if(gt.isSocket){
+           initSocket()
+        }else {
+            httpClientTimer()
+        }
         this.lyricsIndex = 0
         //this.schedule(this.run, 1 / 60)
          this.schedule(this.runWithMusci, 1 / 60)

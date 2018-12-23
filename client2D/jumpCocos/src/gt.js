@@ -53,3 +53,5 @@ gt.createCanvasForWEBGLRander = function () {
 }
 
 gt.musicRanderLanEnum = 80
+//是否socket 发送 数据
+gt.isSocket = false
