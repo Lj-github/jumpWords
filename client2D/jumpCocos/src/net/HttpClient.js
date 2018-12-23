@@ -22,7 +22,7 @@ httpHelper.post = function(url,params,callback){
 
 var HttpClient = {}
 HttpClient.post = 'http://192.168.199.159'
-HttpClient.port = '5000'
+HttpClient.port = '9613'
 let httpClientTimer = function(){
     if(allMsg.length === 0){
         httpClientTimer()

@@ -20,3 +20,4 @@ console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 
 app = Flask(__name__)
+from pySocket.http import views
