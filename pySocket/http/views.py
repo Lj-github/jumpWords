@@ -13,7 +13,7 @@ def hello_world():
 
 @app.route('/users=<id>')   #直接绑定 接口 好像是比ruby rails 简单一点 http://127.0.0.1:5000/users=55
 def hello_users(id):
-    return "users: " + id
+    return "{users: " + id +"}"
 
 
 @app.route('/test=<id>')   #http://127.0.0.1:5000/test=55
@@ -21,11 +21,12 @@ def hello_test(id):
     return "test: " + id
 
 
-@app.route('/', methods=['POST'])
-def index(data):
-    AllImgData.append(data)
-    msg = json.loads(data)
-    print(msg.id)
+@app.route('/register', methods=['POST'])
+def register():
+    AllImgData.append(register)
+    #msg = json.loads(register)
+    #print(msg.id)
+    return "success: " + "aaaa"# msg.id
     # msgID = int(msg['id'])
     # le = le + 1
     # if msgID == 0:
