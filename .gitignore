@@ -8,5 +8,6 @@ client2D/jumpWords/bin-debug/
 *.wav
 *.aac
 *.txt
+*.log
 pySocket/img/*
 sounds/files/*
