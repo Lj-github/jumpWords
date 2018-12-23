@@ -19,7 +19,6 @@ async def echo(websocket, path):
         global le
         msg = json.loads(message)
         msgID = int(msg['id'])
-        print(le)
         le = le + 1
         if msgID == 0 :
             # for i in allCode:
@@ -34,6 +33,7 @@ async def echo(websocket, path):
             await websocket.send("publish success!!!")
 host = '192.168.1.214'
 host = 'localhost'
+host = '192.168.199.159'
 asyncio.get_event_loop().run_until_complete(websockets.serve(echo,host, 9999))
 asyncio.get_event_loop().run_forever()
 print("begin")
