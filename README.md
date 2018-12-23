@@ -19,4 +19,9 @@ todo
     用户 可编辑生成
     录音功能
     生成视频 功能并下载 
-    如果在微信公众号  返回视频下载链接 
+    如果在微信公众号  返回视频下载链接
+
+
+
+pip  win8.1
+    pip install -i https://pypi.doubanio.com/simple/ kivy.deps.gstreamer
