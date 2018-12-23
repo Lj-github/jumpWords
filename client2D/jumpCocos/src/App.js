@@ -36,13 +36,13 @@ var GameLayer = cc.Layer.extend({
         y: size.height / 2
       })
       this.addChild(this.sprite, 0)
-         Union.getMp3(music.mp31, this, function (data) {
-            console.log("data", data)
-             let musciRander = new Music.ReadBuff()
-             this.musciRander = musciRander
-             musciRander.init(music.mp31)
-            this.beginLoop()
-        })
+        //  Union.getMp3(music.mp31, this, function (data) {
+        //     console.log("data", data)
+        //      let musciRander = new Music.ReadBuff()
+        //      this.musciRander = musciRander
+        //      musciRander.init(music.mp31)
+        //     this.beginLoop()
+        // })
         gt.dddd = 1
 
 
@@ -163,7 +163,7 @@ var GameLayer = cc.Layer.extend({
         if(gt.isSocket){
            initSocket()
         }else {
-            httpClientTimer()
+            //httpClientTimer()
         }
         this.lyricsIndex = 0
         //this.schedule(this.run, 1 / 60)

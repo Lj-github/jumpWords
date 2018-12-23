@@ -5,7 +5,16 @@ from flask import render_template, request
 from pySocket.http import app
 import json
 import base64
+
+from flask import Flask, jsonify
+from flask import abort
+from flask import make_response
+from flask import request
+from flask import redirect
+
 AllImgData = []
+
+
 @app.route('/')
 def hello_world():
     return "hello world"
@@ -37,5 +46,11 @@ def register():
     #     file.write(imgdata)
     #     file.close()
 
+@app.route('/ttttt', methods=['GET', 'POST'])
+def create_task():
+    if request.method == 'POST':
+        if not request.json or not 'title' in request.json:
+            abort(400)
+        return jsonify({'task': "dd"}), 201
 
-
+    return jsonify({'tasks':  "dd"})

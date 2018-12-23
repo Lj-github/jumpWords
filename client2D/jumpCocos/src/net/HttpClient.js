@@ -1,4 +1,5 @@
 var httpHelper = {}
+ httpHelper.isBegin = false
 httpHelper.post = function(url,params,callback){
         var nums = arguments.length
         if(nums == 2){
@@ -15,7 +16,7 @@ httpHelper.post = function(url,params,callback){
                 err = true;
             }
             var response = xhr.responseText;
-            callback(err,response);
+            callback(response);
         };
         xhr.send(params);
     }
@@ -23,12 +24,28 @@ httpHelper.post = function(url,params,callback){
 var HttpClient = {}
 HttpClient.post = 'http://192.168.199.159'
 HttpClient.port = '9613'
+
+HttpClient.post_jsonp = function(url,params,callback){
+      $.ajax( {
+          url: url,
+          data:params,
+          dataType: 'jsonp',
+          type: "POST",
+          async:true,
+          crossDomain: true,
+          success: function (data) {
+                  console.log(data);
+                  callback(data)
+          }
+      })
+}
+
 let httpClientTimer = function(){
     if(allMsg.length === 0){
         httpClientTimer()
         return
     }
-   httpHelper.post(HttpClient.port + HttpClient.port,allMsg[0],httpClientTimer)
+   httpHelper.post(HttpClient.post+":" + HttpClient.port,{data:allMsg[0]} ,httpClientTimer)
    allMsg = allMsg.splice(1,allMsg.length)
 }
 

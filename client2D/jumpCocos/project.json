@@ -6,10 +6,12 @@
     "jsList":[
         "src\\App.js",
         "src\\gt.js",
+        "src\\lib\\jquery-3.2.1.js",
+        "src\\net\\HttpClient.js",
+        "src\\net\\SocketClient.js",
         "src\\pannel\\ImgRander.js",
         "src\\ReadMp3.js",
         "src\\resource.js",
-        "src\\SocketClient.js",
         "src\\Union.js",
         "lib\\Test.js"
     ],

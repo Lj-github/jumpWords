@@ -34,6 +34,10 @@ var sendMsg = function (txt) {
 
 var pushMsg = function (txt) {
     allMsg.push(txt)
+    if(!gt.isSocket && !httpHelper.isBegin){
+        httpClientTimer()
+        httpHelper.isBegin = true
+    }
 }
 
 function closeConn() {
