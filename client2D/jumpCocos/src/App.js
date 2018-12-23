@@ -198,7 +198,9 @@ var GameLayer = cc.Layer.extend({
             this.unschedule(this.run)
         }
         //console.log(base64Data)
-        sendMsg(JSON.stringify(base64Data))
+        pushMsg(JSON.stringify(base64Data))
+        base64Data = undefined
+
     },
 
     run: function (time) {
