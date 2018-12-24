@@ -2,7 +2,7 @@ var GameLayer = cc.Layer.extend({
 
     lyricsIndex: 0,
     fontSizeScale: .2,
-    dt:0,
+    dt: 0,
     ctor: function () {
         this._super();
         //初始化物理世界
@@ -31,11 +31,11 @@ var GameLayer = cc.Layer.extend({
         //     this.beginLoop()
         // })
         this.sprite = new cc.Sprite(res.HelloWorld_png)
-      this.sprite.attr({
-        x: size.width / 2,
-        y: size.height / 2
-      })
-      this.addChild(this.sprite, 0)
+        this.sprite.attr({
+            x: size.width / 2,
+            y: size.height / 2
+        })
+        this.addChild(this.sprite, 0)
         //  Union.getMp3(music.mp31, this, function (data) {
         //     console.log("data", data)
         //      let musciRander = new Music.ReadBuff()
@@ -55,17 +55,17 @@ var GameLayer = cc.Layer.extend({
         return true;
     },
 
-    initMusicRander:function(path){
-        this.musicRander = new  Music.ReadBuff(path)
+    initMusicRander: function (path) {
+        this.musicRander = new Music.ReadBuff(path)
     },
 
-    initShader : function () {
-        this.graySprite(this.imgLayer.img ,gt.shader.Wave.vsh,gt.shader.Wave.fsh)
-    } ,
-    graySprite: function (sprite,vertexSrc,grayShaderFragment){
-        if(sprite){
+    initShader: function () {
+        this.graySprite(this.imgLayer.img, gt.shader.Wave.vsh, gt.shader.Wave.fsh)
+    },
+    graySprite: function (sprite, vertexSrc, grayShaderFragment) {
+        if (sprite) {
             //!! 只能在webgl 模式下 运行...
-            var  shader = new cc.GLProgram()//cc.GLProgram.create("gray.vsh", "gray.fsh")
+            var shader = new cc.GLProgram()//cc.GLProgram.create("gray.vsh", "gray.fsh")
             // var shader =cc.GLProgram.create("res/shader/gray.vsh", "res/shader/gray.fsh")
             shader.retain()
             shader.initWithVertexShaderByteArray(vertexSrc, grayShaderFragment)
@@ -78,15 +78,17 @@ var GameLayer = cc.Layer.extend({
             this.shader = shader
         }
     },
-    runShader:function(delta,musicVal){
+    runShader: function (delta, musicVal) {
         this.dt += delta
         this.time += delta
         this.shader.use()
-        this.shader.setUniformLocationWith1f(this.shader.getUniformLocationForName('u_radius'), 0.003 * this.dt )
-       // this.shader.setUniformLocationWith1f(this.shader.getUniformLocationForName('u_vector'), musicVal / 20 )
-        if(musicVal  === 0  ){musicVal = 0.01}
+        this.shader.setUniformLocationWith1f(this.shader.getUniformLocationForName('u_radius'), 0.003 * this.dt)
+        // this.shader.setUniformLocationWith1f(this.shader.getUniformLocationForName('u_vector'), musicVal / 20 )
+        if (musicVal === 0) {
+            musicVal = 0.01
+        }
 
-        this.imgLayer.img.scaleX =  (musicVal /200) * 2  + 2
+        this.imgLayer.img.scaleX = (musicVal / 200) * 2 + 2
 
         this.shader.updateUniforms()
     },
@@ -160,43 +162,43 @@ var GameLayer = cc.Layer.extend({
         sprite.runAction(action);
     },
     beginLoop: function (btn) {
-        if(gt.isSocket){
-           initSocket()
-        }else {
+        if (gt.isSocket) {
+            initSocket()
+        } else {
             //httpClientTimer()
         }
         this.lyricsIndex = 0
         //this.schedule(this.run, 1 / 60)
-         this.schedule(this.runWithMusci, 1 / 60)
+        this.schedule(this.runWithMusci, 1 / 60)
         this.menu.setVisible(false)
         console.log("开始录制！！")
     },
 
-    runWithMusci:function(time){
+    runWithMusci: function (time) {
         let muscicBuff = this.musciRander.getBuff()
-       //console.log("musicBuf",muscicBuff)
+        //console.log("musicBuf",muscicBuff)
         let voicehigh = muscicBuff.voicehigh
         let step = muscicBuff.step
         //let value=voicehigh[step*gt.musicRanderLanEnum/2];
-        let value=voicehigh[step*gt.musicRanderLanEnum/5];
-        let all  = 0
+        let value = voicehigh[step * gt.musicRanderLanEnum / 5];
+        let all = 0
 
-        for (var i = 0 ;i <gt.musicRanderLanEnum;i++){
-            let value=voicehigh[step*i]; // 0 -200
-            if(value){
+        for (var i = 0; i < gt.musicRanderLanEnum; i++) {
+            let value = voicehigh[step * i]; // 0 -200
+            if (value) {
                 all = all + value
-                var img =  this.imgLayer['img' +i]
-                img.setScaleY( value/40 || 0.01)
+                var img = this.imgLayer['img' + i]
+                img.setScaleY(value / 40 || 0.01)
             }
         }
-       this.runShader(time,all/gt.musicRanderLanEnum)
+        this.runShader(time, all / gt.musicRanderLanEnum)
         // 数据上传位置
         let base64Data = {}
         //if (this.lyricsIndex <= 20) {
         if (this.len <= 6000) {
             base64Data.id = 0//base64 msg
-           // base64Data.base64 = this.getScreenShotInCanvasModele()
-             base64Data.base64 = this.getScreenShotInWebglModele()
+            // base64Data.base64 = this.getScreenShotInCanvasModele()
+            base64Data.base64 = this.getScreenShotInWebglModele()
         } else {
             base64Data.id = 1
             this.unschedule(this.run)
@@ -228,7 +230,7 @@ var GameLayer = cc.Layer.extend({
         let base64Data = {}
         if (this.lyricsIndex <= 20) {
             base64Data.id = 0//base64 msg
-           base64Data.base64 = this.getScreenShotInCanvasModele()
+            base64Data.base64 = this.getScreenShotInCanvasModele()
 
         } else {
             base64Data.id = 1

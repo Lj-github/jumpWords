@@ -20,12 +20,12 @@ def hello_world():
     return "hello world"
 
 
-@app.route('/users=<id>')   #直接绑定 接口 好像是比ruby rails 简单一点 http://127.0.0.1:5000/users=55
+@app.route('/users=<id>')  # 直接绑定 接口 好像是比ruby rails 简单一点 http://127.0.0.1:5000/users=55
 def hello_users(id):
-    return "{users: " + id +"}"
+    return "{users: " + id + "}"
 
 
-@app.route('/test=<id>')   #http://127.0.0.1:5000/test=55
+@app.route('/test=<id>')  # http://127.0.0.1:5000/test=55
 def hello_test(id):
     return "test: " + id
 
@@ -33,9 +33,9 @@ def hello_test(id):
 @app.route('/register', methods=['POST'])
 def register():
     AllImgData.append(register)
-    #msg = json.loads(register)
-    #print(msg.id)
-    return "success: " + "aaaa"# msg.id
+    # msg = json.loads(register)
+    # print(msg.id)
+    return "success: " + "aaaa"  # msg.id
     # msgID = int(msg['id'])
     # le = le + 1
     # if msgID == 0:
@@ -46,6 +46,7 @@ def register():
     #     file.write(imgdata)
     #     file.close()
 
+
 @app.route('/ttttt', methods=['GET', 'POST'])
 def create_task():
     if request.method == 'POST':
@@ -53,4 +54,4 @@ def create_task():
             abort(400)
         return jsonify({'task': "dd"}), 201
 
-    return jsonify({'tasks':  "dd"})
+    return jsonify({'tasks': "dd"})

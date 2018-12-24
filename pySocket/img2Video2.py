@@ -4,20 +4,27 @@ from PIL import Image
 import numpy as np
 import base64
 from io import BytesIO
+
+
 # 完美解决
 
 class PX():
     w = 0
     h = 0
+
+
 # 图片信息 可以扩展
 class imgInfo():
     PX = PX
     size = 0
+
+
 def readb64(base64_string):
     sbuf = BytesIO()
     sbuf.write(base64.b64decode(base64_string))
     pimg = Image.open(sbuf)
     return cv2.cvtColor(np.array(pimg), cv2.COLOR_RGB2BGR)
+
 
 # 需要 获取 图片size  和图片文件的大小
 
@@ -29,16 +36,18 @@ def getImgSizeAndPX(imgFile):
     imgInfo1.size = os.path.getsize(imgFile)
     return imgInfo1
 
+
 def del_file(path):
     for i in os.listdir(path):
         path_file = os.path.join(path, i)
-        if os.path.isfile(path_file) :
+        if os.path.isfile(path_file):
             if path_file.find("html") <= -1:
                 os.remove(path_file)
         else:
             del_file(path_file)
 
-#需要 获取 图片size  和图片文件的大小
+
+# 需要 获取 图片size  和图片文件的大小
 fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
 
 path = "img/"

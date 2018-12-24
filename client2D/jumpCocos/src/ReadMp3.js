@@ -1,4 +1,3 @@
-
 var Music;
 (function (Music) {
     class ReadBuff {
@@ -9,6 +8,7 @@ var Music;
             this.bf = {};
             this.init(musicUrl);
         }
+
         init(musicUrl) {
             if (!musicUrl) {
                 console.error("no musicUrl init !!!");
@@ -26,6 +26,7 @@ var Music;
             audioSrc.connect(this.analyser);
             this.analyser.connect(actx.destination);
         }
+
         getBuff() {
             this.bf = {};
             this.voicehigh = new Uint8Array(this.analyser.frequencyBinCount);
@@ -35,14 +36,17 @@ var Music;
             this.bf.step = this.stepp;
             return this.bf;
         }
+
         createAudioElement(id = "audio") {
             var audio = document.createElement("audio");
             audio.id = id;
             return audio;
         }
+
         getAllMusic(json) {
             console.log(json);
         }
+
         getAudioContext() {
             try {
                 var AudioContext = window["AudioContext"] || window["webkitAudioContext"];
@@ -54,5 +58,6 @@ var Music;
             return null;
         }
     }
+
     Music.ReadBuff = ReadBuff;
 })(Music || (Music = {}));

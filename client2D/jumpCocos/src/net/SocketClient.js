@@ -1,10 +1,10 @@
 var isConnected = false
 var allMsg = []
-let sendSocketTimer = function(){
+let sendSocketTimer = function () {
     setInterval(function () {
-    sendMsg(allMsg[0])
-    allMsg = allMsg.splice(1,allMsg.length)
-},33)
+        sendMsg(allMsg[0])
+        allMsg = allMsg.splice(1, allMsg.length)
+    }, 33)
 }
 var onopen = function () {
     /* 与服务器端连接成功后，自动执行 */
@@ -25,7 +25,9 @@ var onclose = function (event) {
 
 var sendMsg = function (txt) {
     //console.log("no txt find")
-    if(!txt){return}
+    if (!txt) {
+        return
+    }
     if (isConnected) {
         socket.send(txt);
         txt = undefined
@@ -34,7 +36,7 @@ var sendMsg = function (txt) {
 
 var pushMsg = function (txt) {
     allMsg.push(txt)
-    if(!gt.isSocket && !httpHelper.isBegin){
+    if (!gt.isSocket && !httpHelper.isBegin) {
         httpClientTimer()
         httpHelper.isBegin = true
     }
@@ -49,7 +51,7 @@ let host = 'localhost'
 host = '192.168.199.159'//win8.1  home
 
 function initSocket() {
-    window.socket = new WebSocket("ws://" + host+":9999");
+    window.socket = new WebSocket("ws://" + host + ":9999");
     socket.onopen = onopen
     socket.onclose = onclose
     socket.onmessage = onmessage

@@ -4,7 +4,6 @@ from flask import Flask
 import logging
 from flask_cors import *
 
-
 # set up logging to file - see previous section for more details
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -34,7 +33,7 @@ import json
 
 
 # 上传文件
-@app.route('/upload', methods=["GET",'POST'])
+@app.route('/upload', methods=["GET", 'POST'])
 def upload():
     if request.method == 'OPTIONS':
         res = flask.make_response()
@@ -48,4 +47,3 @@ def upload():
     res.headers['Access-Control-Allow-Methods'] = 'POST，GET,OPTIONS'
     res.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
     return res
-

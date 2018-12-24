@@ -64,4 +64,4 @@ def run():
     resuzea = [size[0], size[1]]
     global vw
     vw = cv2.VideoWriter('base64Test.avi', fourcc=fourcc, fps=30.0, frameSize=size)
-    #readBase64("", resuze=resuzea, vw=vw)
+    # readBase64("", resuze=resuzea, vw=vw)

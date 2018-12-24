@@ -1,19 +1,18 @@
 var res = {
     HelloWorld_png: "res/HelloWorld.png",
-     timg_jpg: "res/img/timg.jpg",
+    timg_jpg: "res/img/timg.jpg",
     //lyrics: "res/lyrics/我的唇吻不到我爱的人王奕心.txt",
 
 
 };
 
 
-
 var music = {
-     mp31: "res/music/shiqucaidong.mp3",
+    mp31: "res/music/shiqucaidong.mp3",
 }
 var shader = {
-   vsh:  "res/shader/gray.vsh",
-  fsh:  "res/shader/gray.fsh"
+    vsh: "res/shader/gray.vsh",
+    fsh: "res/shader/gray.fsh"
 }
 
 var g_resources = [

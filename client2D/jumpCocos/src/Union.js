@@ -27,7 +27,7 @@ Union.splitLyricsToJson = function (lyricsStr) {
         let item = fTxt[i]
         allList.push({
             time: Union.timeToSecond(item.split('[').pop().split(']')[0]),
-            txt: item.split('[').pop().split(']').pop().replace(/\n/g,'')
+            txt: item.split('[').pop().split(']').pop().replace(/\n/g, '')
         })
     }
     return allList
