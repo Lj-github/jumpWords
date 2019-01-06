@@ -29,7 +29,8 @@ from flask import make_response
 from flask import request
 from flask import redirect
 import flask
-import json
+from pySocket.http import views
+from pySocket.http.view import postview
 
 
 # 上传文件

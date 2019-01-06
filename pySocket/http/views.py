@@ -46,6 +46,10 @@ def register():
     #     file.write(imgdata)
     #     file.close()
 
+@app.route('/indexTest/', methods=['GET'])
+def index_Iframe():
+    return render_template('index.html')
+
 
 @app.route('/ttttt', methods=['GET', 'POST'])
 def create_task():

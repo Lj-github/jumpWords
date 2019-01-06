@@ -26,11 +26,13 @@ test2
 
 
     var idx = 0
+    const host ="localhost" //"192.168.199.115" // 192.168.1.214
+
 
     function post(id, cont) {
         $.ajax({
             type: "POST",
-            url: "http://192.168.1.214:9613/postSaveTxt/",
+            url: "http://" + host + ":9613/postSaveTxt/",
             data: {username: idx, content: cont},
             dataType: "json",
             success: function (data) {

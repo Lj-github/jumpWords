@@ -10,4 +10,5 @@ client2D/jumpWords/bin-debug/
 *.txt
 *.log
 pySocket/img/*
+pySocket/http/static/txt/*
 sounds/files/*
