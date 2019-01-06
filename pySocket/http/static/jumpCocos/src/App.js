@@ -184,7 +184,7 @@ var GameLayer = cc.Layer.extend({
         //let value=voicehigh[step*gt.musicRanderLanEnum/2];
         let value = voicehigh[step * gt.musicRanderLanEnum / 5];
         let all = 0
-        if (!voicehigh){
+        if (!voicehigh) {
             this.unschedule(this.runWithMusci)
         }
         for (var i = 0; i < gt.musicRanderLanEnum; i++) {
@@ -193,7 +193,7 @@ var GameLayer = cc.Layer.extend({
                 all = all + value
                 var img = this.imgLayer['img' + i]
                 img.setScaleY(value / 40 || 0.01)
-                if (gt.rectSkewX){
+                if (gt.rectSkewX) {
                     img.setSkewX(img.getScaleY() * gt.rectSkewX)
 
                 }
@@ -213,9 +213,9 @@ var GameLayer = cc.Layer.extend({
             base64Data.id = 1
             this.unschedule(this.run)
         }
-        if(gt.isSocket){
+        if (gt.isSocket) {
             pushMsg(JSON.stringify(base64Data))
-        }else {
+        } else {
             pushHttpData(base64Data)
         }
 

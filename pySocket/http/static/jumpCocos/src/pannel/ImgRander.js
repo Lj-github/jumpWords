@@ -35,21 +35,25 @@ var ImgRander = cc.Layer.extend({
 
     },
 
-    createRect:function(){
+    createRect: function () {
 
         for (var i = 0; i < gt.musicRanderLanEnum; i++) {
-            let  drawNode =new cc.DrawNode();
+            let drawNode = new cc.DrawNode();
             drawNode.clear();//清除节点缓存drawNode.ctor();//构造函数
-            drawNode.drawRect(cc.p(i * 20,0),
-            cc.p(i * 20+18, 100),
-            Union.getRandomColor());
+            drawNode.drawRect(cc.p(i * 20, 0),
+                cc.p(i * 20 + 18, 100),
+                Union.getRandomColor());
             drawNode.setAnchorPoint(0, 0)
             this['img' + i] = drawNode
             this.addChild(drawNode)
-            if(i === 0){
+            if (i === 0) {
                 window["drawNode"] = drawNode
+            } else {
+                if (i !== 1) {
+                    drawNode.setVisible(false)
+                }
             }
-            //设置 倾斜度
+            //设置 倾斜度  设置 k 值  还是 无法实现  不准确  y = kx + b //难道需要 b？
             drawNode.setSkewX(gt.rectSkewX)
         }
     },

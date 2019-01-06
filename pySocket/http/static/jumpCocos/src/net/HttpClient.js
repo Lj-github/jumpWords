@@ -60,33 +60,33 @@ let old = 0
 let timer
 let count = 0
 
-HttpClient.post_data =  function (id, cont) {
-        $.ajax({
-            type: "POST",
-            url:  HttpClient.post + ":9613/postSaveTxt/",
-            data: {username: idx, content: cont},
-            dataType: "json",
-            success: function (data) {
-                if (data.code === "success") {
-                    delete allMsg[0]
-                    allMsg = allMsg.splice(1, allMsg.length)
-                    idx = idx + 1
-                    if (allMsg.length > 0) {
-                        isBegin = true
-                        HttpClient.post_data(idx, allMsg[0])
-                    } else {
-                        isBegin = false
-                    }
+HttpClient.post_data = function (id, cont) {
+    $.ajax({
+        type: "POST",
+        url: HttpClient.post + ":9613/postSaveTxt/",
+        data: {username: idx, content: cont},
+        dataType: "json",
+        success: function (data) {
+            if (data.code === "success") {
+                delete allMsg[0]
+                allMsg = allMsg.splice(1, allMsg.length)
+                idx = idx + 1
+                if (allMsg.length > 0) {
+                    isBegin = true
+                    HttpClient.post_data(idx, allMsg[0])
+                } else {
+                    isBegin = false
                 }
-            },
-            onerror:function(e){
-                console.log("send fail!!",e)
-            },
-            //回收 主动
-            complete: function (XHR, TS) {
-                XHR = null
             }
-        });
+        },
+        onerror: function (e) {
+            console.log("send fail!!", e)
+        },
+        //回收 主动
+        complete: function (XHR, TS) {
+            XHR = null
+        }
+    });
 }
 // var begin = function () {
 //     timer = setInterval(function () {
