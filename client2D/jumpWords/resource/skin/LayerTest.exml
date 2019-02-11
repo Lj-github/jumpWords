@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="LayerTest" width="1136" height="640" xmlns:e="http://ns.egret.com/eui">
+	<e:Rect width="32" height="354" x="523" y="354" anchorOffsetX="7" anchorOffsetY="354" scaleY="1.2"/>
+</e:Skin>

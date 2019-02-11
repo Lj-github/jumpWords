@@ -10,11 +10,11 @@ module game {
         musicReader: ReadMusic
         constructor() {
             super()
-            this.musicReader = new ReadMusic(App.mp3file)
+           // this.musicReader = new ReadMusic(App.mp3file)
             let nodeline = new NodeLine()
             this.addChild(nodeline)
             this.allCube = nodeline.lintArr
-            this.addEventListener(egret.Event.ENTER_FRAME, this.getBuf, this);
+            //this.addEventListener(egret.Event.ENTER_FRAME, this.getBuf, this);
         }
         getBuf() {
             this.buff = this.musicReader.music.getBuff()
