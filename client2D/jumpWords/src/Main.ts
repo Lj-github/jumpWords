@@ -1,5 +1,8 @@
 window["pb"] = {}
-
+/**
+     created by liujiang
+     time 2019/2/11 11:07
+ */
 class Main extends egret.DisplayObjectContainer {
 
 
@@ -68,24 +71,24 @@ class Main extends egret.DisplayObjectContainer {
             height: egret.MainContext.instance.stage.stageHeight
         };
 
-
-        let colorLabel = new egret.TextField();
-        colorLabel.textColor = 0xffffff;
-        colorLabel.width =  gt.size.width - 172;
-        colorLabel.textAlign = "center";
-        colorLabel.text = "开始";
-        colorLabel.size = 24;
-        colorLabel.x = 172;
-        colorLabel.y = 80;
-        //colorLabel.scaleY = colorLabel.scaleX = 5
-        colorLabel.fontFamily ="hanti";
-        this.addChild(colorLabel);
+        //字体 不行
+        // let colorLabel = new egret.TextField();
+        // colorLabel.textColor = 0xffffff;
+        // colorLabel.width =  gt.size.width - 172;
+        // colorLabel.textAlign = "center";
+        // colorLabel.text = "开始";
+        // colorLabel.size = 24;
+        // colorLabel.x = 172;
+        // colorLabel.y = 80;
+        // //colorLabel.scaleY = colorLabel.scaleX = 5
+        // colorLabel.fontFamily ="hanti";
+        // this.addChild(colorLabel);
         //colorLabel.filters =  [gt.getCustomFilter(0, 255, 0)]
 
-
-
-
-
+        App.run()
+        let music = new game.LayerReadMusci()
+        this.removeChildren()
+        this.addChild(music)
     }
 
     private initProto() {

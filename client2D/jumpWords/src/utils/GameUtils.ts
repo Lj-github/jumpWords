@@ -1,5 +1,6 @@
 /**
- * Created by husong on 4/9/17.
+     created by liujiang
+     time 2019/2/11 11:07
  */
 class GameUtils {
     public static handleHeadImg(img: eui.Image) {
