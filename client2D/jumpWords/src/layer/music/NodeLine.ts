@@ -15,33 +15,30 @@ module game {
             let x = -0
             let w = 30
             let h = 300
-             let y =h
+            let y = h
 
             let gap = 5
             let skewX = 20
-            for (let i = 0;i<35;i++){
-                let line = this.createdLine(x +( w + gap)*i ,y,w,h)
+            for (let i = 0; i < 35; i++) {
+                let line = this.createdLine(x + (w + gap) * i, y, w, h)
                 line.skewX = skewX
-
-
-
                 line.anchorOffsetY = h
 
                 this.addChild(line)
                 this.lintArr.push(line)
-                if(i == 10){
+                if (i == 10) {
                     window["lline"] = line
                 }
             }
 
-            egret.setInterval(()=>{
-             let d :egret.Shape =   window["lline"]
-                d.scaleY = Math.abs(Math.random()*2)
-            },this,100)
+            egret.setInterval(() => {
+                let d: egret.Shape = window["lline"]
+                d.scaleY = Math.abs(Math.random() * 2)
+            }, this, 100)
 
         }
 
-        createdLine(x:number,y:number,w:number,h:number):egret.Shape {
+        createdLine(x: number, y: number, w: number, h: number): egret.Shape {
             let line = new egret.Shape();
             line.graphics.beginFill
             line.graphics.beginFill(App.lineColor, App.lineAlpha);

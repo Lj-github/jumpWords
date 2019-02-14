@@ -12,6 +12,9 @@ module game {
             super()
            // this.musicReader = new ReadMusic(App.mp3file)
             let nodeline = new NodeLine()
+            nodeline.rotation = 180
+            nodeline.x = 1120
+            nodeline.y = 640
             this.addChild(nodeline)
             this.allCube = nodeline.lintArr
             //this.addEventListener(egret.Event.ENTER_FRAME, this.getBuf, this);

@@ -1,6 +1,6 @@
 //与mediator绑定的页面
 module game {
-    export class BaseLayer extends Pb.Component {
+    export class BaseLayer_ extends Pb.Component {
         createComplete: boolean = false
         shiledTouch: boolean = false  //是否屏蔽所有触摸(包括子节点)
         constructor() {
