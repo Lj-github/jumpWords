@@ -1,7 +1,7 @@
 
-interface Window{
-    XMLHttpRequest:any;
-    ActiveXObject:any;
+interface Window {
+    XMLHttpRequest: any;
+    ActiveXObject: any;
 }
 module gt {
     export const lan_cn = "ch"// 当前先写为中文
@@ -130,12 +130,12 @@ module gt {
         var httpTxt = new egret.HtmlTextParser().parser("<u>" + str + "</u>");
         lbl.textFlow = httpTxt
     }
-      export function getXMLHttpRequest() {
+    export function getXMLHttpRequest() {
         return window.XMLHttpRequest ? new window.XMLHttpRequest() : new window.ActiveXObject("MSXML2.XMLHTTP");
     }
 
 
-export function clone<T>(obj: T): T {
+    export function clone<T>(obj: T): T {
         var newObj = (obj.constructor) ? (new (<any>obj).constructor) : {};
         for (var key in obj) {
             var copy = obj[key];
@@ -152,15 +152,15 @@ export function clone<T>(obj: T): T {
 
 
 
-      /*
-    *检测是否有中文字符
-    */
+    /*
+  *检测是否有中文字符
+  */
     export function isContainChinese(str) {
         let reg = /[\u4e00-\u9fa5]/g
         return reg.test(str)
     }
 
-       export function getGrayFilters(v: number) {
+    export function getGrayFilters(v: number) {
         var colorMatrix = [
             v, 0, 0, 0, 0,
             0, v, 0, 0, 0,
@@ -171,9 +171,9 @@ export function clone<T>(obj: T): T {
         return colorFlilter
     }
 
-      /**
-     * 二分法查找 返回目标索引
-     */
+    /**
+   * 二分法查找 返回目标索引
+   */
     export function dichotomyFind(array: Array<any>, value: any, key: any): number {
         var arr: Array<any> = gt.clone(array);
         var low: number = 0;
@@ -194,14 +194,28 @@ export function clone<T>(obj: T): T {
         return -1;
     }
 
-     /**
-     * 俩数之间随机数 min--max
-     * @param min 开始值
-     * @param max 结束值
-     */
+    /**
+    * 俩数之间随机数 min--max
+    * @param min 开始值
+    * @param max 结束值
+    */
     export function randomValue(min: number, max: number): number {
         var value: number = min + Math.random() * (max - min + 1) >> 0;
         return value;
+    }
+
+    export function getLineFilter() {
+        var color: number = 0x33CCFF;        /// 光晕的颜色，十六进制，不包含透明度
+        var alpha: number = 0.8;             /// 光晕的颜色透明度，是对 color 参数的透明度设定。有效值为 0.0 到 1.0。例如，0.8 设置透明度值为 80%。
+        var blurX: number = 35;              /// 水平模糊量。有效值为 0 到 255.0（浮点）
+        var blurY: number = 35;              /// 垂直模糊量。有效值为 0 到 255.0（浮点）
+        var strength: number = 2;            /// 压印的强度，值越大，压印的颜色越深，而且发光与背景之间的对比度也越强。有效值为 0 到 255。暂未实现
+        var quality: number = egret.BitmapFilterQuality.HIGH;        /// 应用滤镜的次数，建议用 BitmapFilterQuality 类的常量来体现
+        var inner: boolean = false;            /// 指定发光是否为内侧发光，暂未实现
+        var knockout: boolean = false;            /// 指定对象是否具有挖空效果，暂未实现
+        var glowFilter: egret.GlowFilter = new egret.GlowFilter(color, alpha, blurX, blurY,
+            strength, quality, inner, knockout);
+        return glowFilter
     }
 
 

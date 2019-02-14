@@ -16,21 +16,19 @@ module game {
             let w = 30
             let h = 300
             let y = h
-
             let gap = 5
             let skewX = 20
             for (let i = 0; i < 35; i++) {
                 let line = this.createdLine(x + (w + gap) * i, y, w, h)
                 line.skewX = skewX
                 line.anchorOffsetY = h
-
+                line.filters =  [gt.getLineFilter()]
                 this.addChild(line)
                 this.lintArr.push(line)
                 if (i == 10) {
                     window["lline"] = line
                 }
             }
-
             egret.setInterval(() => {
                 let d: egret.Shape = window["lline"]
                 d.scaleY = Math.abs(Math.random() * 2)

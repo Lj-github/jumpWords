@@ -18,6 +18,13 @@ module game {
             this.addChild(nodeline)
             this.allCube = nodeline.lintArr
             //this.addEventListener(egret.Event.ENTER_FRAME, this.getBuf, this);
+
+            let nodeline1 = new NodeCircleLine()
+            this.addChild(nodeline1)
+            nodeline1.x = 300
+            nodeline1.y = 400
+            window["ccc"] = nodeline
+            this.allCube = nodeline1.lintArr
         }
         getBuf() {
             this.buff = this.musicReader.music.getBuff()
