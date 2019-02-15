@@ -15,12 +15,12 @@ module game {
         constructor() {
             super()
         }
-        lintArr: Array<egret.Shape> = []
+        inlintArr: Array<egret.Shape> = []
+        outlintArr: Array<egret.Shape> = []
         childrenCreated() {
             //内扣的  line 只是向内
             this.createInCirCle()
             this.createOutCirCle()
-
         }
         /**
          * 向外发散的 一堆 东西
@@ -33,11 +33,6 @@ module game {
             let lineCount = this.confit.lineCount
             //圆形  
             let r = this.confit.r + 20
-
-
-
-
-
             for (let i = 0; i < lineCount; i++) {
                 //角度
                 let deg = (360 / lineCount) * i
@@ -51,21 +46,12 @@ module game {
                 console.log("_x", _x, "_y", _y)
                 line.x = _x
                 line.y = _y
-
-                line.filters =  [gt.getLineFilter()]
+                line.filters = [gt.getLineFilter()]
                 //todo 圆角 好看
-                //line.graphics.drawEllipse ellipseHeight 
+                // line.graphics.drawEllipse ellipseHeight 
                 this.addChild(line)
-                this.lintArr.push(line)
-                if (i == 10) {
-                    window["lline"] = line
-                }
+                this.outlintArr.push(line)
             }
-            window["ddd"] = this.lintArr
-            egret.setInterval(() => {
-                let d: egret.Shape = window["lline"]
-                d.scaleY = Math.abs(Math.random() * 2)
-            }, this, 100)
         }
 
         createInCirCle() {
@@ -89,20 +75,13 @@ module game {
                 console.log("_x", _x, "_y", _y)
                 line.x = _x
                 line.y = _y
-                line.filters =  [gt.getLineFilter()]
+                line.filters = [gt.getLineFilter()]
                 //todo 圆角 好看
                 //line.graphics.drawEllipse ellipseHeight 
                 this.addChild(line)
-                this.lintArr.push(line)
-                if (i == 10) {
-                    window["lline"] = line
-                }
+                this.inlintArr.push(line)
+
             }
-            window["ddd"] = this.lintArr
-            egret.setInterval(() => {
-                let d: egret.Shape = window["lline"]
-                d.scaleY = Math.abs(Math.random() * 2)
-            }, this, 100)
         }
 
         createdLine(x: number, y: number, w: number, h: number, rotation: number): egret.Shape {
@@ -110,7 +89,8 @@ module game {
             let line = new egret.Shape();
             line.graphics.beginFill
             line.graphics.beginFill(App.lineColor, App.lineAlpha);
-            line.graphics.drawRect(x, y, w, h);
+            //绘制一个圆角矩形
+            line.graphics.drawRoundRect(x, y, w, h, 2, 2);
             line.graphics.endFill();
             line.rotation = rotation
             return line
