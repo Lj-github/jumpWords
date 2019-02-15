@@ -6956,7 +6956,7 @@ var egret;
                 try {
                     var canvas = document.createElement("canvas");
                     WebGLUtils.canUseWebGL = !!window["WebGLRenderingContext"]
-                        && !!(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"));
+                        && !!(canvas.getContext("webgl") || canvas.getContext("experimental-webgl", {preserveDrawingBuffer: true}));
                 }
                 catch (e) {
                     WebGLUtils.canUseWebGL = false;

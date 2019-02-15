@@ -113,6 +113,9 @@ class Main extends egret.DisplayObjectContainer {
         console.log(msg.name)
 
     }
+    private reloadEgretFun(){
+       
+    }
 
 
 

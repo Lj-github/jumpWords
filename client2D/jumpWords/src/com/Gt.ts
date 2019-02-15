@@ -218,6 +218,15 @@ module gt {
         return glowFilter
     }
 
+    export function getScreenShotInCanvasModele() {
+        return document.getElementsByTagName("canvas")[0].toDataURL()
+    }
+    export function getScreenShotInWebglModele() {
+        //模糊点 好像也还行  
+        return document.getElementsByTagName("canvas")[0].toDataURL()
+        //.toDataURL("image/webp",.5)
+    }
+
 
 
 }
