@@ -9,6 +9,7 @@
 		"libs/modules/game/game.js",
 		"libs/modules/socket/socket.js",
 		"libs/modules/promise/promise.js",
+		"libs/gameModules/particle/bin/particle.js",
 		"libs/gameModules/protobuf/bin/protobuf.js",
 		"libs/gameModules/socketIO/bin/socketIO.js"
 	],

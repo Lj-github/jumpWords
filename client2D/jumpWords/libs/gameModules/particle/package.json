@@ -1,0 +1,5 @@
+{
+	"name": "particle",
+	"compilerVersion": "",
+	"typings":"libs/particle.d.ts"
+}
