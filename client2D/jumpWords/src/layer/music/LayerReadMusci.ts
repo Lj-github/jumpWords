@@ -33,13 +33,13 @@ module game {
                     scale = scale === 0 ? 2 : scale
                     let scaley = scale / 20
                     if (this.nodeCircleLine.outlintArr[i]) {
-                        this.nodeCircleLine.outlintArr[i].scaleY = scaley
+                        this.nodeCircleLine.outlintArr[i].scaleY = scaley * 2
                     }
                     if (this.nodeCircleLine.inlintArr[i]) {
                         this.nodeCircleLine.inlintArr[i].scaleY = scaley
                     }
                     if (this.nodeline.lintArr[i]) {
-                        this.nodeline.lintArr[i].scaleY = scaley
+                        this.nodeline.lintArr[i].scaleY = scaley * 5
                     }
                     if (i == 20 ){
                         this.scaleX = 1 + (scaley/50)
