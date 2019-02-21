@@ -11,7 +11,7 @@ module Music{
         step:any
     }
     export class ReadBuff{
-        public LINENUM = 80;
+        public LINENUM = 60;
         public SHAP = 2;//1:圆   2 ：柱 3 ：线
         public voicehigh :any;
         public stepp:any;
@@ -50,6 +50,7 @@ module Music{
         public createAudioElement(id:string = "audio"){
             var audio = document.createElement("audio")
             audio.id = id
+            audio.muted
             return audio
         }
 

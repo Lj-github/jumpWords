@@ -1,16 +1,18 @@
 /**
-     created by liujiang
-     time 2019/2/11 11:07
-     所有的 线条  需要 倾斜  目前完全复制  url: http://www.iqiyi.com/w_19rtyuwugp.html
-     全屏考虑 
+ created by liujiang
+ time 2019/2/11 11:07
+ 所有的 线条  需要 倾斜  目前完全复制  url: http://www.iqiyi.com/w_19rtyuwugp.html
+ 全屏考虑
  */
 module game {
     export class NodeLine extends eui.Component {
 
         lintArr: Array<egret.Shape> = []
+
         constructor() {
             super()
         }
+
         childrenCreated() {
             let x = -0
             let w = 30

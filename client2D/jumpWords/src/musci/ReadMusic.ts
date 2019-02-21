@@ -1,19 +1,31 @@
-module game{
+module game {
     export class ReadMusic {
 
-        public music : Music.ReadBuff
-        public buf :any
-        constructor(musicPath :string){
+        public music: Music.ReadBuff
+        public buf: any
+
+        constructor(musicPath: string) {
             this.initUI(musicPath)
         }
-        initUI(musicPath:string){
+
+        initUI(musicPath: string) {
             var music = new Music.ReadBuff(musicPath)
 
             this.music = music
-            let audio :any = document.getElementById('audio');
-            audio.play();
+            let audio: any = document.getElementById('audio');
+            //audio.play();
+            egret.setTimeout(this.toggleSound,this,2)//兼容性...
+
         }
-        removeSelf(){
+
+        toggleSound() {
+            var music1:any = document.getElementById("audio");//获取ID  
+            if (music1.paused) { //判读是否播放  
+                music1.paused = false;
+                music1.play(); //没有就播放 
+            }
+        }
+        removeSelf() {
 
         }
 

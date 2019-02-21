@@ -11,14 +11,14 @@ module game {
         private nodeCircleLine: NodeCircleLine
         constructor() {
             super()
-            //this.musicReader = new ReadMusic(App.mp3file)
+            this.musicReader = new ReadMusic(App.mp3file)
             let nodeline = new NodeLine()
             nodeline.rotation = 180
             nodeline.x = 1120
             nodeline.y = 640
             this.nodeline = nodeline
             this.addChild(nodeline)
-            //this.addEventListener(egret.Event.ENTER_FRAME, this.getBuf, this);
+            this.addEventListener(egret.Event.ENTER_FRAME, this.getBuf, this);
             let nodeline1 = new NodeCircleLine()
             this.addChild(nodeline1)
             nodeline1.x = 300
@@ -30,7 +30,7 @@ module game {
             if (this.buff) {
                 for (var i = 0; i < this.nodeCircleLine.outlintArr.length; i++) {
                     var scale = this.buff.voicehigh[this.buff.step * i] / 25
-                    scale = scale === 0 ? 0.00001 : scale
+                    scale = scale === 0 ? 2 : scale
                     let scaley = scale / 20
                     if (this.nodeCircleLine.outlintArr[i]) {
                         this.nodeCircleLine.outlintArr[i].scaleY = scaley
@@ -40,6 +40,9 @@ module game {
                     }
                     if (this.nodeline.lintArr[i]) {
                         this.nodeline.lintArr[i].scaleY = scaley
+                    }
+                    if (i == 20 ){
+                        this.scaleX = 1 + (scaley/50)
                     }
 
                 }
