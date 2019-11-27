@@ -20,7 +20,7 @@ module game {
             let y = h
             let gap = 5
             let skewX = 20
-            for (let i = 0; i < 35; i++) {
+            for (let i = 0; i < 1; i++) {
                 let line = this.createdLine(x + (w + gap) * i, y, w, h)
                 line.skewX = skewX
                 line.anchorOffsetY = h

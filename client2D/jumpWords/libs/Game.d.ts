@@ -15,4 +15,6 @@
     CH_WX: string
     wx: any
     sendEzWxReport: Function
+
+    J_Base64ToImageUtil:any
 }

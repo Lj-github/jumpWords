@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "snow_json,snow_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,caoyuan_mp3,Yunomi_mp3",
+			"keys": "snow_json,snow_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json",
 			"name": "preload"
 		}
 	],
@@ -132,19 +132,9 @@
 			"name": "egret_icon_png"
 		},
 		{
-			"name": "description_json",
+			"url": "config/description.json",
 			"type": "json",
-			"url": "config/description.json"
-		},
-		{
-			"name": "caoyuan_mp3",
-			"type": "sound",
-			"url": "musci/caoyuan.mp3"
-		},
-		{
-			"name": "Yunomi_mp3",
-			"type": "sound",
-			"url": "musci/Yunomi.mp3"
+			"name": "description_json"
 		},
 		{
 			"url": "particle/snow.png",
@@ -152,9 +142,9 @@
 			"name": "snow_png"
 		},
 		{
-			"name": "snow_json",
+			"url": "particle/snow.json",
 			"type": "json",
-			"url": "particle/snow.json"
+			"name": "snow_json"
 		}
 	]
 }

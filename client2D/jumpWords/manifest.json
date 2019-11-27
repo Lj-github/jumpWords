@@ -20,6 +20,7 @@
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/com/App.js",
+		"bin-debug/com/BrowserMethodMgr.js",
 		"bin-debug/com/Gt.js",
 		"bin-debug/com/Logger.js",
 		"bin-debug/component/BaseLayer.js",
@@ -28,7 +29,7 @@
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/component/PbVScrollBar.js",
 		"bin-debug/layer/LayerJumpWords.js",
-		"bin-debug/LoadingUI.js",
+		"bin-debug/zidongxunlu/Node.js",
 		"bin-debug/layer/music/LayerReadMusci.js",
 		"bin-debug/layer/music/NodeCircleLine.js",
 		"bin-debug/layer/music/NodeLine.js",
@@ -42,6 +43,6 @@
 		"bin-debug/zidongxunlu/AStar.js",
 		"bin-debug/zidongxunlu/Game.js",
 		"bin-debug/zidongxunlu/Grid.js",
-		"bin-debug/zidongxunlu/Node.js"
+		"bin-debug/LoadingUI.js"
 	]
 }

@@ -89,6 +89,8 @@ class Main extends egret.DisplayObjectContainer {
         let music = new game.LayerReadMusci()
         this.removeChildren()
         this.addChild(music)
+        //this.visible = false
+
     }
 
     private initProto() {
@@ -111,7 +113,6 @@ class Main extends egret.DisplayObjectContainer {
     onres(msg: gp.loginS2C) {
         console.log(msg)
         console.log(msg.name)
-
     }
     private reloadEgretFun(){
        
