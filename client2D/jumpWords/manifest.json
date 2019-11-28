@@ -29,7 +29,7 @@
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/component/PbVScrollBar.js",
 		"bin-debug/layer/LayerJumpWords.js",
-		"bin-debug/zidongxunlu/Node.js",
+		"bin-debug/LoadingUI.js",
 		"bin-debug/layer/music/LayerReadMusci.js",
 		"bin-debug/layer/music/NodeCircleLine.js",
 		"bin-debug/layer/music/NodeLine.js",
@@ -44,6 +44,6 @@
 		"bin-debug/zidongxunlu/AStar.js",
 		"bin-debug/zidongxunlu/Game.js",
 		"bin-debug/zidongxunlu/Grid.js",
-		"bin-debug/LoadingUI.js"
+		"bin-debug/zidongxunlu/Node.js"
 	]
 }

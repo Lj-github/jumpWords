@@ -12,7 +12,7 @@ module game {
         system: particle.ParticleSystem
         constructor() {
             super()
-            //this.musicReader = new ReadMusic(App.mp3file)
+            this.musicReader = new ReadMusic(App.mp3file)
             let nodeline = new NodeLine()
             nodeline.rotation = 180
             nodeline.x = 1120

@@ -6,7 +6,8 @@ namespace App {
     /**
      * music mp3 文件路径
      */
-    export const mp3file = "resource/musci/caoyuan.mp3"
+    export const mp3file = "resource/music/anotherWay.mp3"
+
     /**
      * 所有跳动的线条颜色 
      */

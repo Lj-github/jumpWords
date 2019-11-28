@@ -15,6 +15,16 @@ module BrowserMethodMgr {
         }
     }
 
+    export function getBufferFormBrowser(): string[] {
+        if (window['Js2JavaDj']) {
+            let buffStr: string = window['Js2JavaDj'].getBuff()
+            if (buffStr) {
+                return buffStr.split("$");
+            }
+        }
+        return []
+    }
+
     export function compareNumStr(num: number, len: number) {
         let numStr = String(num)
         return leftPad(numStr, len)
