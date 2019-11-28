@@ -3,26 +3,24 @@
 
 import * as path from 'path';
 import { UglifyPlugin, CompilePlugin, ManifestPlugin, ExmlPlugin, EmitResConfigFilePlugin, TextureMergerPlugin, CleanPlugin } from 'built-in';
-import { WxgamePlugin } from './wxgame/wxgame';
+import { QQgamePlugin } from './qqgame/qqgame';
 import { CustomPlugin } from './myplugin';
 import * as defaultConfig from './config';
 
-//是否使用微信分离插件
-const useWxPlugin:boolean = false;
 const config: ResourceManagerConfig = {
 
     buildConfig: (params) => {
 
         const { target, command, projectName, version } = params;
-        const outputDir = `../${projectName}_wxgame`;
+        const outputDir = `../${projectName}_qqgame`;
         if (command == 'build') {
             return {
                 outputDir,
                 commands: [
-                    new CleanPlugin({ matchers: ["js", "resource", "egret-library"] }),
+                    new CleanPlugin({ matchers: ["js", "resource"] }),
                     new CompilePlugin({ libraryType: "debug", defines: { DEBUG: true, RELEASE: false } }),
                     new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
-                    new WxgamePlugin(useWxPlugin),
+                    new QQgamePlugin(),
                     new ManifestPlugin({ output: 'manifest.js' })
                 ]
             }
@@ -31,10 +29,10 @@ const config: ResourceManagerConfig = {
             return {
                 outputDir,
                 commands: [
-                    new CleanPlugin({ matchers: ["js", "resource", "egret-library"] }),
+                    new CleanPlugin({ matchers: ["js", "resource"] }),
                     new CompilePlugin({ libraryType: "release", defines: { DEBUG: false, RELEASE: true } }),
                     new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
-                    new WxgamePlugin(useWxPlugin),
+                    new QQgamePlugin(),
                     new UglifyPlugin([{
                         sources: ["resource/default.thm.js"],
                         target: "default.thm.min.js"
@@ -43,7 +41,7 @@ const config: ResourceManagerConfig = {
                         target: "main.min.js"
                     }
                     ]),
-                    new ManifestPlugin({ output: 'manifest.js', useWxPlugin: useWxPlugin })
+                    new ManifestPlugin({ output: 'manifest.js' })
                 ]
             }
         }

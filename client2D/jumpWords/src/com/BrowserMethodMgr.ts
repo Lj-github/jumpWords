@@ -11,7 +11,7 @@ module BrowserMethodMgr {
             fileId++
             window.J_Base64ToImageUtil.base64ChangeImage(bast64Str, this.compareNumStr(fileId, 6) + ".png")
         } else {
-            console.log(bast64Str)
+            //console.log(bast64Str)
         }
     }
 

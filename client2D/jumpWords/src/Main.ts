@@ -22,11 +22,11 @@ class Main extends egret.DisplayObjectContainer {
         })
 
         egret.lifecycle.onPause = () => {
-           // egret.ticker.pause();
+            // egret.ticker.pause();
         }
 
         egret.lifecycle.onResume = () => {
-           // egret.ticker.resume();
+            // egret.ticker.resume();
         }
 
         this.runGame().catch(e => {
@@ -86,9 +86,19 @@ class Main extends egret.DisplayObjectContainer {
         //colorLabel.filters =  [gt.getCustomFilter(0, 255, 0)]
 
         App.run()
-        let music = new game.LayerReadMusci()
+        let black = new eui.Rect()
+        black.fillColor = 0x000000
+        black.width = 9999
+        black.height = 89999
+
         this.removeChildren()
-        this.addChild(music)
+        this.addChild(black)
+        // let music = new game.LayerReadMusci()
+        // this.addChild(music)
+
+        let line = new game.LayerOneLine()
+        this.addChild(line)
+
         //this.visible = false
 
     }
@@ -114,8 +124,8 @@ class Main extends egret.DisplayObjectContainer {
         console.log(msg)
         console.log(msg.name)
     }
-    private reloadEgretFun(){
-       
+    private reloadEgretFun() {
+
     }
 
 
