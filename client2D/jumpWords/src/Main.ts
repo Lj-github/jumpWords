@@ -88,21 +88,17 @@ class Main extends egret.DisplayObjectContainer {
         App.run()
         let black = new eui.Rect()
         black.fillColor = 0x000000
-        black.width = 9999
-        black.height = 89999
-
+        black.width = gt.size.width
+        black.height = gt.size.height
         this.removeChildren()
         this.addChild(black)
         // let music = new game.LayerReadMusci()
         // this.addChild(music)
-
         //let line = new game.LayerOneLine()
-        let line = new game.LayerMoreLine()
-
+        //let line = new game.LayerMoreLine()
+        let line = new game.LayerMagicLine()
         this.addChild(line)
-
         //this.visible = false
-
     }
 
     private initProto() {
@@ -118,7 +114,6 @@ class Main extends egret.DisplayObjectContainer {
                 // let msg = new gp.AwesomeMessage()
                 // gt.SocketClient.send(msg)
             }, this)
-
         }, this)
 
     }
@@ -127,9 +122,5 @@ class Main extends egret.DisplayObjectContainer {
         console.log(msg.name)
     }
     private reloadEgretFun() {
-
     }
-
-
-
 }

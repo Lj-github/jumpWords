@@ -235,4 +235,27 @@ module gt {
     }
 
 
+    //计算贝塞尔曲线长度
+    export function calcBezierLength(pt0: egret.Point, pt1: egret.Point, pt2: egret.Point, t: number): number {
+        var ax: number = pt0.x - 2 * pt1.x + pt2.x;
+        var ay: number = pt0.y - 2 * pt1.y + pt2.y;
+        var bx: number = 2 * pt1.x - 2 * pt0.x;
+        var by: number = 2 * pt1.y - 2 * pt0.y;
+
+        var A: number = 4 * (ax * ax + ay * ay);
+        var B: number = 4 * (ax * bx + ay * by);
+        var C: number = bx * bx + by * by;
+
+        var temp1: number = Math.sqrt(C + t * (B + A * t));
+        var temp2: number = (2 * A * t * temp1 + B * (temp1 - Math.sqrt(C)));
+        var temp3: number = Math.log(B + 2 * Math.sqrt(A) * Math.sqrt(C));
+        var temp4: number = Math.log(B + 2 * A * t + 2 * Math.sqrt(A) * temp1);
+        var temp5: number = 2 * Math.sqrt(A) * temp2;
+        var temp6: number = (B * B - 4 * A * C) * (temp3 - temp4);
+
+        return (temp5 + temp6) / (8 * Math.pow(A, 1.5));
+    }
+
+
+
 }

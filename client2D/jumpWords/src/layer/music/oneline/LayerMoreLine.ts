@@ -2,7 +2,7 @@
 /**
  * create by liujiang 2019/11/26 09:50 天气还可以
  * 
- * 条状的简单效果 不完美
+ * 条状的简单效果 不完美 这个就是简单的长条  上线动 
  */
 module game {
     export class LayerMoreLine extends eui.Component {
