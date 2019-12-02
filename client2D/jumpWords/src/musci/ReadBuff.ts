@@ -11,9 +11,8 @@ module Music {
         step: number
     }
     export class ReadBuff extends egret.HashObject {
-        public LINENUM = 60;
         public voicehigh: any;
-        public stepp: any;
+        public step: any;
         public analyser: AnalyserNode;
         private musicFilePath = "resource/music.json"
         public bf = <musicbuffObj>{}
@@ -47,9 +46,9 @@ module Music {
             if (this._createAnalyser) {
                 this.voicehigh = new Uint8Array(this.analyser.frequencyBinCount);
                 this.analyser.getByteFrequencyData(this.voicehigh);
-                this.stepp = Math.round(this.voicehigh.length / this.LINENUM);
+                this.step = MusicFactory.getStep()
                 this.bf.voicehigh = this.voicehigh;
-                this.bf.step = this.stepp;
+                this.bf.step = this.step;
             }
             return this.bf;
         }

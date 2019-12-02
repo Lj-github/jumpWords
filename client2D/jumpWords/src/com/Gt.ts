@@ -229,6 +229,10 @@ module gt {
         //.toDataURL("image/webp",.5)
     }
 
+    export function getHexColor(r: number, g: number, b: number): number {
+        let hR = r.toString(16), hG = g.toString(16), hB = b.toString(16);
+        return Number("0x" + (r < 16 ? ("0" + hR) : hR) + (g < 16 ? ("0" + hG) : hG) + (b < 16 ? ("0" + hB) : hB));
+    }
 
 
 }
