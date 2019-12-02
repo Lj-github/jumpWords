@@ -14,11 +14,11 @@ module game {
         _count = 0
         initView() {
             this._count = MusicFactory.getVoicehighCount()
-            this._count = 1
+           // this._count = 1
             this._cernter = new egret.Point(gt.size.width / 2, gt.size.height / 2)
             this.removeChildren()
             let width = Math.floor(gt.size.width / this._count)
-            width = 2000
+           // width = 2000
             egret.Matrix
             for (let i = 0; i < this._count; i++) {
                 let ract = new egret.Shape()
