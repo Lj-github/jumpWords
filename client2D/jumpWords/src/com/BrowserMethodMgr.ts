@@ -1,5 +1,5 @@
 // TypeScript file
-
+//created by liujiang 
 module BrowserMethodMgr {
     /**
      * 把base64 存到java chrome 里面
@@ -57,5 +57,15 @@ module BrowserMethodMgr {
             str += "0";
         }
         return str;
+    }
+
+    export function sendBase64ToJxBrowser() {
+        if (App.isUseJxBrowser && App.sendBase64ToJxBrowser) {
+            //获取base64
+            let base64 = gt.getScreenShotInWebglModele()
+            if (base64) {
+                BrowserMethodMgr.saveBase64DataToBrowser(base64)
+            }
+        }
     }
 }

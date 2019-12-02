@@ -36,6 +36,7 @@
 		"bin-debug/layer/music/ShapeLine.js",
 		"bin-debug/layer/music/oneline/LayerMoreLine.js",
 		"bin-debug/layer/music/oneline/LayerOneLine.js",
+		"bin-debug/musci/MusicFactory.js",
 		"bin-debug/musci/ReadBuff.js",
 		"bin-debug/musci/ReadMusic.js",
 		"bin-debug/protobuf/GameProtocol.js",

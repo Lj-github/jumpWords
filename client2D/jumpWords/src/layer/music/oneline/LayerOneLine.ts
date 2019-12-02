@@ -37,7 +37,10 @@ module game {
         buff: Music.musicbuffObj
         musicReader: ReadMusic
         initView() {
-            // this.musicReader = new ReadMusic(App.mp3file)
+            if (!App.isUseJxBrowser) {
+                this.musicReader = new ReadMusic()
+                //App.mp3file
+            }
             //从中心处开始
             this.buff = <Music.musicbuffObj>{}
             this.buff.step = 0
@@ -49,7 +52,6 @@ module game {
         }
         //设置相关参数
         setConfig() {
-
             this._lineData = []
             let len = 50
             let step = Math.floor(2000 / len)
@@ -64,13 +66,13 @@ module game {
             }
         }
         getBuff() {
-            this.buff.voicehigh = BrowserMethodMgr.getBufferFormBrowser() // this.musicReader.music.getBuff()
+           this.buff = MusicFactory.getMusicBuff()
         }
         _update() {
             this.getBuff()
             this.setConfig()
             this.setLine()
-            //this.sendBase64()
+            this.sendBase64()
         }
         setLine() {
             let shp = this.shp
@@ -81,18 +83,9 @@ module game {
                 shp.graphics.curveTo(unit.curveToX1, unit.curveToY1, unit.curveToX2, unit.curveToY2);
             }
             shp.graphics.endFill();
-            /* this._shpY -= 1
-             if (this._shpY <= 0) {
-                 this._shpY = 600
-         }*/
-
         }
         sendBase64() {
-            //获取base64
-            let base64 = gt.getScreenShotInWebglModele()
-            if (base64) {
-                BrowserMethodMgr.saveBase64DataToBrowser(base64)
-            }
+            BrowserMethodMgr.sendBase64ToJxBrowser()
         }
     }
 }

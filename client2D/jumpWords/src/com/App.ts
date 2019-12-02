@@ -24,6 +24,11 @@ namespace App {
 
     export const height = window.innerHeight
 
+    //是否走java JxBrowser
+    export const isUseJxBrowser = false
+    //是否向 java JxBrowser 发送图片
+    export const sendBase64ToJxBrowser = false  
+
 
 
 

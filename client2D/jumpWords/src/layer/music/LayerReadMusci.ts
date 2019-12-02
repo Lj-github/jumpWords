@@ -3,7 +3,7 @@
  time 2019/2/11 11:07
  */
 module game {
-    export class LayerReadMusci extends eui.Component {
+    export class LayerReadMusic extends eui.Component {
         buff: Music.musicbuffObj
         frustumSize = 1000;
         musicReader: ReadMusic
@@ -12,7 +12,7 @@ module game {
         system: particle.ParticleSystem
         constructor() {
             super()
-            this.musicReader = new ReadMusic(App.mp3file)
+            this.musicReader = new ReadMusic()//App.mp3file
             let nodeline = new NodeLine()
             nodeline.rotation = 180
             nodeline.x = 1120
