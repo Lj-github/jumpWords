@@ -1,4 +1,3 @@
-
 precision lowp float;
 varying vec2 vTextureCoord;
 varying vec4 vColor;
@@ -6,9 +5,11 @@ uniform float time;
 uniform sampler2D uSampler;
 void main() {
     vec4 fg = texture2D(uSampler, vTextureCoord);
-    float t = sin(fg.x *3.1416 * 2.0);
-    float b = sin(fg.x * 3.1416 * 2.0+ 0.01);
-    if( b < t ){
+    float y = floor(vTextureCoord.y);
+    float x = floor(vTextureCoord.x);
+    float y1 = sin(x * 3.1416 * 2.0);
+    float y2 = sin(x * 3.1416 * 2.0 + 0.01);
+    if( y < y1 &&  y < y2  ){//&&　y2 > y1
         gl_FragColor = fg * vColor;
     } else {
        gl_FragColor = vec4(0.0,0.0, 0.0,0.0);
