@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="LayerTest" width="1136" height="640" xmlns:e="http://ns.egret.com/eui">
-	<e:Rect width="32" height="354" x="470" y="479" anchorOffsetX="7" anchorOffsetY="527" scaleY="1.2" rotation="50" ellipseHeight="10" ellipseWidth="10"/>
+<e:Skin class="LayerTest" width="4000" height="2000" xmlns:e="http://ns.egret.com/eui">
+	<e:Rect width="5045.11" height="5544.7" x="-3862.1" y="3665.55" anchorOffsetX="1103.62" anchorOffsetY="8254.39" scaleY="1.2" rotation="50" ellipseHeight="10" ellipseWidth="10"/>
+	<e:ProgressBar width="2502.67" height="692" x="253.33" y="364.71" anchorOffsetX="0" anchorOffsetY="0"/>
 </e:Skin>
