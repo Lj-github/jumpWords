@@ -29,7 +29,7 @@ module MusicFactory {
             if (App.isUseJxBrowser) {
                 VoicehighCount = 100 / getStep()
             } else {
-                VoicehighCount = 1024 / getStep()
+                VoicehighCount = 700 / getStep()//1024 个数据 但是后面的数据 都是空的
             }
         }
         return VoicehighCount

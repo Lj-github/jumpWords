@@ -96,7 +96,8 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(music)
         //let line = new game.LayerOneLine()
         //let line = new game.LayerMoreLine()
-        let line = new game.LayerMagicLine()
+        //let line = new game.LayerMagicLine()
+        let line = new game.LayerMagicArc()
         this.addChild(line)
         //this.visible = false
     }

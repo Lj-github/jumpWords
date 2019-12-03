@@ -60,29 +60,6 @@ module game {
             BrowserMethodMgr.sendBase64ToJxBrowser()
         }
 
-        //弧度的样式 还行
-        //http://developer.egret.com/cn/example/egret2d/index.html#030-graph-arc
-        private drawFl(): void {
-            this.removeChildren();
-            let nums: Array<number> = [18, 15, 12, 10, 9, 6, 5, 4, 3];
-            let num: number = nums[this._count++];
-            this._count %= nums.length;
-            let singleAng: number = 180 / num;
-            let r1 = 150;
-            let r2 = r1 * Math.sin(singleAng * Math.PI / 180);
-            let r3 = r1 * Math.cos(singleAng * Math.PI / 180);
-            for (let i: number = 0; i < num; i++) {
-                let shape = new egret.Shape();
-                this.addChild(shape);
-                shape.x = this.stage.stageWidth / 2;
-                shape.y = this.stage.stageHeight / 2;
-                shape.graphics.clear();
-                shape.graphics.lineStyle(2, 0xff0000 + Math.floor(Math.random() * 100) * (0xffffff / 100));
-                let ang = -singleAng / 2 + i * 2 * singleAng;
-                shape.graphics.drawArc(r3 * Math.cos(ang * Math.PI / 180),
-                    r3 * Math.sin(ang * Math.PI / 180), r2, (ang + 90) * Math.PI / 180, (ang - 90) * Math.PI / 180, true);
-            }
-        }
-
+       
     }
 }

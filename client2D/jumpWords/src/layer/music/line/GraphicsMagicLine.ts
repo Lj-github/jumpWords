@@ -15,7 +15,6 @@ module game {
         line: egret.Shape
         createLine() {
             var shp: egret.Shape = new egret.Shape();
-
             this.addChild(shp);
             this.line = shp
         }

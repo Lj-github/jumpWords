@@ -28,9 +28,16 @@
     </style>
 <script src="libs/vconsole.min.js"></script>
 <script>
-    // 初始化
-    var vConsole = new VConsole();
-    console.log('VConsole');
+
+    (function () {
+        var isWin = navigator.platform == "Win32"
+        if (!isWin) {
+            // 初始化
+            var vConsole = new VConsole();
+            console.log('VConsole');
+        }
+    })()
+
 </script>
 </head>
 
