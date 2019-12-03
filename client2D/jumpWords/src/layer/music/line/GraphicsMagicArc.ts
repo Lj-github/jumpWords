@@ -7,30 +7,38 @@
 //http://developer.egret.com/cn/example/egret2d/index.html#030-graph-arc
 
 module game {
-
     export class LayerMagicArc extends BaseGraphics {
         constructor() {
             super()
             window['GraphicsMagicArcddd'] = this
             this.addFrame()
-            this.changeGraphics();
         }
         _update() {
             super._update()
             this.updateArc()
         }
         _tim = 0
+        _isAddOne = false
         updateArc() {
+            window["vvvv"] = 50
+            let d = window["vvvv"] || 100
             if (this.buff && this.buff.voicehigh) {
-                this.buff.voicehigh[200]
-                if (this._tim % 30 == 0) {
-                    //this.$children[0]['drawFl']()
+                if (this.buff.voicehigh[d] > 140 && !this._isAddOne) {
+                    this.createGraphics();
+                    this._tim = 0
+                    this._isAddOne = true
+                }
+                if (this._isAddOne) {
+                    if (this._tim >= 3) {
+                        this._isAddOne = false
+                    }
                 }
                 this._tim++
             }
         }
-        changeGraphics() {
+        createGraphics() {
             let g = new GraphicsMagicArc()
+            g.createIns()
             g.runAction()
             this.addChild(g)
         }
@@ -40,9 +48,16 @@ module game {
     export class GraphicsMagicArc extends BaseGraphics {
         pBar: eui.ProgressBar
         private _count: number = 0;
-        private _nums = [2, 3, 4, 5, 6, 9, 10, , 12, 15, 18];
+        private _nums = [2, 3, 4, 5, 6, 9, 10, 12, 15, 18];
+        _scaleTime = 50
+        dispairTime = 100
         createIns() {
-            this.drawFl()
+            this.width = gt.size.width
+            this.height = gt.size.height
+            this.anchorOffsetX = this.width / 2
+            this.anchorOffsetY = this.height / 2
+            this.x = gt.size.width / 2
+            this.y = gt.size.height / 2
         }
         set count(c) {
             this._count = c
@@ -70,15 +85,23 @@ module game {
         }
 
         runAction() {
+
             if (this._count == (this._nums.length - 1)) {
-                this._count = 0
+                //到最后了  消失
+                egret.Tween.get(this).to({ scaleX: 2, scaleY: 2, alpha: 0.01 }, this.dispairTime).call(() => {
+                    this.parent.removeChild(this)
+                }, this)
+                return
+            }
+            if (this._count == 0) {
+                this.scaleX = this.scaleY = 0.01
             }
             let countLen = this._nums.length
             let scale = this._count / countLen || 0.01
             let alpha = this._count / countLen || 0.01
             this.drawFl()
             this._count++
-            egret.Tween.get(this).to({ scaleX: scale, scaleY: scale, alpha: alpha }, 500).call(this.runAction, this)
+            egret.Tween.get(this).to({ scaleX: scale, scaleY: scale, alpha: alpha }, this._scaleTime).call(this.runAction, this)
         }
     }
 }

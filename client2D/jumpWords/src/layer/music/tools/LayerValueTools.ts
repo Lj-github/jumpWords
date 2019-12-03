@@ -1,18 +1,24 @@
 // TypeScript file
+
 /**
- * create by liujiang 2019/11/26 09:50 天气还可以
- * 
- * 条状的简单效果 不完美 这个就是简单的长条  上线动 
+ * create by liujiang on 2019/12/3  15:17 
+ * 这个是为了实时查看当前的值  观察  音色范围 感觉的
  */
 module game {
-    export class LayerMoreLine extends eui.Component {
+    export class LayerValueTools extends BaseLayer {
+
         constructor() {
             super()
             this.initView()
-            this.addEventListener(egret.Event.ENTER_FRAME, this._update, this);
+            this.addFrame()
+        }
+        _graphArr = []
+        _labelArr = []
+        _update() {
+            super._update()
+            this.setLine()
         }
         _cernter: egret.Point
-        buff: Music.musicbuffObj
         _count = 0
         initView() {
             this._count = MusicFactory.getVoicehighCount()
@@ -30,34 +36,47 @@ module game {
                 ract.graphics.drawRect(i * width, 0, width, gt.size.height);
                 ract.graphics.endFill();
                 this.addChild(ract);
+                this._graphArr.push(ract)
             }
+
+            for (let i = 0; i < this._count; i++) {
+                let textVal = new eui.Label()
+                textVal.text = "00"
+                textVal.x = i * width
+                textVal.y = gt.size.height - 50
+                textVal.scaleY = -1
+                // textVal.rotation = 90
+                textVal.size = 50
+                this.addChild(textVal);
+                this._labelArr.push(textVal)
+            }
+
+
             this.buff = <Music.musicbuffObj>{}
             this.buff.step = 0
             this.buff.voicehigh = []
             this.scaleY = -1
             this.y = gt.size.height
         }
-        getBuff() {
-            this.buff = MusicFactory.getMusicBuff()
-        }
-        _update() {
-            this.getBuff()
-            this.setLine()
-            this.sendBase64()
-        }
+
         setLine() {
             if (this.buff.voicehigh) {
                 let degre = MusicFactory.getMusicValueDegre()
-                for (let i = 0; i < this.$children.length; i++) {
-                    let rack = this.$children[i]
-                    let sy = Number(this.buff.voicehigh[i * this.buff.step]) / degre
+                for (let i = 0; i < this._count; i++) {
+                    let rack = this._graphArr[i]
+                    let val = Number(this.buff.voicehigh[i * this.buff.step])
+                    let sy = val / degre
                     sy = Math.abs(sy)
                     rack.scaleY = sy
+                    let text = this._labelArr[i]
+                    if (text) {
+                        text.text = val + "/" + sy
+                    }
+
                 }
             }
         }
-        sendBase64() {
-            BrowserMethodMgr.sendBase64ToJxBrowser()
-        }
+
+
     }
 }

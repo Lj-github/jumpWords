@@ -86,20 +86,25 @@ class Main extends egret.DisplayObjectContainer {
         //colorLabel.filters =  [gt.getCustomFilter(0, 255, 0)]
 
         App.run()
+        this.createBg()
+        // let music = new game.LayerReadMusci()
+        // this.addChild(music)
+        //let line = new game.LayerOneLine()
+        //let line = new game.LayerMoreLine()
+        //let line1 = new game.LayerMagicLine()
+        //let line = new game.LayerMagicArc()
+        let lineTools = new game.LayerValueTools()
+        this.addChild(lineTools)
+        //this.addChild(line1)
+        //this.visible = false
+    }
+    createBg() {
         let black = new eui.Rect()
         black.fillColor = 0x000000
         black.width = gt.size.width
         black.height = gt.size.height
         this.removeChildren()
         this.addChild(black)
-        // let music = new game.LayerReadMusci()
-        // this.addChild(music)
-        //let line = new game.LayerOneLine()
-        //let line = new game.LayerMoreLine()
-        //let line = new game.LayerMagicLine()
-        let line = new game.LayerMagicArc()
-        this.addChild(line)
-        //this.visible = false
     }
 
     private initProto() {

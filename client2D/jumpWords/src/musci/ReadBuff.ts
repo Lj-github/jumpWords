@@ -19,12 +19,21 @@ module Music {
         private static _instance = new ReadBuff()
         private _createAnalyser = false
         audioElement: any
+        timer: egret.Timer
         static getInstance() {
             return this._instance
         }
 
         initMusic() {
+            let timer: egret.Timer
+            if (!this.timer) {
+                timer = new egret.Timer(30, 0)
+                timer.addEventListener(egret.TimerEvent.TIMER, this._update, this)
+                timer.start()
+                this.timer = timer
+            }
             //放到html里面了
+            
             this.audioElement = document.getElementById('audio');
             let local = this
             this.audioElement.addEventListener("play", function () {   //开始播放时触发
@@ -40,7 +49,10 @@ module Music {
                 local._createAnalyser = true
             });
         }
-        getBuff() {
+        _update() {
+            this.setBuff()
+        }
+        setBuff() {
             this.bf = undefined
             this.bf = <musicbuffObj>{}
             if (this._createAnalyser) {
@@ -50,6 +62,9 @@ module Music {
                 this.bf.voicehigh = this.voicehigh;
                 this.bf.step = this.step;
             }
+        }
+
+        getBuff() {
             return this.bf;
         }
         getAudioContext() {
