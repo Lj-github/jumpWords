@@ -19,24 +19,39 @@ module game {
             super._update()
             this.updateArc()
         }
+        _tim = 0
         updateArc() {
             if (this.buff && this.buff.voicehigh) {
                 this.buff.voicehigh[200]
-
+                if (this._tim % 30 == 0) {
+                    //this.$children[0]['drawFl']()
+                }
+                this._tim++
             }
         }
-        //轻触修改属性
         changeGraphics() {
-            this.drawFl();
-            //this.addChild(new GraphicsMagicArc())
+            let g = new GraphicsMagicArc()
+            g.runAction()
+            this.addChild(g)
         }
-        private _count: number = 0;
+    }
 
+
+    export class GraphicsMagicArc extends BaseGraphics {
+        pBar: eui.ProgressBar
+        private _count: number = 0;
+        private _nums = [2, 3, 4, 5, 6, 9, 10, , 12, 15, 18];
+        createIns() {
+            this.drawFl()
+        }
+        set count(c) {
+            this._count = c
+            this.drawFl()
+        }
         drawFl(): void {
             this.removeChildren();
-            let nums: Array<number> = [18, 15, 12, 10, 9, 6, 5, 4, 3];
-            let num: number = nums[this._count++];
-            this._count %= nums.length;
+            let nums: Array<number> = this._nums
+            let num: number = nums[this._count];
             let singleAng: number = 180 / num;
             let r1 = 500;
             let r2 = r1 * Math.sin(singleAng * Math.PI / 180);
@@ -53,31 +68,17 @@ module game {
                     r3 * Math.sin(ang * Math.PI / 180), r2, (ang + 90) * Math.PI / 180, (ang - 90) * Math.PI / 180, true);
             }
         }
-    }
 
-
-    export class GraphicsMagicArc extends BaseGraphics {
-        pBar: eui.ProgressBar
-        addBar() {
-            this.pBar = new eui.ProgressBar();
-            this.pBar.maximum = 210;//设置进度条的最大值
-            this.pBar.minimum = 0;//设置进度条的最小值
-            this.pBar.width = 200;
-            this.pBar.height = 30;
-            this.addChild(this.pBar);
-            this.pBar.value = 42;//设置进度条的初始值
-            this.pBar.addEventListener(egret.Event.CHANGE, this.onBarChange, this)
+        runAction() {
+            if (this._count == (this._nums.length - 1)) {
+                this._count = 0
+            }
+            let countLen = this._nums.length
+            let scale = this._count / countLen || 0.01
+            let alpha = this._count / countLen || 0.01
+            this.drawFl()
+            this._count++
+            egret.Tween.get(this).to({ scaleX: scale, scaleY: scale, alpha: alpha }, 500).call(this.runAction, this)
         }
-        onBarChange() {
-        }
-
-
-
     }
-
-
-
-
-
-
 }
