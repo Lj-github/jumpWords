@@ -5,15 +5,15 @@ varying vec4 vColor;
 uniform float time;
 uniform sampler2D uSampler;
 void main() {
-    float t = sin(time *3.1416 );
-    float b = sin(time * 3.1416 + 0.1);
     vec4 fg = texture2D(uSampler, vTextureCoord);
-    if(b> t ){
+    float t = sin(fg.x *3.1416 * 2.0);
+    float b = sin(fg.x * 3.1416 * 2.0+ 0.01);
+    if( b < t ){
         gl_FragColor = fg * vColor;
-    }else{
+    } else {
        gl_FragColor = vec4(0.0,0.0, 0.0,0.0);
     }
-// vec3 p = (vec3(vTextureCoord.xy,.0) - 0.5) * abs(sin(time/10.0)) * 50.0;
+    // vec3 p = (vec3(vTextureCoord.xy,.0) - 0.5) * abs(sin(time/10.0)) * 50.0;
    // float d = sin(length(p)+time), a = sin(mod(atan(p.y, p.x) + time + sin(d+time), 3.1416/3.)*3.), v = a + d, m = sin(length(p)*4.0-a+time);
    // float _r = -v*sin(m*sin(-d)+time*.1);
    // float _g = v*m*sin(tan(sin(-a))*sin(-a*3.)*3.+time*.5);
