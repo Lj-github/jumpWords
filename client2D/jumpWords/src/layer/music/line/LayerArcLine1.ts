@@ -10,7 +10,7 @@ module game {
             super()
             this.addFrame()
             this.initShader()
-            this.initView()
+            this.initMoreRact()
             this.initVSlider()
             window["LayerArcLine1Ins"] = this
         }
@@ -23,7 +23,7 @@ module game {
             this._cernter = new egret.Point(gt.size.width / 2, gt.size.height / 2)
             this.removeChildren()
             let width = Math.floor(gt.size.width / this._count)
-            width = 588
+            width = 1000
             let matrix = new egret.Matrix()
             matrix.createGradientBox(width, gt.size.height, Math.PI / 2);
             let colors = [0x0000ff, gt.getHexColor(1, 32, 97), 0xff0000]//
@@ -31,39 +31,63 @@ module game {
             let ratios = [255 / 3, 255 / 3 * 2, 255]//
             let ract = new egret.Shape()
             ract.graphics.beginGradientFill(egret.GradientType.LINEAR, colors, alphas, ratios, matrix);
-            ract.graphics.drawRect(200, 0, width, gt.size.height);
+            ract.graphics.drawRect(200, 500, width, width);//gt.size.height
             ract.graphics.endFill();
             this.addChild(ract);
             ract.filters = [this.customFilter];
 
         }
+        initMoreRact() {
+            this._count = MusicFactory.getVoicehighCount()
+            this._cernter = new egret.Point(gt.size.width / 2, gt.size.height / 2)
+            this.removeChildren()
+            //正方形 行 row 列 column
+            let col = Math.floor(this._count/2 * gt.size.height / (gt.size.height + gt.size.width))
+            let row = Math.floor(this._count/2 * gt.size.width / (gt.size.height + gt.size.width))
+            let width = Math.floor(gt.size.width / row)
+            let matrix = new egret.Matrix()
+            matrix.createGradientBox(width, gt.size.height, Math.PI / 2);
+            let colors = [0x0000ff, gt.getHexColor(1, 32, 97), 0xff0000]//
+            let alphas = [1, 0.9, 0.8]
+            let ratios = [255 / 3, 255 / 3 * 2, 255]//
+            for (let i = 0; i < row ; i++) {
+                for (let j = 0; j < col; j++) {
+                    let ract = new egret.Shape()
+                    ract.graphics.beginGradientFill(egret.GradientType.LINEAR, colors, alphas, ratios, matrix);
+                    ract.graphics.drawRect(i * width, j * width, width, width);//gt.size.height
+                    ract.graphics.endFill();
+                    this.addChild(ract);
+                    ract.filters = [this.customFilter];
+                }
+            }
+        }
 
         private initVSlider(): void {
             let hSlider: eui.HSlider = new eui.HSlider();
             hSlider.width = 200;
-            hSlider.x = 20;
+            hSlider.x = 1000;
             hSlider.y = 20;
             hSlider.minimum = 0;//定义最小值
             hSlider.maximum = 100;//定义最大值
-            hSlider.value = 10;//定义默认值
-            hSlider.scaleX = hSlider.scaleY = 10
+            hSlider.value = 0;//定义默认值
+            hSlider.scaleX = hSlider.scaleY = 5
             hSlider.addEventListener(eui.UIEvent.CHANGE, this.changeHandler, this);
             this.addChild(hSlider);
         }
         private changeHandler(evt: eui.UIEvent): void {
             console.log(evt.target.value);
+            this.customFilter.uniforms.time = evt.target.value / 100;
+
         }
 
         initShader() {
             let vertexSrc = RES.getRes("test_vs")
-            let fragmentSrc3 = RES.getRes("test_fs")
+            let fragmentSrc3 = RES.getRes("ractChange_fs")
             //两个曲线交错 然后 取中心就行  
             let customFilter3 = new egret.CustomFilter(
                 vertexSrc,
                 fragmentSrc3,
                 {
-                    center: { x: 0.5, y: 0.5 },
-                    params: { x: 10, y: 0.8, z: 0.1 },
                     time: 0
                 }
             );
