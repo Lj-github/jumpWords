@@ -9,7 +9,6 @@ module game {
         constructor() {
             super()
             this.addFrame()
-            this.initShader()
             this.initMoreRact()
             this.initVSlider()
             window["LayerArcLine1Ins"] = this
@@ -17,7 +16,9 @@ module game {
 
         _count = 0
         _cernter: egret.Point
-        customFilter: egret.CustomFilter
+        //customFilter: egret.CustomFilter
+        _voiceScale = 8
+        _filtersArr = []
         initView() {
             this._count = MusicFactory.getVoicehighCount()
             this._cernter = new egret.Point(gt.size.width / 2, gt.size.height / 2)
@@ -34,30 +35,32 @@ module game {
             ract.graphics.drawRect(200, 500, width, width);//gt.size.height
             ract.graphics.endFill();
             this.addChild(ract);
-            ract.filters = [this.customFilter];
+           // ract.filters = [this.customFilter];
 
         }
         initMoreRact() {
-            this._count = MusicFactory.getVoicehighCount()
+            this._count = MusicFactory.getVoicehighCount() / this._voiceScale
             this._cernter = new egret.Point(gt.size.width / 2, gt.size.height / 2)
             this.removeChildren()
             //正方形 行 row 列 column
-            let col = Math.floor(this._count/2 * gt.size.height / (gt.size.height + gt.size.width))
-            let row = Math.floor(this._count/2 * gt.size.width / (gt.size.height + gt.size.width))
+            let col = Math.floor(this._count * gt.size.height / (gt.size.height + gt.size.width))
+            let row = Math.floor(this._count * gt.size.width / (gt.size.height + gt.size.width))
             let width = Math.floor(gt.size.width / row)
             let matrix = new egret.Matrix()
             matrix.createGradientBox(width, gt.size.height, Math.PI / 2);
             let colors = [0x0000ff, gt.getHexColor(1, 32, 97), 0xff0000]//
             let alphas = [1, 0.9, 0.8]
             let ratios = [255 / 3, 255 / 3 * 2, 255]//
-            for (let i = 0; i < row ; i++) {
+            for (let i = 0; i < row; i++) {
                 for (let j = 0; j < col; j++) {
                     let ract = new egret.Shape()
                     ract.graphics.beginGradientFill(egret.GradientType.LINEAR, colors, alphas, ratios, matrix);
-                    ract.graphics.drawRect(i * width, j * width, width, width);//gt.size.height
+                    ract.graphics.drawRect(i * width, j * width, width-10, width-10);//gt.size.height
                     ract.graphics.endFill();
                     this.addChild(ract);
-                    ract.filters = [this.customFilter];
+                    let shader = this.createShader()
+                    this._filtersArr.push(shader)
+                    ract.filters = [shader];
                 }
             }
         }
@@ -76,29 +79,37 @@ module game {
         }
         private changeHandler(evt: eui.UIEvent): void {
             console.log(evt.target.value);
-            this.customFilter.uniforms.time = evt.target.value / 100;
+           // this.customFilter.uniforms.time = evt.target.value / 100;
 
         }
 
-        initShader() {
+        createShader() {
             let vertexSrc = RES.getRes("test_vs")
             let fragmentSrc3 = RES.getRes("ractChange_fs")
             //两个曲线交错 然后 取中心就行  
-            let customFilter3 = new egret.CustomFilter(
+            return new egret.CustomFilter(
                 vertexSrc,
                 fragmentSrc3,
                 {
                     time: 0
                 }
             );
-            this.customFilter = customFilter3
         }
         _update() {
             super._update()
-            let customFilter3 = this.customFilter
-            customFilter3.uniforms.time += 0.01;
-            if (customFilter3.uniforms.time > 1) {
-                customFilter3.uniforms.time = 0.0;
+           
+            this.setRact()
+        }
+        setRact() {
+            if (this.buff.voicehigh) {
+                let degre = MusicFactory.getMusicValueDegre()
+                for (let i = 0; i < this._count; i++) {
+                    let shader = this._filtersArr[i]
+                    let val = Number(this.buff.voicehigh[i * this.buff.step * this._voiceScale])
+                    let sy = val / degre
+                    sy = Math.abs(sy)
+                    shader.uniforms.time = sy
+                }
             }
         }
     }
