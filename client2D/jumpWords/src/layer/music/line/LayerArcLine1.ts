@@ -55,7 +55,7 @@ module game {
                 for (let j = 0; j < col; j++) {
                     let ract = new egret.Shape()
                     ract.graphics.beginGradientFill(egret.GradientType.LINEAR, colors, alphas, ratios, matrix);
-                    ract.graphics.drawRect(i * width, j * width, width-10, width-10);//gt.size.height
+                    ract.graphics.drawRect(i * width, j * width, width-50, width-50);//gt.size.height
                     ract.graphics.endFill();
                     this.addChild(ract);
                     let shader = this.createShader()
