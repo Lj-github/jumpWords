@@ -35,7 +35,7 @@ module game {
             ract.graphics.drawRect(200, 500, width, width);//gt.size.height
             ract.graphics.endFill();
             this.addChild(ract);
-           // ract.filters = [this.customFilter];
+            // ract.filters = [this.customFilter];
 
         }
         initMoreRact() {
@@ -55,7 +55,7 @@ module game {
                 for (let j = 0; j < col; j++) {
                     let ract = new egret.Shape()
                     ract.graphics.beginGradientFill(egret.GradientType.LINEAR, colors, alphas, ratios, matrix);
-                    ract.graphics.drawRect(i * width, j * width, width-50, width-50);//gt.size.height
+                    ract.graphics.drawRect(i * width, j * width, width - 50, width - 50);//gt.size.height
                     ract.graphics.endFill();
                     this.addChild(ract);
                     let shader = this.createShader()
@@ -79,13 +79,13 @@ module game {
         }
         private changeHandler(evt: eui.UIEvent): void {
             console.log(evt.target.value);
-           // this.customFilter.uniforms.time = evt.target.value / 100;
+            // this.customFilter.uniforms.time = evt.target.value / 100;
 
         }
 
         createShader() {
             let vertexSrc = RES.getRes("test_vs")
-            let fragmentSrc3 = RES.getRes("ractChange_fs")
+            let fragmentSrc3 = RES.getRes("Margic_effect_test_fs")//ractChange_fs
             //两个曲线交错 然后 取中心就行  
             return new egret.CustomFilter(
                 vertexSrc,
@@ -97,7 +97,6 @@ module game {
         }
         _update() {
             super._update()
-           
             this.setRact()
         }
         setRact() {
@@ -110,6 +109,16 @@ module game {
                     sy = Math.abs(sy)
                     shader.uniforms.time = sy
                 }
+            } else {
+                //test
+                for (let i = 0; i < this._count; i++) {
+                    let shader = this._filtersArr[i]
+                    shader.uniforms.time += 0.01
+                    if (shader.uniforms.time >= 10) {
+                        shader.uniforms.time = 0.0
+                    }
+                }
+
             }
         }
     }

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,egret_icon_png,selected_png,border_png,header_png,thumb_pb_png,track_pb_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,track_sb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,description_json,anotherWay_mp3,snow_json,snow_png,test_fs,test_vs,ractChange_fs",
+			"keys": "bg_jpg,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,egret_icon_png,selected_png,border_png,header_png,thumb_pb_png,track_pb_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,track_sb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,description_json,anotherWay_mp3,snow_json,snow_png,test_fs,test_vs,ractChange_fs,Margic_effect_test_fs,DouYing_eff_fs",
 			"name": "preload"
 		}
 	],
@@ -165,6 +165,16 @@
 			"url": "glsl/ractChange.fs",
 			"type": "text",
 			"name": "ractChange_fs"
+		},
+		{
+			"url": "glsl/Margic_effect_test.fs",
+			"type": "text",
+			"name": "Margic_effect_test_fs"
+		},
+		{
+			"url": "glsl/DouYing_eff.fs",
+			"type": "text",
+			"name": "DouYing_eff_fs"
 		}
 	]
 }

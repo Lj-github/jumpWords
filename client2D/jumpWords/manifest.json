@@ -38,6 +38,7 @@
 		"bin-debug/LoadingUI.js",
 		"bin-debug/layer/music/NodeLine.js",
 		"bin-debug/layer/music/ShapeLine.js",
+		"bin-debug/layer/music/douying/LayerDouYingImg.js",
 		"bin-debug/layer/music/line/GraphicsMagicArc.js",
 		"bin-debug/layer/music/line/GraphicsMagicLine.js",
 		"bin-debug/layer/music/line/LayerArcLine1.js",

@@ -96,10 +96,11 @@ class Main extends eui.UILayer {
         //let line = new game.LayerMoreLine()
         //let line1 = new game.LayerMagicLine()
         //let line = new game.LayerMagicArc()
-        let line = new game.LayerArcLine1()
+        // let line = new game.LayerArcLine1()
         //let lineTools = new game.LayerValueTools()
         // this.addChild(lineTools)
-        this.addChild(line)
+        let douying = new game.LayerDouYingImg()
+        this.addChild(douying)
         //this.visible = false
     }
     createBg() {
@@ -134,10 +135,10 @@ class Main extends eui.UILayer {
     private reloadEgretFun() {
     }
 
-     /**
-     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
-     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
-     */
+    /**
+    * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
+    * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
+    */
     static createBitmapByName(name: string) {
         let result = new egret.Bitmap();
         let texture: egret.Texture = RES.getRes(name);
