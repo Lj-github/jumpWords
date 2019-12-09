@@ -17,4 +17,5 @@
     sendEzWxReport: Function
 
     J_Base64ToImageUtil:any
+    MediaRecorder:any
 }

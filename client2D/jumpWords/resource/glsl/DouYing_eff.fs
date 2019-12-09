@@ -21,17 +21,17 @@ void main () {
     // 切割图片的最大位移值
     float maxSplitOffset = offset / 2.0;
     // 这里我们选择切割10次
-    for (float i = 0.0; i < 10.0; i += 1.0) { 
+    for (float i = 0.0; i < 10.0; i += 1.0) {
         // 切割纵向坐标 
-        float sliceY = random(vec2(cTime + offset, 1999.0 + float(i))); 
+        float sliceY = random(vec2(cTime + offset, 1999.0 + float(i)));
         // 切割高度 
         float sliceH = random(vec2(cTime + offset, 9999.0 + float(i))) * 0.25;
          // 计算随机横向偏移值 
-        float hOffset = randomRange(vec2(cTime + offset, 9625.0 + float(i)), -maxSplitOffset, maxSplitOffset); 
+        float hOffset = randomRange(vec2(cTime + offset, 9625.0 + float(i)), -maxSplitOffset, maxSplitOffset);
         // 计算最终坐标 
-        vec2 splitOff = vTextureCoord; 
-        splitOff.x += hOffset; 
-        splitOff = fract(splitOff); 
+        vec2 splitOff = vTextureCoord;
+        splitOff.x += hOffset;
+        splitOff = fract(splitOff);
         // 片段如果在切割区间，就偏移区内图像 
         if (vTextureCoord.y > sliceY && vTextureCoord.y < fract(sliceY+sliceH)) {
             color = texture2D(u_Sampler, splitOff).rgb;
