@@ -101,6 +101,7 @@ class Main extends eui.UILayer {
         // this.addChild(lineTools)
         let douying = new game.LayerDouYingImg()
         this.addChild(douying)
+        CanvasToWebmUtils.demo()
         //this.visible = false
     }
     createBg() {

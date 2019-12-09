@@ -7,11 +7,7 @@
         "lib": [
             "es5",
             "dom",
-            "es2015.promise",
-            "ES7",
-            "ES2016",
-            "ES2017",
-            "ES2018",
+            "es2015.promise"
         ],
         "types": []
     },
