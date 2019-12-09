@@ -32,15 +32,15 @@ module game {
         }
         setImg() {
             if (this.buff.voicehigh) {
-                /* let degre = MusicFactory.getMusicValueDegre()
-                 for (let i = 0; i < this.$children.length; i++) {
-                     let rack = this.$children[i]
-                     let sy = Number(this.buff.voicehigh[i * this.buff.step]) / degre
-                     sy = Math.abs(sy)
-                     rack.scaleY = sy
-             }*/
+                let degre = MusicFactory.getMusicValueDegre()
+                let shader = this.shader
+                shader.uniforms.time += 0.01
+                if (shader.uniforms.time >= 10) {
+                    shader.uniforms.time = 0.0
+                }
+                let value = Number(this.buff.voicehigh[50 * this.buff.step]) / degre
+                shader.uniforms.offset = value / 5
             } else {
-                this.shader
                 let shader = this.shader
                 shader.uniforms.time += 0.01
                 if (shader.uniforms.time >= 10) {
