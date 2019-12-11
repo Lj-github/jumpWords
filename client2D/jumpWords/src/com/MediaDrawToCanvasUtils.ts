@@ -5,8 +5,7 @@
  * 
  * TOOD:canvas  还可以直接播放 视频
  */
-export class MediaDrawToCanvasUtils {
-
+class MediaDrawToCanvasUtils {
     private static _instance = new MediaDrawToCanvasUtils()
     static getInstance() {
         return this._instance

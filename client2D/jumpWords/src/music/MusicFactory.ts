@@ -18,7 +18,7 @@ module MusicFactory {
             if (App.isUseJxBrowser) {
                 MusicValueDegre = 10000
             } else {
-                MusicValueDegre = 200
+                MusicValueDegre = 300
             }
         }
         return MusicValueDegre
@@ -39,7 +39,7 @@ module MusicFactory {
         if (App.isUseJxBrowser) {
             return 1
         } else {
-            return 10
+            return 4
         }
     }
 }

@@ -93,15 +93,15 @@ class Main extends eui.UILayer {
         // let music = new game.LayerReadMusci()
         // this.addChild(music)
         //let line = new game.LayerOneLine()
-        //let line = new game.LayerMoreLine()
+        let line = new game.LayerMoreLine()
         //let line1 = new game.LayerMagicLine()
         //let line = new game.LayerMagicArc()
         // let line = new game.LayerArcLine1()
         //let lineTools = new game.LayerValueTools()
         // this.addChild(lineTools)
-        let douying = new game.LayerDouYingImg()
-        this.addChild(douying)
-        CanvasToWebmUtils.demo()
+        //let douying = new game.LayerDouYingImg()
+        this.addChild(line)
+        //CanvasToWebmUtils.demo()
         //this.visible = false
     }
     createBg() {
