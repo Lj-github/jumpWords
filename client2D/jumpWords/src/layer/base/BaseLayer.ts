@@ -3,11 +3,19 @@
 module game {
     export class BaseLayer extends eui.Component {
         buff: Music.musicbuffObj
+        _inLoop = false
         constructor() {
             super()
         }
         addFrame() {
-            this.addEventListener(egret.Event.ENTER_FRAME, this._update, this);
+            if (!this._inLoop) {
+                this.addEventListener(egret.Event.ENTER_FRAME, this._update, this);
+                this._inLoop = true
+            }
+
+        }
+        startLoop() {
+            this.addFrame()
         }
 
         getBuff() {
