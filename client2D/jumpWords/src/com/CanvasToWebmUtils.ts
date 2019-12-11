@@ -15,6 +15,10 @@
  */
 
 class CanvasToWebmUtils {
+    private static _instance = new CanvasToWebmUtils()
+    static getInstance(){
+        return this._instance
+    }
 
     constructor() {
     }
@@ -42,6 +46,47 @@ class CanvasToWebmUtils {
             this.videoElem.setAttribute('src', "text." + vtype);
         }
     }
+    _canvas: HTMLCanvasElement
+    allChunks = []
+    recorder: any
+    //开始记录 直接用canvas
+    beginRecord(fps = 60) {
+        let canvas = <HTMLCanvasElement>document.getElementsByTagName("canvas")[0];
+        this._canvas = canvas
+        // 回调函数执行次数通常是每秒60次
+        this.allChunks = [];
+        // 60 FPS recording
+        const stream2 = canvas['captureStream'](fps);
+        const recorder = new window.MediaRecorder(stream2, {
+            mimeType: 'video/webm;codecs=vp9'
+        });
+        this.recorder = recorder
+        let self = this
+        recorder.ondataavailable = e => {
+            self.allChunks.push(
+                e.data
+            );
+        }
+        //end & download
+        /* setTimeout(function () {
+             stopAndblobDownload()
+         }, 5000);*/
+        //start
+        recorder.start(10);
+    }
+
+    stopAndblobDownload() {
+        this.recorder.stop();
+        const link = document.createElement('a');
+        link.style.display = 'none';
+        const fullBlob = new Blob(this.allChunks);
+        const downloadUrl = window.URL.createObjectURL(fullBlob);
+        link.href = downloadUrl;
+        link.download = `test${Math.random()}.webm`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+    }
     //验证 chrome 没问题
     static demo() {
         var canvas = <HTMLCanvasElement>document.getElementsByTagName("canvas")[0];
@@ -55,7 +100,6 @@ class CanvasToWebmUtils {
             mimeType: 'video/webm;codecs=vp9'
         });
         recorder.ondataavailable = e => {
-            //console.log("TCL: e", e)
             allChunks.push(
                 e.data
             );
