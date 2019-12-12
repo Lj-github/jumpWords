@@ -263,5 +263,11 @@ module gt {
             })(''))
     }
 
+ //生成指定范围内的随机数
+    export function random(start:number, end:number) {
+        let value = start + Math.random() * (end - start)
+        return Math.round(value)
+    }
+
 
 }
