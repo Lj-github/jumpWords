@@ -5,13 +5,6 @@
  */
 module game {
 
-    export enum ShapeType {
-        triangle = 1,//三角
-        circle,//圆
-        rectangle,//长方
-        square,//正方
-        //可以扩展更多
-    }
 
 
 
@@ -78,7 +71,7 @@ module game {
                     rack.scaleY = sy
             }*/
                 if (this._stmp % 60 == 0) {
-                    this.randomShape(gt.random(1, 4))
+                    this.randomShape()
                 }
             }
             this._shapList.forEach((shap: egret.Shape) => {
@@ -94,47 +87,11 @@ module game {
         sendBase64() {
             BrowserMethodMgr.sendBase64ToJxBrowser()
         }
-
-        randomShape(type) {
-            let Shape = this.createShape(type)
+        randomShape() {
+            let Shape = ShapeMoveMgr.getInstance().getRandomShape()
+            Shape.tryMove()
+            this.shapFocus.addChild(Shape)
             this._shapList.push(Shape)
         }
-        createShape(type = ShapeType.circle) {
-
-            let shape = new egret.Shape()
-            switch (type) {
-                case ShapeType.triangle:
-                    shape.graphics.lineStyle(2, 0x00ff00);
-                    shape.graphics.moveTo(68, 84);
-                    shape.graphics.lineTo(167, 76);
-                    shape.graphics.lineTo(221, 118);
-                    shape.graphics.lineTo(68, 84);
-                    break
-                case ShapeType.rectangle:
-                    shape.graphics.beginFill(gt.getRandomColor());
-                    shape.graphics.drawRect(300, 300, 300, 300);
-                    break
-                case ShapeType.square:
-                    shape.graphics.beginFill(gt.getRandomColor());
-                    shape.graphics.drawRect(300, 300, 300, 300);
-                    break
-                case ShapeType.circle:
-                    let r: number = 50;
-                    shape.graphics.moveTo(r, r);//绘制点移动(r, r)点
-                    shape.graphics.lineTo(r * 2, r);//画线到弧的起始点
-                    shape.graphics.drawArc(50, 50, 50, 0, 2 * Math.PI, false);//从起始点顺时针画弧到终点
-                    shape.graphics.lineTo(r, r);//从终点画线到圆形。到此扇形的封闭区域形成
-                    shape.graphics.endFill();
-                    break
-                default:
-                    console.log("createShape", type, "创建失败！")
-                    break
-            }
-            shape.graphics.endFill();
-            this.shapFocus.addChild(shape);
-            return shape
-
-        }
-
     }
 }
