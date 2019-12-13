@@ -70,7 +70,7 @@ module game {
                     sy = Math.abs(sy)
                     rack.scaleY = sy
             }*/
-                if (this._stmp % 60 == 0) {
+                if (this._stmp % 10 == 0) {
                     this.randomShape()
                 }
             }

@@ -7,7 +7,7 @@ enum ShapeType {
     //可以扩展更多
 }
 
-
+//这个可以加上物理
 class ShapeMoveMgr {
     private static _instance = new ShapeMoveMgr()
     static getInstance() {
@@ -39,37 +39,39 @@ class ShapeMoveMgr {
 
 
     }
-    getRandomShape(type = gt.random(1, 4), pos = new egret.Point(0, 0)) {
+    getRandomShape(type = gt.random(1, 4), pos?: egret.Point) {
         let shape = this.createShape(type)
         //this._ShapeArr.push(shape)
-        shape.x = pos.x
-        shape.y = pos.y
+        if (pos) {
+            shape.x = pos.x
+            shape.y = pos.y
+        }
         return shape
     }
     createShape(type = ShapeType.circle) {
-        console.log("createShape", type)
+        //从00 点开始绘制 比较好
         let shape = new game.RandomShape()
         let color = gt.getRandomColor()
         switch (type) {
             case ShapeType.triangle:
                 shape.graphics.lineStyle(2, color);
                 shape.graphics.beginFill(color, 1);
-                shape.graphics.moveTo(68, 84);
-                shape.graphics.lineTo(167, 76);
-                shape.graphics.lineTo(221, 118);
-                shape.graphics.lineTo(68, 84);
+                shape.graphics.moveTo(0, 0);
+                shape.graphics.lineTo(250, 115);
+                shape.graphics.lineTo(100, 250);
+                shape.graphics.lineTo(0, 0);
                 break
             case ShapeType.rectangle:
                 shape.graphics.beginFill(color);
-                shape.graphics.drawRect(300, 300, 800, 300);
+                shape.graphics.drawRect(0, 0, 400, 200);
                 break
             case ShapeType.square:
                 shape.graphics.beginFill(color);
-                shape.graphics.drawRect(300, 300, 300, 300);
+                shape.graphics.drawRect(0, 0, 300, 300);
                 break
             case ShapeType.circle:
                 shape.graphics.beginFill(color);
-                shape.graphics.drawArc(200, 200, 100, 0, Math.PI * 2, true);
+                shape.graphics.drawArc(0, 0, 150, 0, Math.PI * 2, true);
                 break
             default:
                 console.log("createShape", type, "创建失败！")

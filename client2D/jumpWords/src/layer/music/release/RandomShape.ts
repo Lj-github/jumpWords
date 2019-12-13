@@ -20,9 +20,13 @@ module game {
                 return
             }
             this.rotationLoop()
-            this.moveToTop()
+
             this._isMoveing = true
             this.x = gt.random(0, gt.size.width)
+            this.anchorOffsetX = this.width / 2
+            this.anchorOffsetY = this.height / 2
+            this.y = -this.height
+            this.moveToTop()
             //可以 bzer曲线
         }
         $onRemoveFromStage() {
@@ -39,7 +43,9 @@ module game {
         }
         moveToTop() {
             let time = gt.random(15000, 16000)
-            egret.Tween.get(this).to({ y: gt.size.height }, time)
+            egret.Tween.get(this).to({ y: gt.size.height + this.height }, time).call(() => {
+                this.parent.removeChild(this)
+            }, this)
         }
 
         /* 跳跃动作   */
