@@ -34,8 +34,9 @@ module game {
             window["dddd"] = this
             this.shapFocus = new eui.Group()
             this.lineFocus = new eui.Group()
-            this.addChild(this.lineFocus)
+
             this.addChild(this.shapFocus)
+            this.addChild(this.lineFocus)
             this.degre = MusicFactory.getMusicValueDegre() * 2
             this._count = MusicFactory.getVoicehighCount()
             this._cernter = new egret.Point(gt.size.width / 2, gt.size.height / 2)
@@ -46,12 +47,12 @@ module game {
             let alphas = [1, 0.9, 0.8]
             let ratios = [255 / 8, 255 / 8 * 4, 255]
             for (let i = 0; i < this._count; i++) {
-                /* let ract = new egret.Shape()
-                 ract.graphics.beginGradientFill(egret.GradientType.LINEAR, colors, alphas, ratios, matrix);
-                 ract.graphics.drawRect(i * width, 0, width, gt.size.height);
-                 ract.graphics.endFill();
-                 this.lineFocus.addChild(ract);
-                 this._ractList.push(ract)*/
+                let ract = new egret.Shape()
+                ract.graphics.beginGradientFill(egret.GradientType.LINEAR, colors, alphas, ratios, matrix);
+                ract.graphics.drawRect(i * width, 0, width, gt.size.height);
+                ract.graphics.endFill();
+                this.lineFocus.addChild(ract);
+                this._ractList.push(ract)
             }
             this.buff = <Music.musicbuffObj>{}
             this.buff.step = 0
@@ -64,12 +65,12 @@ module game {
         setLine() {
             this._stmp++
             if (this.buff.voicehigh) {
-                /*for (let i = 0; i < this._ractList.length; i++) {
+                for (let i = 0; i < this._ractList.length; i++) {
                     let rack = this._ractList[i]
                     let sy = Number(this.buff.voicehigh[i * this.buff.step]) / this.degre
                     sy = Math.abs(sy)
                     rack.scaleY = sy
-            }*/
+                }
                 if (this._stmp % 10 == 0) {
                     this.randomShape()
                 }
@@ -81,8 +82,6 @@ module game {
 
                 }
             })
-
-
         }
         sendBase64() {
             BrowserMethodMgr.sendBase64ToJxBrowser()
