@@ -99,8 +99,10 @@ class Main extends eui.UILayer {
         // let line = new game.LayerArcLine1()
         //let lineTools = new game.LayerValueTools()
         // this.addChild(lineTools)
-        //let douying = new game.LayerDouYingImg()
+        let douying = new game.LayerDouYingImg()
+        
         this.addChild(line)
+        this.addChild(douying)
         //CanvasToWebmUtils.demo()
         //this.visible = false
     }

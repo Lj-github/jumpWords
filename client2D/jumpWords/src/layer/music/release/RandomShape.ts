@@ -27,6 +27,7 @@ module game {
             this.anchorOffsetY = this.height / 2
             this.y = -this.height
             this.moveToTop()
+            this.scaleLoop()
             //可以 bzer曲线
         }
         $onRemoveFromStage() {
@@ -41,9 +42,16 @@ module game {
             }, this)
 
         }
+        _toTopTime = 0
         moveToTop() {
             let time = gt.random(15000, 16000)
+            this._toTopTime = time
             egret.Tween.get(this).to({ y: gt.size.height + this.height }, time).call(() => {
+                this.parent.removeChild(this)
+            }, this)
+        }
+        scaleLoop() {
+            egret.Tween.get(this).to({ scaleX: 0.1, scaleY: 0.1 }, this._toTopTime * 2).call(() => {
                 this.parent.removeChild(this)
             }, this)
         }

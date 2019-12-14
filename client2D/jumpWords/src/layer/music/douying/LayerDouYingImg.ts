@@ -16,14 +16,22 @@ module game {
         createImg() {
             let img = new eui.Image()
             img.source = "egret_icon_png"
-            this.addChild(img)
+            //this.addChild(img)
             this.img = img
             this.img.scaleX = this.img.scaleY = 10
             img.x = 500
             img.y = 100
-
+            let text = new eui.Label()
+            text.textColor = 0x444693
+            text.text = "Gigi D'Agostino - Another Way"
+            text.size = 150
+            text.x = gt.size.width / 2
+            text.y = gt.size.height / 4
+            text.anchorOffsetX = text.width / 2
+            this.addChild(text)
             this.shader = this.createShader()
-            this.img.filters = [this.shader]
+            //this.img.filters = [this.shader]
+            text.filters = [this.shader]
         }
         _update() {
             super._update()
@@ -38,7 +46,7 @@ module game {
                 if (shader.uniforms.time >= 10) {
                     shader.uniforms.time = 0.0
                 }
-                let value = Number(this.buff.voicehigh[50 * this.buff.step]) / degre
+                let value = Number(this.buff.voicehigh[4 * this.buff.step]) / degre
                 shader.uniforms.offset = value / 5
             } else {
                 let shader = this.shader

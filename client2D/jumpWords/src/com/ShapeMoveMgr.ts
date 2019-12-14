@@ -39,8 +39,8 @@ class ShapeMoveMgr {
 
 
     }
-    getRandomShape(type = gt.random(1, 4), pos?: egret.Point) {
-        let shape = this.createShape(type)
+    getRandomShape(color?, type = gt.random(1, 4), pos?: egret.Point) {
+        let shape = this.createShape(type, color)
         //this._ShapeArr.push(shape)
         if (pos) {
             shape.x = pos.x
@@ -48,10 +48,10 @@ class ShapeMoveMgr {
         }
         return shape
     }
-    createShape(type = ShapeType.circle) {
+    createShape(type = ShapeType.circle, _color: number) {
         //从00 点开始绘制 比较好
         let shape = new game.RandomShape()
-        let color = gt.getRandomColor()
+        let color = _color ? _color : gt.getRandomColor()
         switch (type) {
             case ShapeType.triangle:
                 shape.graphics.lineStyle(2, color);

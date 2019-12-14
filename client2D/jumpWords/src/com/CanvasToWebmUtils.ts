@@ -107,7 +107,7 @@ class CanvasToWebmUtils {
         //end & download
         setTimeout(function () {
             stopAndblobDownload()
-        }, 5000);
+        }, 363000);
         function stopAndblobDownload() {
             recorder.stop();
             const link = document.createElement('a');

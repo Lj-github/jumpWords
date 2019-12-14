@@ -47,6 +47,7 @@ module Music {
                 audioSrc.connect(local.analyser);
                 local.analyser.connect(actx.destination);
                 local._createAnalyser = true
+                CanvasToWebmUtils.demo()
             });
         }
         _update() {
