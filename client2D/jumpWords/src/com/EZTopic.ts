@@ -57,7 +57,7 @@ namespace EZTopic {
         // ("loop ------EZTopic.publish:"+topicId);
         var newArgs = Array.prototype.splice.call(arguments, 1)
         var events: [eventOneData] = eventMaps[topicId]
-
+        console.log('topicId', topicId, "msg  ", newArgs)
         if (events && events.length > 0) {
             // invoker回调中有可能会对events进行修改，所以必须等所有回调执行完成之后，才能处理once参数
             var list = []

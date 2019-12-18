@@ -18,7 +18,7 @@ module Music {
         public bf = <musicbuffObj>{}
         private static _instance = new ReadBuff()
         private _createAnalyser = false
-        audioElement: any
+        audioElement: HTMLAudioElement
         timer: egret.Timer
         static getInstance() {
             return this._instance
@@ -33,21 +33,26 @@ module Music {
                 this.timer = timer
             }
             //放到html里面了
-            
-            this.audioElement = document.getElementById('audio');
-            let local = this
+
+            this.audioElement = <any>document.getElementById('audio');
+            let self = this
+
             this.audioElement.addEventListener("play", function () {   //开始播放时触发
                 console.log("event play: " + (new Date()).getTime());
-                if (local._createAnalyser) {
+                if (self._createAnalyser) {
                     return
                 }
-                let actx = local.getAudioContext();
-                local.analyser = actx.createAnalyser();
-                let audioSrc = actx.createMediaElementSource(local.audioElement);
-                audioSrc.connect(local.analyser);
-                local.analyser.connect(actx.destination);
-                local._createAnalyser = true
-                CanvasToWebmUtils.demo()
+                let actx = self.getAudioContext();
+                self.analyser = actx.createAnalyser();
+                let audioSrc = actx.createMediaElementSource(self.audioElement);
+                audioSrc.connect(self.analyser);
+                self.analyser.connect(actx.destination);
+                self._createAnalyser = true
+                let msg = <Struct.C2C_MUSIC_BEGIN_PLAY_MSG>{}
+                msg.time = self.audioElement.duration
+                console.log("音频时长: " + msg.time)
+                //读取mp3信息 
+                EZTopic.publish(App.TopicEvent.C2C_MUSIC_BEGIN_PLAY, msg)
             });
         }
         _update() {

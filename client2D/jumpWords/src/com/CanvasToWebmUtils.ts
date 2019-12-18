@@ -16,11 +16,12 @@
 
 class CanvasToWebmUtils {
     private static _instance = new CanvasToWebmUtils()
-    static getInstance(){
+    static getInstance() {
         return this._instance
     }
 
     constructor() {
+        EZTopic.subscribe(App.TopicEvent.C2C_MUSIC_BEGIN_PLAY, this.onMusicBeginPlay, this)
     }
     videoElem
     videoDiv;
@@ -87,16 +88,19 @@ class CanvasToWebmUtils {
         link.click();
         link.remove();
     }
+    onMusicBeginPlay(msg: Struct.C2C_MUSIC_BEGIN_PLAY_MSG) {
+        CanvasToWebmUtils.scanCanvas(msg.time * 1000)
+    }
     //验证 chrome 没问题
-    static demo() {
-        var canvas = <HTMLCanvasElement>document.getElementsByTagName("canvas")[0];
-        var x = 20;
-        var speed = 4;
+    static scanCanvas(timeLen: number) {
+        let canvas = <HTMLCanvasElement>document.getElementsByTagName("canvas")[0];
+        let x = 20;
+        let speed = 4;
         // 回调函数执行次数通常是每秒60次
         let context = canvas.getContext('2d');
-        var allChunks = [];
-        const stream2 = canvas['captureStream'](60); // 60 FPS recording
-        const recorder = new window.MediaRecorder(stream2, {
+        let allChunks = [];
+        let stream2 = canvas['captureStream'](60); // 60 FPS recording
+        let recorder = new window.MediaRecorder(stream2, {
             mimeType: 'video/webm;codecs=vp9'
         });
         recorder.ondataavailable = e => {
@@ -105,9 +109,9 @@ class CanvasToWebmUtils {
             );
         }
         //end & download
-        setTimeout(function () {
+        setTimeout(() => {
             stopAndblobDownload()
-        }, 363000);
+        }, timeLen);
         function stopAndblobDownload() {
             recorder.stop();
             const link = document.createElement('a');
@@ -115,7 +119,7 @@ class CanvasToWebmUtils {
             const fullBlob = new Blob(allChunks);
             const downloadUrl = window.URL.createObjectURL(fullBlob);
             link.href = downloadUrl;
-            link.download = `test${Math.random()}.webm`;
+            link.download = `AV_${Math.random()}.webm`;
             document.body.appendChild(link);
             link.click();
             link.remove();

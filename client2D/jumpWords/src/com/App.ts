@@ -30,6 +30,10 @@ namespace App {
     export const sendBase64ToJxBrowser = false  
 
 
+    export const TopicEvent = {
+        C2C_MUSIC_BEGIN_PLAY :"c2c_music_begin_play"
+
+    }
 
 
 }
