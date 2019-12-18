@@ -15,7 +15,8 @@ namespace App {
     export const lineAlpha = 1
 
     export function run() {
-
+        CanvasToWebmUtils.getInstance()
+        
     }
     export let exampleTar :any
 

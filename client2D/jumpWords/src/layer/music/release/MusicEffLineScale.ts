@@ -34,11 +34,11 @@ module game {
             window["dddd"] = this
             this.shapFocus = new eui.Group()
             this.lineFocus = new eui.Group()
-            this.defColor = 0x411445
+            this.defColor = gt.getHexColor(94, 255, 255)// 0x411445
 
             this.addChild(this.shapFocus)
             this.addChild(this.lineFocus)
-            this.degre = MusicFactory.getMusicValueDegre() * 2
+            this.degre = MusicFactory.getMusicValueDegre()
             this._count = MusicFactory.getVoicehighCount()
             this._cernter = new egret.Point(gt.size.width / 2, gt.size.height / 2)
             let width = Math.floor(gt.size.width / this._count)
@@ -50,7 +50,7 @@ module game {
             for (let i = 0; i < this._count; i++) {
                 let ract = new egret.Shape()
                 ract.graphics.beginGradientFill(egret.GradientType.LINEAR, colors, alphas, ratios, matrix);
-                ract.graphics.drawRect(i * width, 0, width, gt.size.height);
+                ract.graphics.drawRect(i * (width + 2), 0, width, gt.size.height);
                 ract.graphics.endFill();
                 ract.scaleY = 0.00001
                 this.lineFocus.addChild(ract);

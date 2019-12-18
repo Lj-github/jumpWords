@@ -15,8 +15,11 @@
  */
 
 class CanvasToWebmUtils {
-    private static _instance = new CanvasToWebmUtils()
+    private static _instance :CanvasToWebmUtils
     static getInstance() {
+        if(!this._instance){
+            this._instance = new CanvasToWebmUtils()
+        }
         return this._instance
     }
 

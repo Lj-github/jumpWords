@@ -39,7 +39,7 @@ module MusicFactory {
         if (App.isUseJxBrowser) {
             return 1
         } else {
-            return 4
+            return 5
         }
     }
 }
