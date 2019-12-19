@@ -1,6 +1,10 @@
 .idea/
 client2D/jumpWords/.wing/
 client2D/jumpWords/bin-debug/
+client3D/av3d/.rpt2_cache/
+client3D/av3d/.vscode/
+client3D/av3d/bin/js/
+
 *.pyc
 *.mp4
 *.mp3
