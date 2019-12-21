@@ -100,7 +100,7 @@ class Main extends eui.UILayer {
         //let lineTools = new game.LayerValueTools()
         // this.addChild(lineTools)
         let douying = new game.LayerDouYingImg()
-        
+        this.addChild(new MoreColorLines())
         this.addChild(line)
         this.addChild(douying)
         //CanvasToWebmUtils.demo()

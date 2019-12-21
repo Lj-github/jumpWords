@@ -23,8 +23,8 @@ module game {
             img.y = 100
             let text = new eui.Label()
             text.textColor = 0x444693
-            text.text = "Gigi D'Agostino - Another Way"
-            text.size = 150
+            text.text = "Gigi D'Agostino - Gigi'S Goodnight(Buonanotte Mix) (Remix)"
+            text.size = 100
             text.x = gt.size.width / 2
             text.y = gt.size.height / 4
             text.anchorOffsetX = text.width / 2

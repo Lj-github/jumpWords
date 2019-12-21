@@ -34,7 +34,7 @@ module game {
             window["dddd"] = this
             this.shapFocus = new eui.Group()
             this.lineFocus = new eui.Group()
-            this.defColor = gt.getHexColor(94, 255, 255)// 0x411445
+            this.defColor = 0x472d56// gt.getHexColor(94, 255, 255)// 0x411445
 
             this.addChild(this.shapFocus)
             this.addChild(this.lineFocus)
@@ -44,7 +44,7 @@ module game {
             let width = Math.floor(gt.size.width / this._count)
             let matrix = new egret.Matrix()
             matrix.createGradientBox(width, gt.size.height, Math.PI / 2);
-            let colors = [this.defColor, this.defColor, this.defColor]//[0x00688B, 0x008B8B, 0x33CCFF]// [0x000000, gt.getHexColor(1, 32, 97), 0xff0000]
+            let colors = [0x411445,0x45224a, 0x472d56]//[0x00688B, 0x008B8B, 0x33CCFF]// [0x000000, gt.getHexColor(1, 32, 97), 0xff0000]
             let alphas = [1, 0.9, 0.8]
             let ratios = [255 / 8, 255 / 8 * 4, 255]
             for (let i = 0; i < this._count; i++) {
