@@ -1,37 +1,39 @@
+import { CanvasToWebmUtils } from "./CanvasToWebmUtils"
+
 /**
      created by liujiang
      time 2019/2/11 11:07
  */
-export namespace App {
+export class App {
     /**
      * music mp3 文件路径
      */
-    export const mp3file = "resource/music/anotherWay.mp3"
+   static mp3file = "resource/music/anotherWay.mp3"
 
     /**
      * 所有跳动的线条颜色 
      */
-    export const lineColor = 0xff0000
-    export const lineAlpha = 1
+    static lineColor = 0xff0000
+    static lineAlpha = 1
 
-    export function run() {
-        CanvasToWebmUtils.getInstance()
+    static run() {
+        CanvasToWebmUtils .getInstance()
         
     }
-    export let exampleTar :any
+    static exampleTar :any
 
    
-    export const width = window.innerWidth
+    static width = window.innerWidth
 
-    export const height = window.innerHeight
+    static height = window.innerHeight
 
     //是否走java JxBrowser
-    export const isUseJxBrowser = false
+    static isUseJxBrowser = false
     //是否向 java JxBrowser 发送图片
-    export const sendBase64ToJxBrowser = false  
+    static sendBase64ToJxBrowser = false  
 
 
-    export const TopicEvent = {
+    static TopicEvent = {
         C2C_MUSIC_BEGIN_PLAY :"c2c_music_begin_play"
 
     }

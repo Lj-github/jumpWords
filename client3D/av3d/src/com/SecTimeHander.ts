@@ -1,19 +1,18 @@
 // 每秒定时回调，不再自己添加timer
-module SecTimeHander {
-    var timer: egret.Timer
-    let quickTimer: egret.Timer
-    export const slowTimerScale = 1000
-    export const quickTimerScale = 30
-    function startSecCb() {
-        if (!timer) {
-            timer = new egret.Timer(slowTimerScale, 0)
-            timer.addEventListener(egret.TimerEvent.TIMER, updateList, SecTimeHander)
-            timer.start()
+export class  SecTimeHander {
+    private static timer:boolean
+    private static quickTimer: boolean
+    private static slowTimerScale = 1000
+    private static quickTimerScale = 30
+    private static startSecCb() {
+        if (!this.timer) {
+           Laya.timer.loop(this.slowTimerScale,this,this.updateList)
+           this.timer = true
         }
     }
 
-    function startQuick() {
-        if (!quickTimer) {
+    private static startQuick() {
+        if (!this.quickTimer) {
             quickTimer = new egret.Timer(quickTimerScale, 0)
             quickTimer.addEventListener(egret.TimerEvent.TIMER, updateQuickList, SecTimeHander)
             quickTimer.start()
@@ -21,12 +20,12 @@ module SecTimeHander {
     }
 
 
-    function updateList() {
+    private static updateList() {
         eventList.forEach((evt) => {
             evt.cb.call(evt.cbTgt)
         })
     }
-    function updateQuickList() {
+    private static updateQuickList() {
         quickEventList.forEach((evt) => {
             evt.cb.call(evt.cbTgt)
         })
@@ -39,21 +38,21 @@ module SecTimeHander {
         cbTgt: any
     }
     //慢
-    export function subscribeSlow(callback: (...args) => any, cbTarget?: any) {
+    static subscribeSlow(callback: (...args) => any, cbTarget?: any) {
         if (!timer) {
             startSecCb()
         }
         eventList.push({ cb: callback, cbTgt: cbTarget })
     }
 
-    export function unSubscribeSlow(callback, cbTarget) {
+    static unSubscribeSlow(callback, cbTarget) {
         eventList.push({ cb: callback, cbTgt: cbTarget })
         eventList = eventList.filter((evt) => {
             return evt.cbTgt != cbTarget || evt.cb != callback
         })
     }
 
-    export function unsubscribeSlowAllOnTarget(target: any) {
+    static unsubscribeSlowAllOnTarget(target: any) {
         if (!target) {
             return
         }
@@ -63,21 +62,21 @@ module SecTimeHander {
     }
 
     //快
-    export function subscribeQuick(callback: (...args) => any, cbTarget?: any) {
+    static subscribeQuick(callback: (...args) => any, cbTarget?: any) {
         if (!quickTimer) {
             startQuick()
         }
         quickEventList.push({ cb: callback, cbTgt: cbTarget })
     }
 
-    export function unSubscribeQuick(callback, cbTarget) {
+    static unSubscribeQuick(callback, cbTarget) {
         quickEventList.push({ cb: callback, cbTgt: cbTarget })
         quickEventList = quickEventList.filter((evt) => {
             return evt.cbTgt != cbTarget || evt.cb != callback
         })
     }
 
-    export function unsubscribeQuickAllOnTarget(target: any) {
+    static unsubscribeQuickAllOnTarget(target: any) {
         if (!target) {
             return
         }

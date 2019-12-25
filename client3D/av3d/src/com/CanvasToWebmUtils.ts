@@ -16,7 +16,7 @@ import { App } from "./App"
  * 从 shadertoy 上面 看见 可以直接从 浏览器中生成 视频 webm 文件 所以试一下
  */
 
-class CanvasToWebmUtils {
+export class CanvasToWebmUtils {
     private static _instance :CanvasToWebmUtils
     static getInstance() {
         if(!this._instance){

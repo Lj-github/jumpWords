@@ -1,23 +1,24 @@
 import { App } from "./App";
+import { gt } from "./Gt";
 
 // TypeScript file
 //created by liujiang 
-export module BrowserMethodMgr {
+export class BrowserMethodMgr {
     /**
      * 把base64 存到java chrome 里面
      */
 
-    let fileId = 0
-    export function saveBase64DataToBrowser(bast64Str: string) {
+    private static fileId = 0
+    static saveBase64DataToBrowser(bast64Str: string) {
         if (window.J_Base64ToImageUtil) {
-            fileId++
-            window.J_Base64ToImageUtil.base64ChangeImage(bast64Str, this.compareNumStr(fileId, 6) + ".png")
+            this.fileId++
+            window.J_Base64ToImageUtil.base64ChangeImage(bast64Str, this.compareNumStr(this.fileId, 6) + ".png")
         } else {
             //console.log(bast64Str)
         }
     }
 
-    export function getBufferFormBrowser(): string[] {
+    static getBufferFormBrowser(): string[] {
         if (window['Js2JavaDj']) {
             let buffStr: string = window['Js2JavaDj'].getBuff()
             if (buffStr) {
@@ -27,9 +28,9 @@ export module BrowserMethodMgr {
         return []
     }
 
-    export function compareNumStr(num: number, len: number) {
+    static compareNumStr(num: number, len: number) {
         let numStr = String(num)
-        return leftPad(numStr, len)
+        return this.leftPad(numStr, len)
     }
 
 
@@ -38,7 +39,7 @@ export module BrowserMethodMgr {
      * @param str 补0操作
      * @param len 
      */
-    export function leftPad(str, len) {
+    static leftPad(str, len) {
         str = str + '' || '';
         len = len || 0;
         while (str.length < len) {
@@ -52,7 +53,7 @@ export module BrowserMethodMgr {
      * @param str 补0操作
      * @param len 
      */
-    export function rightPad(str, len) {
+    static rightPad(str, len) {
         str = str + '' || '';
         len = len || 0;
         while (str.length < len) {
@@ -61,10 +62,10 @@ export module BrowserMethodMgr {
         return str;
     }
 
-    export function sendBase64ToJxBrowser() {
-        if (App .isUseJxBrowser && App.sendBase64ToJxBrowser) {
+    static sendBase64ToJxBrowser() {
+        if (App.isUseJxBrowser && App.sendBase64ToJxBrowser) {
             //获取base64
-            let base64 = gt.getScreenShotInWebglModele()
+            let base64 = gt .getScreenShotInWebglModele()
             if (base64) {
                 BrowserMethodMgr.saveBase64DataToBrowser(base64)
             }
