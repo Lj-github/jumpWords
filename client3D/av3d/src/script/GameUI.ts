@@ -1,4 +1,5 @@
 import { ui } from "./../ui/layaMaxUI";
+import { MusicFactory } from "../music/MusicFactory";
 /**
  * 本示例采用非脚本的方式实现，而使用继承页面基类，实现页面逻辑。在IDE里面设置场景的Runtime属性即可和场景进行关联
  * 相比脚本方式，继承式页面类，可以直接使用页面定义的属性（通过IDE内var属性定义），比如this.tipLbll，this.scoreLbl，具有代码提示效果
@@ -53,13 +54,14 @@ export default class GameUI extends ui.test.TestSceneUI {
 		
 		this.mat1 = new Laya.BlinnPhongMaterial();
 		//加载纹理资源
-		Laya.Texture2D.load("res/wood.jpg", Laya.Handler.create(this, function(tex:Laya.Texture2D):void {
+		Laya.Texture2D.load("res/wood.jpg", Laya.Handler.create(this, (tex:Laya.Texture2D)=> {
 			this.mat1.albedoTexture = tex;
 			//添加一个球体
-			Laya.timer.once(100, this, function():void {
+			Laya.timer.loop(5000, this, function():void {
 				this.addBox();
 			});
 		}));
+		MusicFactory.getMusicBuff
 		
     }
 
