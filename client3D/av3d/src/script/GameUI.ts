@@ -1,6 +1,7 @@
 import { ui } from "./../ui/layaMaxUI";
 import { MusicFactory } from "../music/MusicFactory";
 import { TextUI } from "../layer/music/TextUI";
+import { MusicEffLineScale } from "../layer/music/release/MusicEffLineScale";
 /**
  * 本示例采用非脚本的方式实现，而使用继承页面基类，实现页面逻辑。在IDE里面设置场景的Runtime属性即可和场景进行关联
  * 相比脚本方式，继承式页面类，可以直接使用页面定义的属性（通过IDE内var属性定义），比如this.tipLbll，this.scoreLbl，具有代码提示效果
@@ -34,7 +35,9 @@ export default class GameUI extends ui.test.TestSceneUI {
 
 	}
 	viewOther() {
-		this._rootScene.addChild(new TextUI())
+		let ui  = new MusicEffLineScale ()
+		//new TextUI()
+		this._rootScene.addChild(ui)
 	}
 
 }
