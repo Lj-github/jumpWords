@@ -1,5 +1,6 @@
 import { App } from "./App"
 import { EZTopic } from "./EZTopic"
+import { Struct } from "./Struct"
 
 // TypeScript file
 
@@ -18,16 +19,16 @@ import { EZTopic } from "./EZTopic"
  */
 
 export class CanvasToWebmUtils {
-    private static _instance :CanvasToWebmUtils
+    private static _instance: CanvasToWebmUtils
     static getInstance() {
-        if(!this._instance){
+        if (!this._instance) {
             this._instance = new CanvasToWebmUtils()
         }
         return this._instance
     }
 
     constructor() {
-        EZTopic .subscribe(App .TopicEvent.C2C_MUSIC_BEGIN_PLAY, this.onMusicBeginPlay, this)
+        EZTopic.subscribe(App.TopicEvent.C2C_MUSIC_BEGIN_PLAY, this.onMusicBeginPlay, this)
     }
     videoElem
     videoDiv;

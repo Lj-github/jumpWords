@@ -25,51 +25,12 @@ export class gt {
     static lan_cn = "ch"// 当前先写为中文
     static lan_en = "en"// 当前先写为中文
     static lan = gt.lan_cn
-    static isDebug = true
     static size = {
         width: 0,
         height: 0
         // Number(document.getElementsByClassName("egret-player")[0].getAttribute("data-content-width")) ,
         // Number(document.getElementsByClassName("egret-player")[0].getAttribute("data-content-height"))
     }
-
-    static getLocalContex(id: number): string {
-        if (!LC[id]) {
-            console.error("没有定义 id = " + id + " 的文字")
-            return
-        }
-        return LC[id][this.lan]
-    }
-
-    static log(...params) {
-        if (this.isDebug) {
-            return
-        } else {
-            console.log.apply(console, arguments)
-        }
-    }
-
-
-    /**
-     * 判断是否安装 MetaMask   通过他的 js 文件 判断
-     */
-
-    static metaMaskUrl = "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
-
-    static isInstallMetaMask() {
-        // 检查web3是否已经注入到(Mist/MetaMask)
-        if (typeof window["web3"] !== 'undefined') {
-            // 使用 Mist/MetaMask 的提供者
-            // web3js = new Web3(web3.currentProvider);
-        } else {
-            alert("没有安装 MetaMask")
-        }
-
-        // // 现在你可以启动你的应用并自由访问 Web3.js:
-        // startApp()
-
-    }
-
     static setProp(tgt, props) {
         if (!tgt || !props) {
             return
@@ -94,26 +55,6 @@ export class gt {
     static isHttps() {
         return window.location.href.indexOf('https://') == 0
     }
-
-    static getFnName(callee) {
-        var _callee = callee.toString().replace(/[\s\?]*/g, ""),
-            comb = _callee.length >= 50 ? 50 : _callee.length;
-        _callee = _callee.substring(0, comb);
-        var name = _callee.match(/^function([^\(]+?)\(/);
-        if (name && name[1]) {
-            return name[1];
-        }
-        var caller = callee.caller,
-            _caller = caller.toString().replace(/[\s\?]*/g, "");
-        var last = _caller.indexOf(_callee),
-            str = _caller.substring(last - 30, last);
-        name = str.match(/var([^\=]+?)\=/);
-        if (name && name[1]) {
-            return name[1];
-        }
-        return "anonymous"
-    };
-
     static getCustomFilter(r: number, g: number, b: number) {
         var colorMatrix = [
             r / 255, 0, 0, 0, 0,
@@ -124,13 +65,9 @@ export class gt {
         var colorFlilter = new Laya.ColorFilter(colorMatrix);
         return colorFlilter
     }
-
-
     static getXMLHttpRequest() {
         return window.XMLHttpRequest ? new window.XMLHttpRequest() : new window.ActiveXObject("MSXML2.XMLHTTP");
     }
-
-
     static clone<T>(obj: T): T {
         var newObj = (obj.constructor) ? (new (<any>obj).constructor) : {};
         for (var key in obj) {
@@ -145,9 +82,6 @@ export class gt {
         }
         return newObj;
     }
-
-
-
     /*
   *检测是否有中文字符
   */

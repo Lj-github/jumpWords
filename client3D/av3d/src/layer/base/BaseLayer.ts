@@ -1,39 +1,32 @@
+import { musicbuffObj } from "../../music/ReadBuff"
+import { SecTimeHander } from "../../com/SecTimeHander"
+import { BrowserMethodMgr } from "../../com/BrowserMethodMgr"
+import { MusicFactory } from "../../music/MusicFactory"
+
 // TypeScript file
 
-module game {
-    export class BaseLayer extends eui.Component {
-        buff: Music.musicbuffObj
-        _inLoop = false
-        constructor() {
-            super()
-        }
-        addFrame() {
-            if (!this._inLoop) {
-                this.addEventListener(egret.Event.ENTER_FRAME, this._update, this);
-                this._inLoop = true
-            }
-
-        }
-        startLoop() {
-            this.addFrame()
-        }
-
-        getBuff() {
-            this.buff = MusicFactory.getMusicBuff()
-        }
-        _update() {
-            this.getBuff()
-            this.sendBase64()
-        }
-        sendBase64() {
-            BrowserMethodMgr.sendBase64ToJxBrowser()
-        }
-
-        $onRemoveFromStage() {
-            this.removeEventListener(egret.Event.ENTER_FRAME, this._update, this);
-            super.$onRemoveFromStage()
-        }
-
-
+export class BaseLayer extends Laya.Sprite {
+    buff: musicbuffObj
+    constructor() {
+        super()
     }
+    startLoop() {
+        SecTimeHander.subscribeQuick(this._update, this)
+    }
+    getBuff() {
+        this.buff = MusicFactory.getMusicBuff()
+    }
+    _update() {
+        this.getBuff()
+        this.sendBase64()
+    }
+    sendBase64() {
+        BrowserMethodMgr.sendBase64ToJxBrowser()
+    }
+
+    destroy() {
+        SecTimeHander.unsubscribeQuickAllOnTarget(this)
+        super.destroy()
+    }
+
 }
