@@ -1,49 +1,49 @@
 // log输出控制
-module Logger {
-    var _level = 0
-    var _isCollect = false
-    var _uuid = undefined
-    var isToNet = false
+export class Logger {
+    private static _level = 0
+    private static _isCollect = false
+    private static _uuid = undefined
+    private static isToNet = false
 
-    function isDebugEnabled(): boolean {
-        return _level >= 0
+    private static isDebugEnabled(): boolean {
+        return this._level >= 0
     };
 
-    export function log(...params) {
-        if (_level > 0) {
+    private static log(...params) {
+        if (this._level > 0) {
             return
         } else {
             console.log.apply(console, arguments)
         }
     };
 
-    export function logf(...params) { //无论什么环境都要打出来比较重要的流程才使用
+    private static logf(...params) { //无论什么环境都要打出来比较重要的流程才使用
         console.log.apply(console, arguments)
     }
 
-    export function warn(...params) {
+    private static warn(...params) {
         console.warn.apply(console, arguments)
     };
 
-    function isInfoEnabled(): boolean {
-        return _level >= 1
+    private static isInfoEnabled(): boolean {
+        return this._level >= 1
     };
 
-    function getFunctionName(func) {
+    static getFunctionName(func) {
         if (typeof func == 'function' || typeof func == 'object') {
             var name = ('' + func).match(/function\s*([\w\$]*)\s*\(/);
         }
         return name && name[1];
     }
 
-    export function error(...params) {
-        if (_level > 2) {
+    static error(...params) {
+        if (this._level > 2) {
             return
         } else {
             console.error.apply(console, arguments)
             var stack = {};
             let errBake: any = Error
-            if (errBake.captureStackTrace && this.touchReachTgt instanceof Function) {
+            if (errBake.captureStackTrace) {// && this.touchReachTgt instanceof Function
                 let obj: any = {}
                 errBake.captureStackTrace(obj)
                 stack = obj.stack

@@ -1,43 +1,45 @@
 import { musicbuffObj, ReadBuff } from "./ReadBuff"
+import { App } from "../com/App"
+import { BrowserMethodMgr } from "../com/BrowserMethodMgr"
 
 // TypeScript file
 /**
  * created by liujiang on 2019/12/2 16:28 好天气 清雾霾  北京
  */
-export module MusicFactory {
+export class MusicFactory {
 
-    export function getMusicBuff():musicbuffObj {
+    static getMusicBuff(): musicbuffObj {
         if (App.isUseJxBrowser) {
-            return { voicehigh: BrowserMethodMgr.getBufferFormBrowser(), step: getStep() }
+            return { voicehigh: BrowserMethodMgr.getBufferFormBrowser(), step: this.getStep() }
         } else {
-            return ReadBuff .getInstance().getBuff()
+            return ReadBuff.getInstance().getBuff()
         }
     }
 
-    let MusicValueDegre = null
-    export function getMusicValueDegre() {
-        if (!MusicValueDegre) {
+    static MusicValueDegre = null
+    static getMusicValueDegre() {
+        if (!this.MusicValueDegre) {
             if (App.isUseJxBrowser) {
-                MusicValueDegre = 10000
+                this.MusicValueDegre = 10000
             } else {
-                MusicValueDegre = 300
+                this.MusicValueDegre = 300
             }
         }
-        return MusicValueDegre
+        return this.MusicValueDegre
     }
-    let VoicehighCount = null
-    export function getVoicehighCount() {
-        if (!VoicehighCount) {
+    static VoicehighCount = null
+    static getVoicehighCount() {
+        if (!this.VoicehighCount) {
             if (App.isUseJxBrowser) {
-                VoicehighCount = 100 / getStep()
+                this.VoicehighCount = 100 / this.getStep()
             } else {
-                VoicehighCount = 700 / getStep()//1024 个数据 但是后面的数据 都是空的
+                this.VoicehighCount = 700 / this.getStep()//1024 个数据 但是后面的数据 都是空的
             }
         }
-        return VoicehighCount
+        return this.VoicehighCount
     }
 
-    export function getStep() {
+    static getStep() {
         if (App.isUseJxBrowser) {
             return 1
         } else {

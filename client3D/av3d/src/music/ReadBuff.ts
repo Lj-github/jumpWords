@@ -1,4 +1,9 @@
+import { SecTimeHander } from "../com/SecTimeHander";
+import { EZTopic } from "../com/EZTopic";
+import { App } from "../com/App";
+import { Struct } from "../com/Struct";
 import { MusicFactory } from "./MusicFactory";
+
 
 /**
  *  createBy liujiang  very old ... 忘记哪天弄的了
@@ -20,25 +25,20 @@ export class ReadBuff {
     private static _instance = new ReadBuff()
     private _createAnalyser = false
     audioElement: HTMLAudioElement
-    timer: egret.Timer
+    timer: boolean = false
     static getInstance() {
         return this._instance
     }
 
     initMusic() {
         Laya.timer.loop
-        let timer: egret.Timer
         if (!this.timer) {
-            timer = new egret.Timer(30, 0)
-            timer.addEventListener(egret.TimerEvent.TIMER, this._update, this)
-            timer.start()
-            this.timer = timer
+            SecTimeHander.subscribeQuick(this._update, this)
+            this.timer = true
         }
         //放到html里面了
-
         this.audioElement = <any>document.getElementById('audio');
         let self = this
-
         this.audioElement.addEventListener("play", function () {   //开始播放时触发
             console.log("event play: " + (new Date()).getTime());
             if (self._createAnalyser) {

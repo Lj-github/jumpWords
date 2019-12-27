@@ -1,3 +1,4 @@
+import { SecTimeHander } from "./SecTimeHander"
 
 enum ShapeType {
     triangle = 1,//三角
@@ -15,7 +16,7 @@ class ShapeMoveMgr {
     }
     _ShapeArr = <game.RandomShape[]>[]
     constructor() {
-        SecTimeHander.subscribeQuick(this.update, this)
+        SecTimeHander .subscribeQuick(this.update, this)
     }
     update() {
         let exitArr = {}
@@ -39,7 +40,7 @@ class ShapeMoveMgr {
 
 
     }
-    getRandomShape(color?, type = gt.random(1, 4), pos?: egret.Point) {
+    getRandomShape(color?, type = gt.random(1, 4), pos?: Laya.Point) {
         let shape = this.createShape(type, color)
         //this._ShapeArr.push(shape)
         if (pos) {

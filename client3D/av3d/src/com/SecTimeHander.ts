@@ -1,53 +1,58 @@
 // 每秒定时回调，不再自己添加timer
-export class  SecTimeHander {
-    private static timer:boolean
-    private static quickTimer: boolean
+interface event {
+    cb: Function
+    cbTgt: any
+}
+
+export class SecTimeHander {
+    private static timer: number
+    private static quickTimer: number
     private static slowTimerScale = 1000
     private static quickTimerScale = 30
     private static startSecCb() {
         if (!this.timer) {
-           Laya.timer.loop(this.slowTimerScale,this,this.updateList)
-           this.timer = true
+            let self = this
+            this.timer = setInterval(() => {
+                self.updateList()
+            }, this.slowTimerScale)
         }
     }
 
     private static startQuick() {
         if (!this.quickTimer) {
-            quickTimer = new egret.Timer(quickTimerScale, 0)
-            quickTimer.addEventListener(egret.TimerEvent.TIMER, updateQuickList, SecTimeHander)
-            quickTimer.start()
+            let self = this
+            this.quickTimer = setInterval(() => {
+                self.updateQuickList()
+            }, this.quickTimerScale)
         }
     }
 
 
     private static updateList() {
-        eventList.forEach((evt) => {
+        this.eventList.forEach((evt) => {
             evt.cb.call(evt.cbTgt)
         })
     }
     private static updateQuickList() {
-        quickEventList.forEach((evt) => {
+        this.quickEventList.forEach((evt) => {
             evt.cb.call(evt.cbTgt)
         })
     }
 
-    let eventList: Array<event> = []
-    let quickEventList: Array<event> = []
-    interface event {
-        cb: Function
-        cbTgt: any
-    }
+    private static eventList: Array<event> = []
+    private static quickEventList: Array<event> = []
+
     //慢
     static subscribeSlow(callback: (...args) => any, cbTarget?: any) {
-        if (!timer) {
-            startSecCb()
+        if (!this.timer) {
+            this.startSecCb()
         }
-        eventList.push({ cb: callback, cbTgt: cbTarget })
+        this.eventList.push({ cb: callback, cbTgt: cbTarget })
     }
 
     static unSubscribeSlow(callback, cbTarget) {
-        eventList.push({ cb: callback, cbTgt: cbTarget })
-        eventList = eventList.filter((evt) => {
+        this.eventList.push({ cb: callback, cbTgt: cbTarget })
+        this.eventList = this.eventList.filter((evt) => {
             return evt.cbTgt != cbTarget || evt.cb != callback
         })
     }
@@ -56,22 +61,22 @@ export class  SecTimeHander {
         if (!target) {
             return
         }
-        eventList = eventList.filter((evt) => {
+        this.eventList = this.eventList.filter((evt) => {
             return evt.cbTgt != target
         })
     }
 
     //快
     static subscribeQuick(callback: (...args) => any, cbTarget?: any) {
-        if (!quickTimer) {
-            startQuick()
+        if (!this.quickTimer) {
+            this.startQuick()
         }
-        quickEventList.push({ cb: callback, cbTgt: cbTarget })
+        this.quickEventList.push({ cb: callback, cbTgt: cbTarget })
     }
 
     static unSubscribeQuick(callback, cbTarget) {
-        quickEventList.push({ cb: callback, cbTgt: cbTarget })
-        quickEventList = quickEventList.filter((evt) => {
+        this.quickEventList.push({ cb: callback, cbTgt: cbTarget })
+        this.quickEventList = this.quickEventList.filter((evt) => {
             return evt.cbTgt != cbTarget || evt.cb != callback
         })
     }
@@ -80,7 +85,7 @@ export class  SecTimeHander {
         if (!target) {
             return
         }
-        quickEventList = quickEventList.filter((evt) => {
+        this.quickEventList = this.quickEventList.filter((evt) => {
             return evt.cbTgt != target
         })
     }
